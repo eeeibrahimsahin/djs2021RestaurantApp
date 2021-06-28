@@ -1,7 +1,7 @@
 package com.restaurant.reservationApp.Table;
 
-import com.restaurant.reservationApp.Employee.Employee;
-import com.restaurant.reservationApp.Employee.EmployeeService;
+import com.restaurant.reservationApp.employee.Employee;
+import com.restaurant.reservationApp.employee.EmployeeService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,11 +41,4 @@ public class TableController {
         return new ResponseEntity<>(table1, HttpStatus.OK);
 
     }
-
-//    public ResponseEntity<Table> Table(@RequestBody Table tablee){
-//
-//        Table table2 = tableService.deleteTable(tablee);
-//        return new ResponseEntity<>(table2, HttpStatus.OK);
-//    }
-
 }
