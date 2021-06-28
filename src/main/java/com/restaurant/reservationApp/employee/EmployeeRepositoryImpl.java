@@ -1,4 +1,4 @@
-package com.restaurant.reservationApp.Employee;
+package com.restaurant.reservationApp.employee;
 
 import org.springframework.stereotype.Component;
 
