@@ -1,4 +1,4 @@
-package com.restaurant.reservationApp.Guest;
+package com.restaurant.reservationApp.guest;
 
 public class Guest {
     private long id;

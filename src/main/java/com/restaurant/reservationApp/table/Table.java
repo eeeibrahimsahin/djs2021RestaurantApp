@@ -1,4 +1,4 @@
-package com.restaurant.reservationApp.Table;
+package com.restaurant.reservationApp.table;
 
 public class Table {
     private long id;

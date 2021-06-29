@@ -1,10 +1,5 @@
 package com.restaurant.reservationApp.reservation;
 
-import com.restaurant.reservationApp.Table.Table;
-import com.restaurant.reservationApp.Table.TableService;
-import com.restaurant.reservationApp.employee.Employee;
-import com.restaurant.reservationApp.employee.EmployeeService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

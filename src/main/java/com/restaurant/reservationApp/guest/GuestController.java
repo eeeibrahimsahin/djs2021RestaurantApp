@@ -1,7 +1,5 @@
-package com.restaurant.reservationApp.Guest;
+package com.restaurant.reservationApp.guest;
 
-import com.restaurant.reservationApp.Employee.Employee;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +14,9 @@ public class GuestController {
 
     public GuestController() {
     }
+
     @Autowired
-    public GuestController(GuestService guestService){
+    public GuestController(GuestService guestService) {
         this.guestService = guestService;
     }
 
@@ -27,13 +26,15 @@ public class GuestController {
         List<Guest> allGuests = guestService.getAllGuests();
         return new ResponseEntity<>(allGuests, HttpStatus.OK);
     }
+
     @GetMapping("/guest/{id}")
-    public ResponseEntity<Guest> getGuestById(@PathVariable(name = "id", required = true) long id){
+    public ResponseEntity<Guest> getGuestById(@PathVariable(name = "id", required = true) long id) {
         Guest guest = guestService.getGuestById(id);
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
-    @PutMapping(value = "/guest", produces = "application/json",consumes = "application/json")
-    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest){
+
+    @PutMapping(value = "/guest", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
         Guest guest1 = guestService.createGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }

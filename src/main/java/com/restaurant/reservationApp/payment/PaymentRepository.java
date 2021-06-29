@@ -1,6 +1,5 @@
-package com.restaurant.reservationApp.Payment;
+package com.restaurant.reservationApp.payment;
 
-import com.restaurant.reservationApp.Employee.Employee;
 
 import java.util.List;
 

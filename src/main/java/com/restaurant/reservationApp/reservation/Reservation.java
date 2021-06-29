@@ -1,7 +1,7 @@
 package com.restaurant.reservationApp.reservation;
 
-import com.restaurant.reservationApp.Guest.Guest;
-import com.restaurant.reservationApp.Table.Table;
+import com.restaurant.reservationApp.guest.Guest;
+import com.restaurant.reservationApp.table.Table;
 import com.restaurant.reservationApp.employee.Employee;
 
 import java.util.Date;

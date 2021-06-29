@@ -1,12 +1,7 @@
 package com.restaurant.reservationApp.reservation;
-import com.restaurant.reservationApp.Table.Table;
-import com.restaurant.reservationApp.Table.TableRepository;
-import com.restaurant.reservationApp.employee.Employee;
-import com.restaurant.reservationApp.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

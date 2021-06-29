@@ -1,7 +1,5 @@
 package com.restaurant.reservationApp.reservation;
 
-import com.restaurant.reservationApp.Table.Table;
-
 import java.util.List;
 
 public interface ReservationService {

@@ -1,4 +1,4 @@
-package com.restaurant.reservationApp.Payment;
+package com.restaurant.reservationApp.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

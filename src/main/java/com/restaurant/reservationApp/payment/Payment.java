@@ -1,4 +1,4 @@
-package com.restaurant.reservationApp.Payment;
+package com.restaurant.reservationApp.payment;
 
 public class Payment {
         private long id;

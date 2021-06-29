@@ -1,5 +1,4 @@
-package com.restaurant.reservationApp.Table;
-import com.restaurant.reservationApp.employee.Employee;
+package com.restaurant.reservationApp.table;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

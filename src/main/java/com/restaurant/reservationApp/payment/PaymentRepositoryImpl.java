@@ -1,4 +1,4 @@
-package com.restaurant.reservationApp.Payment;
+package com.restaurant.reservationApp.payment;
 
 
 import org.springframework.stereotype.Component;
