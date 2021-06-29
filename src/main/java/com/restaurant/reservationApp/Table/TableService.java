@@ -1,6 +1,6 @@
 package com.restaurant.reservationApp.Table;
 
-import com.restaurant.reservationApp.Employee.Employee;
+import com.restaurant.reservationApp.employee.Employee;
 
 import java.util.List;
 
