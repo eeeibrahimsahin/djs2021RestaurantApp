@@ -4,9 +4,20 @@ package com.restaurant.reservationApp.drink;
 public class Drink {
     private long id;
     private String name;
-    private String typ;
+    private String type;
     private int quantity;
     private double price;
+
+    public Drink() {
+    }
+
+    public Drink(long id, String name, String type, int quantity, double price) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.quantity = quantity;
+        this.price = price;
+    }
 
     public long getId() {
         return id;
@@ -24,12 +35,12 @@ public class Drink {
         this.name = name;
     }
 
-    public String getTyp() {
-        return typ;
+    public String getType() {
+        return type;
     }
 
-    public void setTyp(String typ) {
-        this.typ = typ;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getQuantity() {

@@ -4,6 +4,8 @@ import com.restaurant.reservationApp.guest.Guest;
 import com.restaurant.reservationApp.table.Table;
 import com.restaurant.reservationApp.employee.Employee;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Reservation {
@@ -12,7 +14,19 @@ public class Reservation {
     private Table table;
     private Guest guest;
     private Date bookingDate;
-    private Date reservationDate;
+    private LocalDateTime reservationDate;
+
+    public Reservation() {
+    }
+
+    public Reservation(long id, Employee employee, Table table, Guest guest, Date bookingDate, LocalDateTime reservationDate) {
+        this.id = id;
+        this.employee = employee;
+        this.table = table;
+        this.guest = guest;
+        this.bookingDate = bookingDate;
+        this.reservationDate = reservationDate;
+    }
 
     public long getId() {
         return id;
@@ -54,7 +68,7 @@ public class Reservation {
         this.bookingDate = bookingDate;
     }
 
-    public Date getReservationDate() {
+    public LocalDateTime getReservationDate() {
         return reservationDate;
     }
 

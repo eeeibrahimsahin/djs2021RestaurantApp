@@ -5,6 +5,15 @@ public class Table {
     private int numberOfChairs;
     private int floor;
 
+    public Table() {
+    }
+
+    public Table(long id, int numberOfChairs, int floor) {
+        this.id = id;
+        this.numberOfChairs = numberOfChairs;
+        this.floor = floor;
+    }
+
     public long getId() {
         return id;
     }

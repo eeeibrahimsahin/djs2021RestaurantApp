@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
@@ -32,8 +32,13 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/employee", produces = "application/json",consumes = "application/json")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+    @RequestMapping(value = {"/newEmployee"})
+    public ResponseEntity<Employee> createEmployee(@RequestParam(value = "inputName") String inputName,
+                                                   @RequestParam(value = "inputLastname") String inputLastname,
+                                                   @RequestParam(value = "inputUsername") String inputUsername,
+                                                   @RequestParam(value = "inputPassword4") String inputPassword4){
+
+        Employee employee = new Employee(inputName,inputLastname,inputUsername,inputPassword4);
         Employee employee1 = employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
     }
