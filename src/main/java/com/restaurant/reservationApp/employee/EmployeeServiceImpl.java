@@ -7,15 +7,16 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     public EmployeeServiceImpl() {
     }
-
-    @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+//
+//    @Autowired
+//    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+//        this.employeeRepository = employeeRepository;
+//    }
 
     @Override
     public List<Employee> getAllEmployee() {

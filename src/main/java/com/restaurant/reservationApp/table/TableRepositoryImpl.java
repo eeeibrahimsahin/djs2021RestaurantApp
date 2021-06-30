@@ -2,19 +2,24 @@ package com.restaurant.reservationApp.table;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public  class TableRepositoryImpl implements TableRepository{
-    List<Table> addList = new ArrayList<>();
+    List<Table> addList = Arrays.asList(
+            new Table(1,4,2),
+            new Table(2,4,1),
+            new Table(3,4,2),
+            new Table(4,2,1),
+            new Table(5,2,2),
+            new Table(6,2,1),
+            new Table(7,8,1)
+    );
     List<Table>  deleteList = new ArrayList<>();
 
     public TableRepositoryImpl() {
-        Table table = new Table();
-        table.setId(3);
-        table.setNumberOfChairs(5);
-        addList.add(table);
 
     }
 
