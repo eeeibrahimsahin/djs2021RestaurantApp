@@ -15,12 +15,12 @@ import java.util.Optional;
 
 @Component
 public class OrderRepositoryImpl implements OrderRepository {
-    private List<Order> orderList = Arrays.asList(
+    private List<Order> orderList = new ArrayList<>(Arrays.asList(
             new Order(1, new TableRepositoryImpl().getTableById(5), new EmployeeRepositoryImpl().getEmployeeById(1), new ReservationRepositoryImpl().getReservationById(1), Arrays.asList(new DrinkRepositoryImpl().getDrinkById(1), new DrinkRepositoryImpl().getDrinkById(2)), true),
             new Order(2, new TableRepositoryImpl().getTableById(2), new EmployeeRepositoryImpl().getEmployeeById(2), new ReservationRepositoryImpl().getReservationById(2), Arrays.asList(new DrinkRepositoryImpl().getDrinkById(8), new DrinkRepositoryImpl().getDrinkById(4)), false),
             new Order(3, new TableRepositoryImpl().getTableById(2), new EmployeeRepositoryImpl().getEmployeeById(3), new ReservationRepositoryImpl().getReservationById(3), Arrays.asList(new DrinkRepositoryImpl().getDrinkById(7), new DrinkRepositoryImpl().getDrinkById(5)), true),
             new Order(4, new TableRepositoryImpl().getTableById(1), new EmployeeRepositoryImpl().getEmployeeById(4), new ReservationRepositoryImpl().getReservationById(4), Arrays.asList(new DrinkRepositoryImpl().getDrinkById(3), new DrinkRepositoryImpl().getDrinkById(6)), false)
-    );
+    ));
 
     public OrderRepositoryImpl() {
     }

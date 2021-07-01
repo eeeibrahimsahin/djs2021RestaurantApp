@@ -35,14 +35,8 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/newEmployee"})
-    public ResponseEntity<Employee> createEmployee(@RequestParam(value = "inputName") String inputName,
-                                                   @RequestParam(value = "inputLastname") String inputLastname,
-                                                   @RequestParam(value = "inputUsername") String inputUsername,
-                                                   @RequestParam(value = "inputPassword4") String inputPassword4) {
-
-
-        Employee employee = new Employee(inputName, inputLastname, inputUsername, inputPassword4);
+    @RequestMapping(value = "/newEmployee", method =RequestMethod.POST)
+    public ResponseEntity<Employee> createEmployee(Employee employee) {
         Employee employee1 = employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
     }
