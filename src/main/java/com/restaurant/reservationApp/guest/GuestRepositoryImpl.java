@@ -9,14 +9,14 @@ import java.util.Optional;
 
 @Component
 public class GuestRepositoryImpl implements GuestRepository {
-    List<Guest> list = Arrays.asList(
+    List<Guest> list = new ArrayList<>(Arrays.asList(
             new Guest(1, "Mila", "Bom", 061234567, 234),
             new Guest(2, "Alex", "De Souza", 061234567, 345),
             new Guest(3, "Yolant", "Verbulen", 061234567, 456),
             new Guest(4, "Johan", "Cruyff", 061234567, 567),
             new Guest(5, "Pogba", "Henry", 061234567, 678),
             new Guest(6, "Sedat", "Peker", 061234567, 789)
-    );
+    ));
 
     public GuestRepositoryImpl() {
     }

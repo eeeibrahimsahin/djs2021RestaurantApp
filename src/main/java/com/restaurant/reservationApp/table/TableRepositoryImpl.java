@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Component
 public  class TableRepositoryImpl implements TableRepository{
-    List<Table> addList = Arrays.asList(
+    List<Table> addList = new ArrayList<>(Arrays.asList(
             new Table(1,4,2),
             new Table(2,4,1),
             new Table(3,4,2),
@@ -16,7 +16,7 @@ public  class TableRepositoryImpl implements TableRepository{
             new Table(5,2,2),
             new Table(6,2,1),
             new Table(7,8,1)
-    );
+    ));
     List<Table>  deleteList = new ArrayList<>();
 
     public TableRepositoryImpl() {

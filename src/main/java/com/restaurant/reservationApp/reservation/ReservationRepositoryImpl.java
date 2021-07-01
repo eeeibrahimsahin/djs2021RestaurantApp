@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 public class ReservationRepositoryImpl implements ReservationRepository {
-    private List<Reservation> reservationList = Arrays.asList(
+    private List<Reservation> reservationList = new ArrayList<>(Arrays.asList(
             new Reservation(1, new EmployeeRepositoryImpl().getEmployeeById(1), new TableRepositoryImpl().getTableById(1),
                     new GuestRepositoryImpl().getGuestById(1), new Date(System.currentTimeMillis()), LocalDateTime.of(2021, 07, 13, 12, 00)),
             new Reservation(2, new EmployeeRepositoryImpl().getEmployeeById(2), new TableRepositoryImpl().getTableById(2),
@@ -30,7 +30,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             new Reservation(6, new EmployeeRepositoryImpl().getEmployeeById(6), new TableRepositoryImpl().getTableById(6),
                     new GuestRepositoryImpl().getGuestById(6), new Date(System.currentTimeMillis()), LocalDateTime.of(2021, 07, 18, 17, 00))
 
-    );
+    ));
 
     public ReservationRepositoryImpl() {
 
