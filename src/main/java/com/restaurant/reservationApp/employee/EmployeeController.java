@@ -6,16 +6,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
     EmployeeService employeeService;
 
-    public EmployeeController(){
+    public EmployeeController() {
     }
+
     @Autowired
-    public EmployeeController(EmployeeService employeeService){
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -36,9 +39,10 @@ public class EmployeeController {
     public ResponseEntity<Employee> createEmployee(@RequestParam(value = "inputName") String inputName,
                                                    @RequestParam(value = "inputLastname") String inputLastname,
                                                    @RequestParam(value = "inputUsername") String inputUsername,
-                                                   @RequestParam(value = "inputPassword4") String inputPassword4){
+                                                   @RequestParam(value = "inputPassword4") String inputPassword4) {
 
-        Employee employee = new Employee(inputName,inputLastname,inputUsername,inputPassword4);
+
+        Employee employee = new Employee(inputName, inputLastname, inputUsername, inputPassword4);
         Employee employee1 = employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
     }

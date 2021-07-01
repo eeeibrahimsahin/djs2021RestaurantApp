@@ -26,13 +26,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-
-                    <!-- <tr>
-                        <td id="id"></td>
-                        <td id="firstName"></td>
-                        <td id="lastName"></td>
-                        <td id="username"></td>
-                    </tr> -->
+                    
                 </tbody>
             </table>
         </div>
@@ -56,8 +50,9 @@
                 },
                 success: function (data) {
                     console.log(data);
+                    console.log(data.length);
 
-                    let html;
+                   let html;
                     data.forEach(element => {
                         html += `<tr>
                                         <td>${element.id}</td>
