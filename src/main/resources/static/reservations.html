@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+
+    <div class="jumbotron">
+        <h3>Reservations</h3>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Table No</th>
+                <th scope="col">Guest</th>
+                <th scope="col">Booking Date</th>
+                <th scope="col">Reservation Date</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script>
+ $(document).ready(function () {
+            $.ajax({
+                url: 'http://localhost:8080/api/reservations',
+                headers: { "Accept": "application/json" },
+                type: "GET", /* or type:"GET" or type:"PUT" */
+                dataType: "json",
+                data: {
+                },
+                success: function (data) {
+                    console.log(data);
+                    console.log(data.length);
+
+                   let html;
+                    data.forEach(element => {
+                        html += `<tr>
+                                        <td>${element.id}</td>
+                                        <td>${element.employee.firstName +" " + element.employee.lastName}</td>
+                                        <td>${element.table.id}</td>
+                                        <td>${element.guest.firstName + " " + element.guest.lastName}</td>
+                                        <td>${element.bookingDate}</td>
+                                        <td>${element.reservationDate}</td>
+                                       <td> <i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></td>
+                                    </tr>`
+                    });
+
+                    $('#tableBody').append(html);
+
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        })
+</script>
+</body>
+</html>

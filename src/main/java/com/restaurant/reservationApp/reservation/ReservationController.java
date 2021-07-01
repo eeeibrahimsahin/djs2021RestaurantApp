@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class ReservationController {
@@ -20,7 +21,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/allreservations")
+    @GetMapping("/reservations")
     public ResponseEntity<List<Reservation>> getAllReservation() {
 
         List<Reservation> allReservation = reservationService.getAllReservation();
