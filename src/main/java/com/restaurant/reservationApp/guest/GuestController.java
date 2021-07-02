@@ -33,8 +33,9 @@ public class GuestController {
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/guest", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
+    @RequestMapping(value = "/guest", method = RequestMethod.POST)
+    public ResponseEntity<Guest> createGuest(Guest guest) {
+        System.out.println(guest);
         Guest guest1 = guestService.createGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
