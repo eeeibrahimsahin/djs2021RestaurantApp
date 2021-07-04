@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>//if the guest number increase or date change
+  <title>Update Gues</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Guest Form</h1> //baslik
+<form action="#" th:action="@{/guest/{id}}" th:object="${/guest/{id}}" method="post">
+  <p>Id: <input type="text" th:field="*{id}" /></p>
+  <p>Table: <input type="number" th:field="*{id}" /></p>
+  <p>New Table: <input type="number" th:field="*{id}" /></p>
+  <p>Date: <input type="datetime-local" th:field="*{id}" /></p>
+  <p>New Date: <input type="datetime-local" th:field="*{id}" /></p>
+  <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
