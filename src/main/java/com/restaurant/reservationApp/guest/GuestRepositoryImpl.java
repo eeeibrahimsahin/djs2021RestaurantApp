@@ -38,4 +38,28 @@ public class GuestRepositoryImpl implements GuestRepository {
         list.add(guest);
         return guest;
     }
+
+    @Override
+    public Guest updateGuest(long id, String firstName, String lastName) {
+        for(Guest guest: list){
+            if(guest.getId()==id){
+                guest.setFirstName(firstName);
+                guest.setFirstName(lastName);
+                return guest;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteGuest(long id) {
+        for(Guest guest:list){
+            if (guest.getId()==id){
+                list.remove(guest);
+                break;
+            }
+
+        }
+
+    }
 }

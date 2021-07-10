@@ -34,4 +34,15 @@ public class GuestServiceImpl implements GuestService{
         return guestRepository.createGuest(guest);
     }
 
+    @Override
+    public Guest updateGuest(long id, String firstName, String lastName) {
+        return guestRepository.updateGuest(id, firstName,lastName);
+    }
+
+    @Override
+    public void deleteGuest(long id) {
+        guestRepository.deleteGuest(id);
+
+    }
+
 }
