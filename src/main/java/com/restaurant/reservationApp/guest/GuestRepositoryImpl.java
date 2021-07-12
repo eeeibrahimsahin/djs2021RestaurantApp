@@ -44,7 +44,7 @@ public class GuestRepositoryImpl implements GuestRepository {
         for(Guest guest: list){
             if(guest.getId()==id){
                 guest.setFirstName(firstName);
-                guest.setFirstName(lastName);
+                guest.setLastName(lastName);
                 return guest;
             }
         }

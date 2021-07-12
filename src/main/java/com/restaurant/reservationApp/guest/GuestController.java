@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
@@ -42,14 +43,14 @@ public class GuestController {
 
     @PutMapping("/update")
     public ResponseEntity<Guest> updatePlane(@RequestParam(name = "id") long id,
-                                             @RequestParam(name="firstName") String firstName,
-                                             @RequestParam(name="lastName") String lastName){
+                                             @RequestParam(name = "firstName") String firstName,
+                                             @RequestParam(name = "lastName") String lastName) {
         Guest guest = guestService.updateGuest(id, firstName, lastName);
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete")
-    public void deleteGuest(@RequestParam(name="id") long id) {
+    public void deleteGuest(@RequestParam(name = "id") long id) {
         guestService.deleteGuest(id);
     }
 }

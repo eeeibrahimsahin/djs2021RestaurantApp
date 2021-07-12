@@ -72,7 +72,7 @@ $('#tblguest').append( '<tr><td>' + value.firstName + '</td><td>' + value.lastNa
                 $('#alert').hide();
                 var idFromInput = $("#intId").val();
                 console.log(idFromInput)
-                var firstnameFromInput = $("txtfirstname").val();
+                var firstnameFromInput = $("#txtfirstname").val();
                 var lastnameFromInput = $("#txtlastname").val();
                 var phoneFromInput = $("#intphone").val();
                 var roomFromInput = $("#introom").val();
@@ -114,12 +114,14 @@ $('#tblguest').append( '<tr><td>' + value.firstName + '</td><td>' + value.lastNa
                 $('#alert').show();
             } else {
                 $('#alert').hide();
-                var firstnameFromInput = $("txtfirstname").val();
+                var idFromInput = $("#intId").val();
+                var firstnameFromInput = $("#txtfirstname").val();
                 var lastnameFromInput = $("#txtlastname").val();
                 var phoneFromInput = $("#intphone").val();
                 var roomFromInput = $("#introom").val();
 
                 var guest = {
+                    id:idFromInput,
                     firstname: firstnameFromInput,
                     lastname: lastnameFromInput,
                     phone: phoneFromInput,
@@ -129,7 +131,7 @@ $('#tblguest').append( '<tr><td>' + value.firstName + '</td><td>' + value.lastNa
                 var guestJson = JSON.stringify(guest);
 
                 $.ajax({
-                    url: 'http://localhost:8080/api/delete'+id,
+                    url: 'http://localhost:8080/api/delete?id='+idFromInput,
                     type: 'delete',
                     data: guestJson,
                     contentType: "application/json",
@@ -155,6 +157,7 @@ $('#tblguest').append( '<tr><td>' + value.firstName + '</td><td>' + value.lastNa
 <div>
   </br></br>
   <table>
+    <td>Guest Id</td>
     <td><input type="int" id = "intId" ></td>
 
     <tr>
@@ -189,14 +192,6 @@ $('#tblguest').append( '<tr><td>' + value.firstName + '</td><td>' + value.lastNa
     </td>
     <td>
       <button onclick="getData()">Show All Guests</button>
-    </td>
-
-    <td>
-      <button onclick="updateData(id)">Update Guest</button>
-    </td>
-
-    <td>
-      <button onclick="deleteData()">Delete Guest</button>
     </td>
   </tr>
   </br></br>
