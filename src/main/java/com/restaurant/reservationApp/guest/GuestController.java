@@ -42,8 +42,8 @@ public class GuestController {
 
     @PutMapping("/update")
     public ResponseEntity<Guest> updatePlane(@RequestParam(name = "id") long id,
-                                             @RequestParam(name="name") String firstName,
-                                             @RequestParam(name="name") String lastName){
+                                             @RequestParam(name="firstName") String firstName,
+                                             @RequestParam(name="lastName") String lastName){
         Guest guest = guestService.updateGuest(id, firstName, lastName);
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }

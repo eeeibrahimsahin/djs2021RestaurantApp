@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to the guest page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+
+function getData() {
+$.ajax({
+url: 'http://localhost:8080/api/guests',
+type: 'get',
+success: function (data) {
+console.log(data);
+$('#tblguest').empty();
+$.each(data, function (index, value) {
+  console.log(value);
+$('#tblguest').append( '<tr><td>' + value.firstName + '</td><td>' + value.lastName +'</td><td>' +
+ value.phoneNumber+'<td>' + value.roomNumber +'</td><td><button onclick = "updateData(id)">Update</button> | <button onclick = "deleteData(id)">Delete</button></td></tr>');
+});
+}
+});
+}
+
+      function postData() {
+            // Check if names and capacity of the plane are not empty
+            if (!$('#txtfirstname').val() ||!$('#txtlastname').val() || !$('#intphone').val()
+             || !$('#introom').val()) {
+                $('#alert').show();
+            } else {
+                $('#alert').hide();
+                var firstnameFromInput = $("txtfirstname").val();
+                var lastnameFromInput = $("#txtlastname").val();
+                var phoneFromInput = $("#intphone").val();
+                var roomFromInput = $("#introom").val();
+
+                var guest = {
+                    firstname: firstnameFromInput,
+                    lastname: lastnameFromInput,
+                    phone: phoneFromInput,
+                    room: roomFromInput
+                };
+
+                var guestJson = JSON.stringify(guest);
+
+                //Do POST request with body.
+                $.ajax({
+                    url: 'http://localhost:8080/api/guest',
+                    type: 'post',
+                    data: guestJson,
+                    contentType: "application/json",
+                    success: function (data) {
+                            getData();
+                        //Reset form
+                        $("txtfirstname").val();
+                        $("#txtlastname").val();
+                        $("#intphone").val();
+                        $("#introom").val();
+
+                    }
+                });
+            }
+        }
+
+        function updateData(id) {
+            // Check if names and capacity of the plane are not empty
+            if (!$('#txtfirstname').val() ||!$('#txtlastname').val() || !$('#intphone').val()
+             || !$('#introom').val()) {
+                $('#alert').show();
+            } else {
+                $('#alert').hide();
+                var idFromInput = $("#intId").val();
+                console.log(idFromInput)
+                var firstnameFromInput = $("txtfirstname").val();
+                var lastnameFromInput = $("#txtlastname").val();
+                var phoneFromInput = $("#intphone").val();
+                var roomFromInput = $("#introom").val();
+
+                var guest = {
+                    id:idFromInput,
+                    firstname: firstnameFromInput,
+                    lastname: lastnameFromInput,
+                    phone: phoneFromInput,
+                    room: roomFromInput
+                };
+
+                var guestJson = JSON.stringify(guest);
+
+                $.ajax({
+                    url: 'http://localhost:8080/api/update?id='+idFromInput+'&firstName='+firstnameFromInput
+                    +'&lastName='+lastnameFromInput,
+                    type: 'put',
+                    data: guestJson,
+                    contentType: "application/json",
+                    success: function (data) {
+                            getData();
+                        //Reset form
+                        $("#intId").val();
+                        $("txtfirstname").val();
+                        $("#txtlastname").val();
+                        $("#intphone").val();
+                        $("#introom").val();
+
+                    }
+                });
+            }
+        }
+
+         function deleteData(id) {
+            // Check if names and capacity of the plane are not empty
+            if (!$('#txtfirstname').val() ||!$('#txtlastname').val() || !$('#intphone').val()
+             || !$('#introom').val()) {
+                $('#alert').show();
+            } else {
+                $('#alert').hide();
+                var firstnameFromInput = $("txtfirstname").val();
+                var lastnameFromInput = $("#txtlastname").val();
+                var phoneFromInput = $("#intphone").val();
+                var roomFromInput = $("#introom").val();
+
+                var guest = {
+                    firstname: firstnameFromInput,
+                    lastname: lastnameFromInput,
+                    phone: phoneFromInput,
+                    room: roomFromInput
+                };
+
+                var guestJson = JSON.stringify(guest);
+
+                $.ajax({
+                    url: 'http://localhost:8080/api/delete'+id,
+                    type: 'delete',
+                    data: guestJson,
+                    contentType: "application/json",
+                    success: function (data) {
+                            getData();
+                        //Reset form
+                        $("txtfirstname").val();
+                        $("#txtlastname").val();
+                        $("#intphone").val();
+                        $("#introom").val();
+
+                    }
+                });
+            }
+        }
+         $(function () {
+            getData();
+        })
+
+ </script>
+</head>
+<body>
+<div>
+  </br></br>
+  <table>
+    <td><input type="int" id = "intId" ></td>
+
+    <tr>
+
+    <tr>
+
+      <td>First Name</td>
+      <td><input type="text" id = "txtfirstname"></td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td><input type="text" id = "txtlastname"></td>
+    </tr>
+    <tr>
+      <td>Phone Number</td>
+      <td><input type="tel" id = "intphone"></td>
+    </tr>
+
+    <tr>
+      <td>Room Number</td>
+      <td><input type="number" id = "introom"></td>
+    </tr>
+
+
+  </table>
+
+  </br></br>
+
+  <tr >
+    <td>
+      <button onclick="postData()">Add a Guest</button>
+    </td>
+    <td>
+      <button onclick="getData()">Show All Guests</button>
+    </td>
+
+    <td>
+      <button onclick="updateData(id)">Update Guest</button>
+    </td>
+
+    <td>
+      <button onclick="deleteData()">Delete Guest</button>
+    </td>
+  </tr>
+  </br></br>
+  <table border = "1" >
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Phone Number</th>
+      <th>Room Number</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id = "tblguest">
+
+    </tbody>
+  </table>
+</div>
