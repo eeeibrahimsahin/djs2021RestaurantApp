@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class GuestController {
@@ -33,9 +34,24 @@ public class GuestController {
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/guest", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
+    @RequestMapping(value = "/guest", method = RequestMethod.POST)
+    public ResponseEntity<Guest> createGuest(Guest guest) {
+        System.out.println(guest);
         Guest guest1 = guestService.createGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<Guest> updatePlane(@RequestParam(name = "id") long id,
+                                             @RequestParam(name = "firstName") String firstName,
+                                             @RequestParam(name = "lastName") String lastName) {
+        Guest guest = guestService.updateGuest(id, firstName, lastName);
+        return new ResponseEntity<>(guest, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete")
+    public void deleteGuest(@RequestParam(name = "id") long id) {
+        guestService.deleteGuest(id);
+    }
 }
+
