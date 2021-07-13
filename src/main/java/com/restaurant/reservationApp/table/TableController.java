@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.table;
 
+import com.restaurant.reservationApp.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,11 @@ public class TableController {
         return new ResponseEntity<>(table, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/table", produces = "application/json",consumes = "application/json")
+    @PutMapping(value = "/newTable", produces = "application/json",consumes = "application/json")
     public ResponseEntity<Table> Table(@RequestBody Table table){
         Table table1 = tableService.createTable(table);
         return new ResponseEntity<>(table1, HttpStatus.OK);
 
     }
+
 }
