@@ -12,7 +12,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
-    EmployeeService employeeService;
+    private Employee willUpdateEmployee;
+    private EmployeeService employeeService;
 
     public EmployeeController() {
     }
@@ -35,9 +36,28 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/newEmployee", method =RequestMethod.POST)
+    @RequestMapping(value = "/newEmployee", method = RequestMethod.POST)
     public ResponseEntity<Employee> createEmployee(Employee employee) {
         Employee employee1 = employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public void deleteEmployee(@PathVariable(name = "id") int id) {
+        employeeService.deleteEmployee(id);
+    }
+
+    @PutMapping(value = "/employee")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
+        Employee employee1 = employeeService.updateEmployee(employee);
+        return new ResponseEntity<>(employee1, HttpStatus.OK);
+    }
+    @PutMapping(value = "/willupdateemployee")
+    public void willUpdateEmployee(@RequestBody Employee employee) {
+        willUpdateEmployee =employee;
+    }
+    @GetMapping("/update")
+    public ResponseEntity<Employee> getWillUpdateEmployee() {
+        return new ResponseEntity<>(willUpdateEmployee, HttpStatus.OK);
     }
 }

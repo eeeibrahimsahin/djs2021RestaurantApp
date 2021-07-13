@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Update Employee</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h3>Update employee</h3>
+            <div class="mt-5">
+                <form id="employeeForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Firstname</label>
+                            <input type="text" class="form-control" id="inputName" name="firstName"
+                                placeholder="Firstname">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputLastname">Lastname</label>
+                            <input type="text" class="form-control" id="inputLastname" name="lastName"
+                                placeholder="Lastname">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" class="form-control" id="inputUsername" name="username"
+                                placeholder="Username">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Password</label>
+                            <input type="password" class="form-control" id="inputPassword4" name="password"
+                                placeholder="Password">
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        let employeeData;
+        let firstNameEl = $("#inputName");
+        let lastNameEl = $("#inputLastname");
+        let usernameEl = $("#inputUsername");
+        let passwordEl = $("#inputPassword4");
+        $(document).ready(function () {
+            getData();
+        });
+        function getData() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/update",
+                success: function (response) {
+                    employeeData = response;
+                    console.log(employeeData)
+                    firstNameEl.val(employeeData.firstName);
+                    lastNameEl.val(employeeData.lastName);
+                    usernameEl.val(employeeData.username);
+                    passwordEl.val(employeeData.password);
+                }
+            });
+        }
+
+        $("#employeeForm").submit(function (e) {
+            e.preventDefault();
+            let employeeJsObj = {
+                id: employeeData.id,
+                firstName: firstNameEl.val(),
+                lastName: lastNameEl.val(),
+                username: usernameEl.val(),
+                password: passwordEl.val()
+            };
+
+            let employeeJSON = JSON.stringify(employeeJsObj);
+
+            $.ajax({
+                type: "PUT",
+                url: "http://localhost:8080/api/employee",
+                data: employeeJSON,
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response)
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

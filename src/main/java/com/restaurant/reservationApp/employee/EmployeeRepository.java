@@ -6,4 +6,8 @@ public interface EmployeeRepository {
     public List<Employee> getAllEmployee();
     public Employee getEmployeeById(long id);
     public Employee createEmployee(Employee employee);
+
+    void deleteEmployee(int id);
+
+    Employee updateEmployee(Employee employee);
 }
