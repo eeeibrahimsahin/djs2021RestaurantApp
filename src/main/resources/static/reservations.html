@@ -35,6 +35,8 @@
         <thead>
         <tr>
             <th>Guest Name</th>
+            <th>Phone Number</th>
+            <th>Room No</th>
             <th>Table No</th>
             <th>Reservation Date</th>
             <th>Booking Date</th>
@@ -62,6 +64,8 @@
                         return rowData.guest.firstName + " " + rowData.guest.lastName;
                     }
             },
+            {"data": "guest.phoneNumber"},
+            {"data": "guest.roomNumber"},
             { "data": "table.id" },
             { "data": "reservationDate" },
             {  "data": "bookingDate",

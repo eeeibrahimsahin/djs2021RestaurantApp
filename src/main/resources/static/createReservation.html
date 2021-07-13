@@ -42,6 +42,11 @@
                     <input type="text" class="form-control" id="inputRoomNo" name="inputRoomNo"
                            placeholder="Room No">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPhoneNo">Phone Number</label>
+                    <input type="text" class="form-control" id="inputPhoneNo" name="inputPhoneNo"
+                           placeholder="Phone Number">
+                </div>
             </div>
             <div class="form-group">
                 <label for="selectTable">Select Table</label>
@@ -74,8 +79,10 @@
 var dateAndTime;
 var guestFirstName;
 var guestLastName;
+var guestPhoneNumber;
 var guestRoomNo;
 var desiredResTable;
+
 
 $("#reservationForm").submit(function (event) {
     event.preventDefault();
@@ -87,12 +94,15 @@ $("#reservationForm").submit(function (event) {
     guestFirstName = $("#inputName").val();
     guestLastName = $("#inputLastname").val();
     guestRoomNo = $("#inputRoomNo").val();
+    guestPhoneNumber = $("#inputPhoneNo").val();
 
     var reservationJsObject = {
         reservationDate: dateAndTime,
         guest: {
             firstName: guestFirstName,
             lastName: guestLastName,
+            phoneNumber:guestPhoneNumber,
+            roomNumber:guestRoomNo
         },
         table: {
             id: parseInt(desiredResTable),
