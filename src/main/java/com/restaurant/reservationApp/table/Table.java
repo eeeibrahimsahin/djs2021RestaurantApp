@@ -37,4 +37,13 @@ public class Table {
     public void setFloor(int floor) {
         this.floor = floor;
     }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "id=" + id +
+                ", numberOfChairs=" + numberOfChairs +
+                ", floor=" + floor +
+                '}';
+    }
 }

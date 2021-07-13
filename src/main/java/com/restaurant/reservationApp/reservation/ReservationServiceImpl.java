@@ -1,4 +1,5 @@
 package com.restaurant.reservationApp.reservation;
+import com.restaurant.reservationApp.table.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,10 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public Reservation  deleteReservation (Reservation  reservation) {
         return reservationRepository.deleteReservation (reservation);
+    }
+
+    @Override
+    public List<Table> getAvailableTables(String dateAndTime) {
+        return reservationRepository.getAvailableTables(dateAndTime);
     }
 }

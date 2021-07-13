@@ -7,4 +7,5 @@ public interface TableService {
     public Table getTableById(long id);
     public Table createTable(Table table);
     public Table deleteTable(Table table);
+
 }

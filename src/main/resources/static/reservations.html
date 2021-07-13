@@ -5,75 +5,72 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <title>Reservation</title>
+    <style>
+        #main{
+          margin: auto;
+          width: 95%;
+          padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="jumbotron">
-            <h3>Reservations</h3>
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Guest Name</th>
-                        <th scope="col">Table No</th>
-                        <th scope="col">Reservation Date</th>
-                        <th scope="col">Booking Date</th>
-                        <th scope="col">Employee</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
+<div id="main">
+    <table id="table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Guest Name</th>
+            <th>Table No</th>
+            <th>Reservation Date</th>
+            <th>Booking Date</th>
+            <th>Employee</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script>
+
+    $(document).ready(function() {
 
 
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: 'http://localhost:8080/api/allreservations',
-                headers: { "Accept": "application/json" },
-                type: "GET", /* or type:"GET" or type:"PUT" */
-                dataType: "json",
-                data: {
-                },
-                success: function (data) {
-                    console.log(data);
+    $('#table').DataTable( {
+        "processing": true,
+        ajax: {
+        url: 'http://localhost:8080/api/allreservations',
+        dataSrc: ''
+    },
+        "columns": [
+            { "data": function( rowData, type, row ){
+                        return rowData.guest.firstName + " " + rowData.guest.lastName;
+                    }
+            },
+            { "data": "table.id" },
+            { "data": "reservationDate" },
+            {  "data": "bookingDate",
+               "render": dateChanger
+            },
+            { "data": "employee.firstName" },
+        ]
+    } );
 
-                    let html;
-                    data.forEach(element => {
-                        html += `<tr>
-                                        <td>${element.id}</td>
-                                        <td>${element.guest.firstName} ${element.guest.lastName}</td>
-                                        <td>${element.table.id}</td>
-                                        <td>${element.reservationDate}</td>
-                                        <td>${element.bookingDate}</td>
-                                        <td>${element.employee.firstName}</td>
-                                    </tr>`
-                    });
+    function dateChanger(data, type, row, meta){
+        let dateFormatArray = data.split("T")
+        let date = dateFormatArray[0];
+        let time = dateFormatArray[1].slice(0,5)
+        return date + " " + time;
+    }
 
-                    $('#tableBody').append(html);
 
-                },
-                error: function () {
-                    console.log("error");
-                }
-            });
-        })
+} );
 
-    </script>
+</script>
 </body>
 
 </html>
