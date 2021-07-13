@@ -18,6 +18,11 @@ public class Guest {
         this.roomNumber = roomNumber;
     }
 
+    public Guest(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public long getId() {
         return id;
     }

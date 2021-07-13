@@ -12,4 +12,5 @@ public interface TableRepository {
 
     public Table createTable(Table table);
     public Table deleteTable(Table table);
+
 }

@@ -9,10 +9,8 @@ import com.restaurant.reservationApp.table.TableRepositoryImpl;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Component
 public class ReservationRepositoryImpl implements ReservationRepository {
@@ -58,6 +56,19 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public Reservation deleteReservation(Reservation reservation) {
         reservation.setId(reservationList.size() - 1);
         return reservation;
+    }
+
+    @Override
+    public List<Table> getAvailableTables(String dateAndTime) {
+        List<Table> availableTableList = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+        for (Reservation reservation : reservationList) {
+            if (reservation.getReservationDate().isBefore(dateTime) || reservation.getReservationDate().isAfter(dateTime)) {
+                availableTableList.add(reservation.getTable());
+            }
+        }
+        return availableTableList;
     }
 
 }
