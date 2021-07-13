@@ -4,12 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <title>Reservation</title>
     <style>
         #main{
@@ -17,6 +22,10 @@
           width: 95%;
           padding: 10px;
         }
+        a.editor-create {
+        display: inline-block;
+        margin-bottom: 0.5em;
+    }
     </style>
 </head>
 
@@ -30,6 +39,8 @@
             <th>Reservation Date</th>
             <th>Booking Date</th>
             <th>Employee</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
     </table>
@@ -57,6 +68,18 @@
                "render": dateChanger
             },
             { "data": "employee.firstName" },
+            {
+                        data: null,
+                        className: "dt-center editor-edit",
+                        defaultContent: '<i class="far fa-edit"></i>',
+                        orderable: false
+                    },
+                    {
+                        data: null,
+                        className: "dt-center editor-delete",
+                        defaultContent: '<i class="far fa-trash-alt"></i>',
+                        orderable: false
+                    }
         ]
     } );
 
