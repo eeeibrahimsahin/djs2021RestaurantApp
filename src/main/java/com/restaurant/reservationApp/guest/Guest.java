@@ -32,7 +32,7 @@ public class Guest {
     }
 
     public String getFirstName() {
-        return firstName;
+        System.out.println();return firstName;
     }
 
     public void setFirstName(String firstName) {
