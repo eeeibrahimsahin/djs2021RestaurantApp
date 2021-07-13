@@ -33,4 +33,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee createEmployee(Employee employee) {
         return employeeRepository.createEmployee(employee);
     }
+
+    @Override
+    public void deleteEmployee(int id) {
+        employeeRepository.deleteEmployee(id);
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        return employeeRepository.updateEmployee(employee);
+    }
 }

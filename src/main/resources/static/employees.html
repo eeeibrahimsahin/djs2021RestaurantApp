@@ -4,34 +4,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
     <title>Employees</title>
 </head>
 
 <body>
     <div class="container">
-        
+
         <div class="jumbotron">
             <h3>Employees</h3>
-            <table class="table table-striped">
+            <table id="table" class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col"></th>
                         <th scope="col">Firstname</th>
                         <th scope="col">Lastname</th>
                         <th scope="col">username</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    
+
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -40,38 +44,97 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
+        let dataNew;
+        let rowData;
+        function getData() {
             $.ajax({
                 url: 'http://localhost:8080/api/employees',
                 headers: { "Accept": "application/json" },
                 type: "GET", /* or type:"GET" or type:"PUT" */
                 dataType: "json",
-                data: {
-                },
+                data: {},
                 success: function (data) {
-                    console.log(data);
-                    console.log(data.length);
-
-                   let html;
-                    data.forEach(element => {
-                        html += `<tr>
-                                        <td>${element.id}</td>
-                                        <td>${element.firstName}</td>
-                                        <td>${element.lastName}</td>
-                                        <td>${element.username}</td>
-                                       <td> <i class="far fa-edit"></i> <i class="far fa-trash-alt"></i></td>
-                                    </tr>`
-                    });
-
-                    $('#tableBody').append(html);
+                    dataNew = data;
+                    putDataToDataTable(data);
 
                 },
                 error: function () {
                     console.log("error");
                 }
             });
+        }
+
+
+        function putDataToDataTable(data) {
+            $('#table').DataTable().clear();
+            $('#table').DataTable().rows.add(data);
+            $('#table').DataTable().columns.adjust().draw();
+        }
+
+
+        $(document).ready(function () {
+            getData();
+            $('#table').DataTable({
+                data: dataNew,
+                columns: [
+                    {
+                        data: "id",
+                        "visible": false,
+                        "searchable": false
+                    },
+                    { data: "firstName" },
+                    { data: "lastName" },
+                    { data: "username" },
+                    {
+                        data: null,
+                        className: "edit",
+                        defaultContent: '<i class="far fa-edit"></i>',
+                        orderable: false
+                    },
+                    {
+                        data: null,
+                        defaultContent: '<i class="far fa-trash-alt"></i>',
+                        orderable: false
+                    }
+                ]
+            });
+
+            var table = $('#table').DataTable();
+
+            $('#table').on('click', '.fa-trash-alt', function () {
+                rowData = table.row($(this).parents('tr').first()).data().id;
+                console.log(rowData);
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:8080/api/employee/" + rowData,
+                    success: function (response) {
+                        location.reload();
+
+                    }
+                });
+            });
+
+            $('#table').on('click', '.fa-edit', function () {
+                rowData = table.row($(this).parents('tr').first()).data();
+                let rowDataJSON = JSON.stringify(rowData)
+                console.log(rowData);
+                $.ajax({
+                    type: "PUT",
+                    url: "http://localhost:8080/api/willupdateemployee",
+                    data: rowDataJSON,
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response)
+                        pageRedirect();
+
+                    }
+                });
+            });
         })
 
+        function pageRedirect() {
+            window.location.href = "./updateEmployee.html";
+        }
     </script>
 </body>
 
