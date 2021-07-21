@@ -18,9 +18,14 @@
         <form id="dateCheckForm">
             <div class="form-row">
                 <div class="col">
-                    <input type="text" id="date-time" class="form-control" placeholder="Reservation Date">
+                    <label for="date-time">Choose a time for reservation:</label>
+<!--                    <input type="text" id="date-time" class="form-control" placeholder="Reservation Date">-->
+                    <input type="datetime-local" id="date-time" class="form-control"
+                           name="meeting-time" value="2021-08-12T19:30"
+                           min="2021-08-09T00:00">
+                    <input type="submit" class="btn btn-primary" value="Check">
                 </div>
-                <input type="submit" class="btn btn-primary" value="Check">
+
             </div>
         </form>
 
@@ -82,7 +87,6 @@ $("#reservationForm").submit(function (event) {
         .filter(":selected")
         .val();
     dateAndTime = $("#date-time").val();
-    console.log(dateAndTime);
     guestFirstName = $("#inputName").val();
     guestLastName = $("#inputLastname").val();
     guestRoomNo = $("#inputRoomNo").val();

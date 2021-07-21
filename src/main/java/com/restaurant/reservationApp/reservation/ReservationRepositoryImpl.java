@@ -61,8 +61,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public List<Table> getAvailableTables(String dateAndTime) {
         List<Table> availableTableList = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime);
         for (Reservation reservation : reservationList) {
             if (reservation.getReservationDate().isBefore(dateTime) || reservation.getReservationDate().isAfter(dateTime)) {
                 availableTableList.add(reservation.getTable());

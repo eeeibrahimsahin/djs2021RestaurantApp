@@ -51,8 +51,6 @@
 
     $(document).ready(function() {
 
-
-
     $('#table').DataTable( {
         "processing": true,
         ajax: {
@@ -67,7 +65,9 @@
             {"data": "guest.phoneNumber"},
             {"data": "guest.roomNumber"},
             { "data": "table.id" },
-            { "data": "reservationDate" },
+            { "data": "reservationDate" ,
+                "render": dateChanger
+            },
             {  "data": "bookingDate",
                "render": dateChanger
             },

@@ -20,7 +20,7 @@ public class Reservation {
     private Table table;
     private Guest guest;
     private Date bookingDate;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat()
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime reservationDate;
