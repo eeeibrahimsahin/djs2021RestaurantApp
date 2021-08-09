@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class GuestController {
+    private Guest willUpdateGuest;
     GuestService guestService;
 
     public GuestController() {
@@ -34,24 +35,34 @@ public class GuestController {
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/guest", method = RequestMethod.POST)
+    @RequestMapping(value = "/newguest", method = RequestMethod.POST)
     public ResponseEntity<Guest> createGuest(Guest guest) {
         System.out.println(guest);
         Guest guest1 = guestService.createGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Guest> updatePlane(@RequestParam(name = "id") long id,
-                                             @RequestParam(name = "firstName") String firstName,
-                                             @RequestParam(name = "lastName") String lastName) {
-        Guest guest = guestService.updateGuest(id, firstName, lastName);
-        return new ResponseEntity<>(guest, HttpStatus.OK);
+    @PutMapping(value = "/guest")
+    public ResponseEntity<Guest> updateGuest(@RequestBody Guest guest){
+        Guest guest1 = guestService.updateGuest(guest);
+        return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete")
-    public void deleteGuest(@RequestParam(name = "id") long id) {
+    @PutMapping(value = "/willupdateguest")
+    public void willUpdateGuest(@RequestBody Guest guest) {
+        willUpdateGuest =guest;
+    }
+
+    @GetMapping("/updateguest")
+    public ResponseEntity<Guest> getWillUpdateGuest() {
+        return new ResponseEntity<>(willUpdateGuest, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public void deleteGuest(@PathVariable(name = "id") long id) {
         guestService.deleteGuest(id);
     }
 }
+
+
 
