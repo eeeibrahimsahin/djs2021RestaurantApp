@@ -35,7 +35,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         String password = request.getParameter("password");
         if (username == null) {
             System.out.println("password = " + password);
-            username = "admin";
+            username = "ibrahim";
         }
         System.out.println("username = " + username);
         System.out.println("password = " + password);

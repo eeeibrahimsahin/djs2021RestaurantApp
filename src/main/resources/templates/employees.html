@@ -8,46 +8,49 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
     <title>Employees</title>
 </head>
 
 <body>
-<div th:insert="fragments/navbar.html"></div>
+    <div th:insert="fragments/navbar.html"></div>
+    <div th:insert="fragments/modal.html"></div>
 
-<div class="container">
+    <div class="container">
 
-    <div class="jumbotron">
-        <h3>Employees</h3>
-        <table id="table" class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">username</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody id="tableBody">
+        <div class="jumbotron">
+            <h3>Employees</h3>
+            <table id="table" class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">username</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script>
+    <script>
         let dataNew;
         let rowData;
+        let deleteText = "<p>----Once  you delete an account,  there's no getting it back.----" +
+            "Make sure you want to do this.</p>"
         function getData() {
             $.ajax({
                 url: 'http://localhost:8080/api/employees',
@@ -104,18 +107,25 @@
             var table = $('#table').DataTable();
 
             $('#table').on('click', '.fa-trash-alt', function () {
+                $("#confirmButton").addClass("btn-danger");
+                $("#exampleModalLabel").html("Whoa, there!")
+                $("#confirmButton").html("YEP, DELETE IT")
+                $(".modal-body").append(deleteText);
+                $('#exampleModal').modal('show')
                 rowData = table.row($(this).parents('tr').first()).data().id;
                 console.log(rowData);
+
+            });
+            $("#confirmButton").click(function (e) {
+                e.preventDefault();
                 $.ajax({
                     type: "DELETE",
                     url: "http://localhost:8080/api/employee/" + rowData,
                     success: function (response) {
                         location.reload();
-
                     }
                 });
             });
-
             $('#table').on('click', '.fa-edit', function () {
                 rowData = table.row($(this).parents('tr').first()).data();
                 let rowDataJSON = JSON.stringify(rowData)
@@ -135,10 +145,11 @@
         })
 
         function pageRedirect() {
-            window.location.href = "./updateEmployee.html";
+            window.location.href = "./update_employee";
         }
 
-</script>
+
+    </script>
 </body>
 
 </html>
