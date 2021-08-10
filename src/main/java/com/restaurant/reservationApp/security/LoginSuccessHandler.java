@@ -36,7 +36,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             redirectURL += "/reservations";
             System.out.println("redirectURL = " + redirectURL);
         } else if (roles.contains("ROLE_WAITER")) {
-            redirectURL += "/orders";
+            redirectURL += "/order_create";
             System.out.println("redirectURL = " + redirectURL);
         } else if (roles.contains("ROLE_CASHIER")) {
             redirectURL += "/payment";
