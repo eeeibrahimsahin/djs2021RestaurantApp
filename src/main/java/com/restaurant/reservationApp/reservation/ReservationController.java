@@ -20,6 +20,7 @@ import java.util.List;
 public class ReservationController {
     ReservationService reservationService;
     private Reservation reservation;
+    private Reservation willUpdateReservation;
 
     public ReservationController() {
     }
@@ -57,23 +58,47 @@ public class ReservationController {
     }
 
 
-    @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<Reservation> Reservation(@RequestParam(name = "reservation", required = false) String wish) {
-        if (wish == "create") {
-            Reservation reservation1 = reservationService.createReservation(reservation);
-            return new ResponseEntity<>(reservation1, HttpStatus.OK);
-        }
-        if (wish == "delete") {
-            Reservation reservation1 = reservationService.deleteReservation(reservation);
-            return new ResponseEntity<>(reservation1, HttpStatus.OK);
-        }
-        return null;
-    }
+//    @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
+//    public ResponseEntity<Reservation> Reservation(@RequestParam(name = "reservation", required = false) String wish) {
+//        if (wish == "create") {
+//            Reservation reservation1 = reservationService.createReservation(reservation);
+//            return new ResponseEntity<>(reservation1, HttpStatus.OK);
+//        }
+//        if (wish == "delete") {
+//            Reservation reservation1 = reservationService.deleteReservation(id);
+//            return new ResponseEntity<>(reservation1, HttpStatus.OK);
+//        }
+//        return null;
+//    }
 //    @PutMapping(value = "/reservation", produces = "application/json",consumes = "application/json")
 //    public ResponseEntity<Reservation> Reservation(@RequestBody Reservation reservation){
 //        Reservation reservation1 = reservationService.deleteReservation(reservation);
 //        return new ResponseEntity<>(reservation1, HttpStatus.OK);
 //    }
+
+
+    @PutMapping(value = "/reservation")
+    public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation){
+        Reservation reservation1  = reservationService.updateReservation(reservation);
+        System.out.println("reservation1 = " + reservation1);
+        return new ResponseEntity<>(reservation1, HttpStatus.OK);
+    }
+
+
+    @PutMapping(value = "/willupdatereservation")
+    public void willUpdateReservation(@RequestBody Reservation reservation) {
+        willUpdateReservation =reservation;
+    }
+    @GetMapping("/reservation/update")
+    public ResponseEntity<Reservation> getWillUpdateReservation() {
+        return new ResponseEntity<Reservation>(willUpdateReservation, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/deletereservation/{id}")
+    public void deleteReservation(@PathVariable(name = "id") long id) {
+        reservationService.deleteReservation(id);
+    }
+
 
     @GetMapping("/getavailabletables/{dateAndTime}")
     public ResponseEntity<List<Table>> getAvailableTables(@PathVariable(name = "dateAndTime") String dateAndTime) {

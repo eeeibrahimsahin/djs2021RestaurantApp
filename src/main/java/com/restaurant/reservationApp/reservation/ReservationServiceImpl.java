@@ -34,12 +34,17 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation  deleteReservation (Reservation  reservation) {
-        return reservationRepository.deleteReservation (reservation);
+    public void deleteReservation(long id) {
+        reservationRepository.deleteReservation(id);
     }
 
     @Override
     public List<Table> getAvailableTables(String dateAndTime) {
         return reservationRepository.getAvailableTables(dateAndTime);
+    }
+
+    @Override
+    public Reservation updateReservation(Reservation reservation) {
+        return reservationRepository.updateReservation(reservation);
     }
 }

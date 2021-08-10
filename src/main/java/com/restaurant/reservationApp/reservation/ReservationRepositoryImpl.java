@@ -53,10 +53,21 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public Reservation deleteReservation(Reservation reservation) {
-        reservation.setId(reservationList.size() - 1);
-        return reservation;
+    public void deleteReservation(long id) {
+        for(Reservation reservation:reservationList){
+            if (reservation.getId()==id){
+                reservationList.remove(reservation);
+                break;
+            }
+
+        }
     }
+
+//    @Override
+//    public Reservation deleteReservation(Reservation reservation) {
+//        reservation.setId(reservationList.size() - 1);
+//        return reservation;
+//    }
     //public Reservation deleteReservation(Reservation reservation) {
     //1---for(Reservation reservation:list){
     //            if (reservation.getId()==id){
@@ -76,6 +87,18 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             }
         }
         return availableTableList;
+    }
+
+    @Override
+    public Reservation updateReservation(Reservation reservation) {
+        final Optional<Reservation> willUpdateReservation = reservationList.stream().filter(reservation1 -> reservation1.getId() == reservation.getId()).findFirst();
+        if (willUpdateReservation.isPresent()){
+            willUpdateReservation.get().setGuest(reservation.getGuest());
+            willUpdateReservation.get().setTable(reservation.getTable());
+//            willUpdateReservation.get().setReservationDate(reservation.getReservationDate());
+            return willUpdateReservation.get();
+        }
+        return null;
     }
 
 }

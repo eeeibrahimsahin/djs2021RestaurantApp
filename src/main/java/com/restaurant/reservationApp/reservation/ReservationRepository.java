@@ -8,7 +8,9 @@ public interface ReservationRepository {
     public List<Reservation> getAllReservation();
     public Reservation getReservationById(long id);
     public Reservation createReservation(Reservation reservation);
-    public Reservation deleteReservation(Reservation reservation);
+    public void deleteReservation(long id);
 
     List<Table> getAvailableTables(String dateAndTime);
+
+    public Reservation updateReservation(Reservation reservation);
 }
