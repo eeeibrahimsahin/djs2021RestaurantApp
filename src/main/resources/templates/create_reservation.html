@@ -1,156 +1,168 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Create Reservation</title>
 </head>
 
 <body>
-<div th:insert="fragments/navbar.html"> </div>
+    <div th:insert="fragments/navbar.html"> </div>
+    <div th:insert="fragments/modal.html"></div>
 
-<div class="container">
-    <div class="jumbotron">
-        <h3>New reservation</h3>
+    <div class="container">
+        <div class="jumbotron">
+            <h3>New reservation</h3>
 
-        <form id="dateCheckForm">
-            <div class="form-row">
-                <div class="col">
-                    <label for="date-time">Choose a time for reservation:</label>
-<!--                    <input type="text" id="date-time" class="form-control" placeholder="Reservation Date">-->
-                    <input type="datetime-local" id="date-time" class="form-control"
-                           name="meeting-time" value="2021-08-12T19:30"
-                           min="2021-08-09T00:00">
-                    <input type="submit" class="btn btn-primary" value="Check">
+            <form id="dateCheckForm">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="date-time">Choose a time for reservation:</label>
+                        <!--                    <input type="text" id="date-time" class="form-control" placeholder="Reservation Date">-->
+                        <input type="datetime-local" id="date-time" class="form-control" name="meeting-time"
+                            value="2021-08-12T19:30" min="2021-08-09T00:00">
+                        <input type="submit" class="btn btn-primary" value="Check">
+                    </div>
+
                 </div>
+            </form>
 
-            </div>
-        </form>
+            <hr />
 
-        <hr/>
+            <form id="reservationForm" method="GET" action="http://localhost:8080/api/reservation">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputName">Firstname</label>
+                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Firstname">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLastname">Lastname</label>
+                        <input type="text" class="form-control" id="inputLastname" name="inputLastname"
+                            placeholder="Lastname">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputRoomNo">Room No</label>
+                        <input type="text" class="form-control" id="inputRoomNo" name="inputRoomNo"
+                            placeholder="Room No">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhoneNo">Phone Number</label>
+                        <input type="text" class="form-control" id="inputPhoneNo" name="inputPhoneNo"
+                            placeholder="Phone Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="selectTable">Select Table</label>
+                    <select multiple class="form-control" id="selectTable" name="selectTable">
 
-        <form id="reservationForm" method="GET" action="http://localhost:8080/api/reservation">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputName">Firstname</label>
-                    <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Firstname">
+                    </select>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputLastname">Lastname</label>
-                    <input type="text" class="form-control" id="inputLastname" name="inputLastname"
-                           placeholder="Lastname">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputRoomNo">Room No</label>
-                    <input type="text" class="form-control" id="inputRoomNo" name="inputRoomNo"
-                           placeholder="Room No">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPhoneNo">Phone Number</label>
-                    <input type="text" class="form-control" id="inputPhoneNo" name="inputPhoneNo"
-                           placeholder="Phone Number">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="selectTable">Select Table</label>
-                <select multiple class="form-control" id="selectTable" name="selectTable">
-
-                </select>
-            </div>
-            <input type="submit" class="btn btn-primary mt-1" value="Save">
-        </form>
+                <input type="submit" class="btn btn-primary mt-1" value="Save">
+            </form>
+        </div>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script>
-// Selecting HTML elements
-var dateAndTime;
-var guestFirstName;
-var guestLastName;
-var guestPhoneNumber;
-var guestRoomNo;
-var desiredResTable;
+    <script>
+        // Selecting HTML elements
+        var dateAndTime;
+        var guestFirstName;
+        var guestLastName;
+        var guestPhoneNumber;
+        var guestRoomNo;
+        var desiredResTable;
 
+        function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
+            $("#confirmButton").show();
+            $("#confirmButton").addClass(buttonColor);
+            $("#exampleModalLabel").html(header)
+            $("#confirmButton").html(confirmationWord)
+            $(".modal-body").html(text);
+            $('#exampleModal').modal('show')
+            if (deleteButton == true) {
+                $("#confirmButton").hide();
+                $("#cancelButton").html("Close")
+            }
+        }
 
-$("#reservationForm").submit(function (event) {
-    event.preventDefault();
-    desiredResTable = $("select[name=selectTable] option")
-        .filter(":selected")
-        .val();
-    dateAndTime = $("#date-time").val();
-    guestFirstName = $("#inputName").val();
-    guestLastName = $("#inputLastname").val();
-    guestRoomNo = $("#inputRoomNo").val();
-    guestPhoneNumber = $("#inputPhoneNo").val();
+        $("#reservationForm").submit(function (event) {
+            event.preventDefault();
+            desiredResTable = $("select[name=selectTable] option")
+                .filter(":selected")
+                .val();
+            dateAndTime = $("#date-time").val();
+            guestFirstName = $("#inputName").val();
+            guestLastName = $("#inputLastname").val();
+            guestRoomNo = $("#inputRoomNo").val();
+            guestPhoneNumber = $("#inputPhoneNo").val();
 
-    var reservationJsObject = {
-        reservationDate: dateAndTime,
-        guest: {
-            firstName: guestFirstName,
-            lastName: guestLastName,
-            phoneNumber:guestPhoneNumber,
-            roomNumber:guestRoomNo
-        },
-        table: {
-            id: parseInt(desiredResTable),
-        },
-    };
+            var reservationJsObject = {
+                reservationDate: dateAndTime,
+                guest: {
+                    firstName: guestFirstName,
+                    lastName: guestLastName,
+                    phoneNumber: guestPhoneNumber,
+                    roomNumber: guestRoomNo
+                },
+                table: {
+                    id: parseInt(desiredResTable),
+                },
+            };
 
-    var reservationJSON = JSON.stringify(reservationJsObject);
-    console.log(reservationJSON);
-    $.ajax({
-        type: "post",
-        url: "http://localhost:8080/api/createNewReservation",
-        data: reservationJSON,
-        dataType: "application/json",
-        contentType: "application/json",
-        success: function (response) {
-            console.log(response);
-        },
-    });
-});
-
-$("#dateCheckForm").submit(function (event) {
-    //alert("Handler for .submit() called.");
-    event.preventDefault();
-    dateAndTime = $("#date-time").val();
-    
-    $.ajax({
-        url: "http://localhost:8080/api/getavailabletables/"+dateAndTime,
-        headers: { Accept: "application/json" },
-        type: "GET" /* or type:"GET" or type:"PUT" */,
-        dataType: "json",
-        data: {},
-        success: function (data) {
-            console.log(data);
-
-            let html;
-            data.forEach((element) => {
-                html += `<option value=${element.id}>Table No: ${element.id}, Size: ${element.numberOfChairs} chairs, Location: ${element.floor}. floor</option>`;
+            var reservationJSON = JSON.stringify(reservationJsObject);
+            console.log(reservationJSON);
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8080/api/createNewReservation",
+                data: reservationJSON,
+                dataType: "application/json",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response);
+                },
             });
+        });
 
-            $("#selectTable").append(html);
-        },
-        error: function () {
-            console.log("error");
-        },
-    });
-});
+        $("#dateCheckForm").submit(function (event) {
+            //alert("Handler for .submit() called.");
+            event.preventDefault();
+            dateAndTime = $("#date-time").val();
+
+            $.ajax({
+                url: "http://localhost:8080/api/getavailabletables/" + dateAndTime,
+                headers: { Accept: "application/json" },
+                type: "GET" /* or type:"GET" or type:"PUT" */,
+                dataType: "json",
+                data: {},
+                success: function (data) {
+                    console.log(data);
+
+                    let html;
+                    data.forEach((element) => {
+                        html += `<option value=${element.id}>Table No: ${element.id}, Size: ${element.numberOfChairs} chairs, Location: ${element.floor}. floor</option>`;
+                    });
+
+                    $("#selectTable").append(html);
+                },
+                error: function () {
+                    console.log("error");
+                },
+            });
+        });
 
 
 
-        </script>
+    </script>
 </body>
 
 </html>
