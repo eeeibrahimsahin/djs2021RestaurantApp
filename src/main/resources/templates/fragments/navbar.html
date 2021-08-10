@@ -21,7 +21,7 @@
                     <a class="dropdown-item">Delete</a>
                 </div>
             </li>
-            <li sec:authorize="hasAnyRole('WAITER', 'CHEF')" class="nav-item dropdown">
+            <li sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN')" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Order
                 </a>
