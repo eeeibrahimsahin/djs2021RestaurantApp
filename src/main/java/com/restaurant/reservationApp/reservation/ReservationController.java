@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -78,6 +79,11 @@ public class ReservationController {
     @GetMapping("/getavailabletables/{dateAndTime}")
     public ResponseEntity<List<Table>> getAvailableTables(@PathVariable(name = "dateAndTime") String dateAndTime) {
         return new ResponseEntity<>(reservationService.getAvailableTables(dateAndTime), HttpStatus.OK);
+    }
+
+    @GetMapping("/amountofcustomer")
+    public ResponseEntity<Map<String,Long>> getAmountOfGuestSoFar() {
+        return new ResponseEntity<>(reservationService.getAmountOfGuest(), HttpStatus.OK);
     }
 
 }
