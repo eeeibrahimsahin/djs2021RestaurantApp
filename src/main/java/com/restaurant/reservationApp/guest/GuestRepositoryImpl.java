@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.guest;
 
+import com.restaurant.reservationApp.employee.Employee;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -38,15 +39,29 @@ public class GuestRepositoryImpl implements GuestRepository {
         list.add(guest);
         return guest;
     }
+//    public Employee updateEmployee(Employee employee) {
+//        final Optional<Employee> willUpdateEmployee = list.stream().filter(employee1 -> employee1.getId() == employee.getId()).findFirst();
+//        if (willUpdateEmployee.isPresent()) {
+//            willUpdateEmployee.get().setFirstName(employee.getFirstName());
+//            willUpdateEmployee.get().setLastName(employee.getLastName());
+//            willUpdateEmployee.get().setUsername(employee.getUsername());
+//            willUpdateEmployee.get().setPassword(employee.getPassword());
+//            return willUpdateEmployee.get();
+//        }
+//
+//        return null;
+//    }
 
     @Override
-    public Guest updateGuest(long id, String firstName, String lastName) {
-        for(Guest guest: list){
-            if(guest.getId()==id){
-                guest.setFirstName(firstName);
-                guest.setLastName(lastName);
-                return guest;
-            }
+    public Guest updateGuest(Guest guest) {
+
+        final Optional<Guest> willUpdateGuest = list.stream().filter(guest1 -> guest1.getId() == guest.getId()).findFirst();
+        if (willUpdateGuest.isPresent()){
+            willUpdateGuest.get().setFirstName(guest.getFirstName());
+            willUpdateGuest.get().setLastName(guest.getLastName());
+            willUpdateGuest.get().setPhoneNumber(guest.getPhoneNumber());
+            willUpdateGuest.get().setRoomNumber(guest.getRoomNumber());
+            return willUpdateGuest.get();
         }
         return null;
     }

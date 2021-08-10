@@ -57,6 +57,13 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         reservation.setId(reservationList.size() - 1);
         return reservation;
     }
+    //public Reservation deleteReservation(Reservation reservation) {
+    //1---for(Reservation reservation:list){
+    //            if (reservation.getId()==id){
+    //                list.remove(reservation);
+    //                break;}
+//2--- reservation = reservationList.stream().filter(reservation1 -> reservation1.getId() == id).findFirst().get();
+    //list.remove(reservation);
 
     @Override
     public List<Table> getAvailableTables(String dateAndTime) {

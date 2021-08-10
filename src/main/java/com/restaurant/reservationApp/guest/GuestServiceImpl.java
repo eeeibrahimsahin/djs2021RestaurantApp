@@ -35,8 +35,8 @@ public class GuestServiceImpl implements GuestService{
     }
 
     @Override
-    public Guest updateGuest(long id, String firstName, String lastName) {
-        return guestRepository.updateGuest(id, firstName,lastName);
+    public Guest updateGuest(Guest guest) {
+        return guestRepository.updateGuest(guest);
     }
 
     @Override
@@ -44,5 +44,6 @@ public class GuestServiceImpl implements GuestService{
         guestRepository.deleteGuest(id);
 
     }
+
 
 }
