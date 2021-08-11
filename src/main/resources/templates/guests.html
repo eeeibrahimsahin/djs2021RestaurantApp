@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
     <link href="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    
+
     <title>Guests</title>
     <style>
         #main{
@@ -24,26 +24,29 @@
         display: inline-block;
         margin-bottom: 0.5em;
     }
+
     </style>
 </head>
 
 <body>
+<div th:insert="fragments/navbar.html"></div>
+
 <div id="main">
     <table id="tableBody" class="table table-striped table-bordered" style="width:100%">
         <thead>
-                    <tr>
-                        <th scope="col">Guestname</th>
-<!--                        <th scope="col">Firstname</th>-->
-<!--                        <th scope="col">Lastname</th>-->
-                        <th scope="col">Phone Number</th>
-                        <th scope="col">Room Number</th>
-                        <th></th>
+        <tr>
+            <th scope="col">Guestname</th>
+            <!--                        <th scope="col">Firstname</th>-->
+            <!--                        <th scope="col">Lastname</th>-->
+            <th scope="col">Phone Number</th>
+            <th scope="col">Room Number</th>
             <th></th>
-                    </tr>
-                </thead>
-            </table>
-    </div>
-    <script>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script>
         let rowData;
         $(document).ready(function () {
          $('#tableBody').DataTable( {
@@ -127,6 +130,7 @@
           function pageRedirect() {
             window.location.href = "./updateGuess.html";
         }
+
 
 
 </script>

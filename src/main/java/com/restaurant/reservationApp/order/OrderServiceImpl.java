@@ -25,5 +25,10 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(Order order) {
         return orderRepository.createOrder(order);
     }
+
+    @Override
+    public Order addDishToOrder(int id,List<Dish> dish) {
+        return orderRepository.addDishToOrder(id,dish);
+    }
 }
 

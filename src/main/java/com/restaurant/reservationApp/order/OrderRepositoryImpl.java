@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Component
 public class OrderRepositoryImpl implements OrderRepository {
+
     private List<Order> orderList = new ArrayList<>(Arrays.asList(
             new Order(1, new TableRepositoryImpl().getTableById(5), new EmployeeRepositoryImpl().getEmployeeById(1), new ReservationRepositoryImpl().getReservationById(1), Arrays.asList(new DrinkRepositoryImpl().getDrinkById(1), new DrinkRepositoryImpl().getDrinkById(2)), true),
             new Order(2, new TableRepositoryImpl().getTableById(2), new EmployeeRepositoryImpl().getEmployeeById(2), new ReservationRepositoryImpl().getReservationById(2), Arrays.asList(new DrinkRepositoryImpl().getDrinkById(8), new DrinkRepositoryImpl().getDrinkById(4)), false),
@@ -41,6 +42,15 @@ public class OrderRepositoryImpl implements OrderRepository {
         order.setId(orderList.size() + 1);
         orderList.add(order);
         return order;
+    }
+
+    @Override
+    public Order addDishToOrder(int id, List<Dish> dishes) {
+        Optional<Order> optionalOrder = orderList.stream().filter(order -> order.getId() == id).findFirst();
+        if(optionalOrder.isPresent()){
+            optionalOrder.get().getDishes().addAll(dishes);
+        }
+        return null;
     }
 }
 
