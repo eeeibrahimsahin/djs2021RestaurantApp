@@ -10,7 +10,7 @@ import java.util.List;
 public class FoodRepositoryImpl implements FoodRepository{
 
     List <Food> foodList = new ArrayList<>(Arrays.asList(
-            new Food(100,"Chicken Salad", "Meal", 500,15,"gr"),
+            new Food(100,"Chicken Salad", "Meal", 9,15,"gr"),
             new Food(101,"Salad","Starter",2.1,5,"gr"),
             new Food(102,"Wonton Soup with BBQ","Starter",400,4.99,"ml"),
             new Food(103,"Five Star","meal",800,25,"gr"),

@@ -30,7 +30,7 @@
                     <p>
                         What do you want to do with me?
                     </p>
-                    <img sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN','CASHIER','KITCHEN','WAITER')" src="/images/menu.jpg" style="width:75%" class="mx-auto" />
+                    <img sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN','CASHIER','KITCHEN','WAITER')" src="/images/header-bg.jpg" style="width:75%" class="mx-auto" />
                     <div sec:authorize="hasAnyRole('CHEF')" th:insert="fragments/cards.html"> </div>
                 </div>
             </div>
