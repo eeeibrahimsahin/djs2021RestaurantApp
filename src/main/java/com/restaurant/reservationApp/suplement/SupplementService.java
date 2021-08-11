@@ -10,4 +10,6 @@ public interface SupplementService {
     List<Supplement> getAllSupplements();
 
     public Supplement getSupplementById(long id);
+
+    List getSupplementsLessThan(long amount);
 }

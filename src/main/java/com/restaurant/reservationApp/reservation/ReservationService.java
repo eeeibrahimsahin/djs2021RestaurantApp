@@ -3,6 +3,7 @@ package com.restaurant.reservationApp.reservation;
 import com.restaurant.reservationApp.table.Table;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ReservationService {
     public List<Reservation> getAllReservation();
@@ -11,4 +12,7 @@ public interface ReservationService {
     public Reservation deleteReservation(Reservation reservation);
 
     List<Table> getAvailableTables(String dateAndTime);
+
+
+    Map<String, Long> getAmountOfGuest();
 }

@@ -3,7 +3,10 @@ import com.restaurant.reservationApp.table.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
@@ -41,5 +44,19 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public List<Table> getAvailableTables(String dateAndTime) {
         return reservationRepository.getAvailableTables(dateAndTime);
+    }
+    @Override
+    public Map<String, Long> getAmountOfGuest(){
+        LocalDateTime now = LocalDateTime.now();
+        long amountOfAllGuest = getAllReservation().stream().count();
+        long amountOfGuestSoFar = getAllReservation().stream().filter(reservation ->now.isAfter(reservation.getReservationDate())).count();
+        long amountOfGuestWhoVisitPlanned = getAllReservation().stream().filter(reservation ->reservation.getReservationDate().isAfter(now)).count();
+        long amountOfGuestWhoVisitContinue = 2;
+
+         Map<String,Long> amountOfGuestMap = new HashMap<>();
+         amountOfGuestMap.put("amountOfGuestSoFar",amountOfGuestSoFar);
+         amountOfGuestMap.put("amountOfGuestWhoVisitPlanned",amountOfGuestWhoVisitPlanned);
+         amountOfGuestMap.put("amountOfGuestWhoVisitContinue",amountOfGuestWhoVisitContinue);
+         return amountOfGuestMap;
     }
 }

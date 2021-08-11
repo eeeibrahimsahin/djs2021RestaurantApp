@@ -1,9 +1,14 @@
 package com.restaurant.reservationApp.suplement;
 
+import com.restaurant.reservationApp.drink.Drink;
+import com.restaurant.reservationApp.food.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class SupplementServiceImpl implements SupplementService {
@@ -20,5 +25,16 @@ public class SupplementServiceImpl implements SupplementService {
         return supplementRepository.getSupplementById(id);
     }
 
+    @Override
+    public List getSupplementsLessThan(long amount){
+        List<Food> foodList = supplementRepository.getAllSupplements().get(0).getFoodList();
+        List<Drink> drinkList = supplementRepository.getAllSupplements().get(0).getDrinkList();
+        List list = new ArrayList();
+
+        foodList.stream().filter(food -> food.getQuantity()<amount).forEach(list::add);
+        drinkList.stream().filter(drink -> drink.getQuantity()<amount).forEach(list::add);
+
+        return list;
+    }
 
 }

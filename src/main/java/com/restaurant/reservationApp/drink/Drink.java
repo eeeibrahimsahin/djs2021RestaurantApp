@@ -6,16 +6,18 @@ public class Drink {
     private String name;
     private String type;
     private int quantity;
+    private String typeOfQuantity;
     private double price;
 
     public Drink() {
     }
 
-    public Drink(long id, String name, String type, int quantity, double price) {
+    public Drink(long id, String name, String type, int quantity, String typeOfQuantity, double price) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.quantity = quantity;
+        this.typeOfQuantity = typeOfQuantity;
         this.price = price;
     }
 
