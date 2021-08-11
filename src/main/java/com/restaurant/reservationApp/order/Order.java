@@ -12,7 +12,7 @@ public class Order {
     private Table table;
     private Employee employee;
     private Reservation reservation;
-    //private List<Food> foodList;
+    private List<Dish> dishes;
     private List<Drink> drinkList;
     //private List<Dessert> dessertList;
     private boolean isDiet;
@@ -25,6 +25,7 @@ public class Order {
         this.table = table;
         this.employee = employee;
         this.reservation = reservation;
+    //    this.dishes = dishes;
         this.drinkList = drinkList;
         this.isDiet = isDiet;
     }
@@ -79,5 +80,13 @@ public class Order {
 
     public void addDrinkToList(Drink drink) {
         this.drinkList.add(drink);
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
     }
 }

@@ -18,7 +18,7 @@
                     <a class="dropdown-item" href="/reservations">View</a>
                     <a class="dropdown-item" href="/create_reservation">Create</a>
                     <a class="dropdown-item" href="/reservations">Update</a>
-                    <a class="dropdown-item">Delete</a>
+
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN')" class="nav-item dropdown">
@@ -28,8 +28,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
                     <a class="dropdown-item" href="/orders">View</a>
                     <a class="dropdown-item" href="/order_create">Create</a>
-                    <a class="dropdown-item">Update</a>
-                    <a class="dropdown-item">Delete</a>
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('CASHIER','ADMIN')"class="nav-item dropdown">
@@ -52,8 +50,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarRelMenuLink">
                     <a class="dropdown-item" href="/tables">View</a>
                     <a class="dropdown-item" href="/create_table">Create</a>
-                    <a class="dropdown-item">Update</a>
-                    <a class="dropdown-item">Delete</a>
+
                 </div>
             </li>
 
@@ -64,8 +61,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
                     <a class="dropdown-item" href="/guests">View</a>
                     <a class="dropdown-item" href="/create_guest">Create</a>
-                    <a class="dropdown-item" href="/guests">Update</a>
-                    <a class="dropdown-item" href="/guests">Delete</a>
+
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('KITCHEN','ADMIN','CHEF')" class="nav-item dropdown">
@@ -76,8 +72,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
                     <a class="dropdown-item" href="/foods">View</a>
                     <a class="dropdown-item" >Create</a>
-                    <a class="dropdown-item" >Update</a>
-                    <a class="dropdown-item">Delete</a>
+
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('KITCHEN','ADMIN','CHEF')" class="nav-item dropdown">

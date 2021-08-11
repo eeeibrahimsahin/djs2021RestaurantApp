@@ -8,4 +8,6 @@ public interface OrderRepository {
     public Order getOrderById(long id);
 
     public Order createOrder(Order order);
+
+    Order addDishToOrder(int id, List<Dish> dish);
 }
