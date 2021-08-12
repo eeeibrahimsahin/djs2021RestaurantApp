@@ -2,19 +2,33 @@ package com.restaurant.reservationApp.payment;
 
 import com.restaurant.reservationApp.order.Order;
 
+import javax.persistence.*;
+
+@Entity
 public class Payment {
-        private long id;
-        private String paymentMethod;
-        private Order order;
-        private double totalPrice;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String paymentMethod;
+    @OneToOne
+    private Order order;
+    private double totalPrice;
 
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public String getPaymentMethod() { return paymentMethod; }
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
 
-    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 
     public Order getOrder() {
         return order;
@@ -24,7 +38,11 @@ public class Payment {
         this.order = order;
     }
 
-    public double getTotalPrice() { return totalPrice; }
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }

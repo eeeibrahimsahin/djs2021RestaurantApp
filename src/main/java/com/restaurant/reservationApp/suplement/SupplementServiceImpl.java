@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 @Component
 public class SupplementServiceImpl implements SupplementService {
@@ -17,18 +16,21 @@ public class SupplementServiceImpl implements SupplementService {
 
     @Override
     public List<Supplement> getAllSupplements() {
-        return supplementRepository.getAllSupplements();
+        List<Supplement> supplements = new ArrayList<>();
+        Iterable<Supplement> supplementIterable = supplementRepository.findAll();
+        supplementIterable.forEach(supplements::add);
+        return supplements;
     }
 
     @Override
-    public Supplement getSupplementById(long id) {
-        return supplementRepository.getSupplementById(id);
+    public Optional<Supplement> getSupplementById(long id) {
+        return supplementRepository.findById(id);
     }
 
     @Override
     public List getSupplementsLessThan(long amount){
-        List<Food> foodList = supplementRepository.getAllSupplements().get(0).getFoodList();
-        List<Drink> drinkList = supplementRepository.getAllSupplements().get(0).getDrinkList();
+        List<Food> foodList =getAllSupplements().get(0).getFoodList();
+        List<Drink> drinkList = getAllSupplements().get(0).getDrinkList();
         List list = new ArrayList();
 
         foodList.stream().filter(food -> food.getQuantity()<amount).forEach(list::add);

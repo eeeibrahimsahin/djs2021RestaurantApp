@@ -1,12 +1,12 @@
 package com.restaurant.reservationApp.food;
 
-import com.restaurant.reservationApp.drink.Drink;
-
 import java.util.List;
+import java.util.Optional;
 
 public interface FoodService {
-    List <Food> getAllFood ();
+    List<Food> getAllFood();
 
-    Food getFoodById(long id);
+    Optional<Food> getFoodById(long id);
+
     public Food createFood(Food food);
 }

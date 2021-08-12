@@ -2,11 +2,15 @@ package com.restaurant.reservationApp.order;
 
 import com.restaurant.reservationApp.food.Food;
 
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
 public class Dish {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
+    @OneToMany
     private List<Food> ingredients;
 
     public Dish() {

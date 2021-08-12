@@ -1,9 +1,12 @@
 package com.restaurant.reservationApp.suplement;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
-
-public interface SupplementRepository {
-    List<Supplement> getAllSupplements();
-
-    Supplement getSupplementById(long id);
+@Repository
+public interface SupplementRepository extends CrudRepository<Supplement,Long> {
+//    List<Supplement> getAllSupplements();
+//
+//    Supplement getSupplementById(long id);
 }

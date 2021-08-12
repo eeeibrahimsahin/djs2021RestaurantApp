@@ -1,11 +1,12 @@
 package com.restaurant.reservationApp.table;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TableService {
     public List<Table> getAllTable();
-    public Table getTableById(long id);
+    public Optional<Table> getTableById(long id);
     public Table createTable(Table table);
-    public Table deleteTable(Table table);
+    public void deleteTable(Table table);
 
 }

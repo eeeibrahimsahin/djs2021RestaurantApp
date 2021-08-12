@@ -1,11 +1,14 @@
 package com.restaurant.reservationApp.table;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class TableServiceImpl implements TableService{
+public class TableServiceImpl implements TableService {
     TableRepository tableRepository;
 
     public TableServiceImpl() {
@@ -18,23 +21,25 @@ public class TableServiceImpl implements TableService{
 
     @Override
     public List<Table> getAllTable() {
-
-        return tableRepository.getAllTable();
+        List<Table> tables = new ArrayList<>();
+        Iterable<Table> tableIterable = tableRepository.findAll();
+        tableIterable.forEach(tables::add);
+        return tables;
     }
 
     @Override
-    public Table getTableById(long id) {
-        return tableRepository.getTableById(id);
+    public Optional<Table> getTableById(long id) {
+        return tableRepository.findById(id);
     }
 
     @Override
     public Table createTable(Table table) {
-        return tableRepository.createTable(table);
+        return tableRepository.save(table);
     }
 
     @Override
-    public Table deleteTable(Table table) {
-        return tableRepository.deleteTable(table);
+    public void deleteTable(Table table) {
+        tableRepository.delete(table);
     }
 
 

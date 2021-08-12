@@ -26,7 +26,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         List<String> roles = authorities.stream().map(auth -> auth.getAuthority()).collect(Collectors.toList());
 
         String redirectURL = request.getContextPath();
-
+        System.out.println("jooasda = " );
 
         if (roles.contains("ROLE_ADMIN")) {
             System.out.println("redirectURL = " + redirectURL);

@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" xmlns:sec="http://www.w3.org/1999/xhtml">
 
     <a class="navbar-brand" href="">Restaurant Menu</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -11,8 +10,7 @@
         <ul class="navbar-nav mr-auto">
             <li sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN')" class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink1" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Reservation
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
@@ -23,8 +21,7 @@
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN','KITCHEN')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Order
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
@@ -33,8 +30,7 @@
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('CASHIER','ADMIN')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink6" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Payment
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
@@ -47,8 +43,7 @@
 
 
             <li sec:authorize="hasAnyRole('WAITER','ADMIN')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarRelMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarRelMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Table
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarRelMenuLink">
@@ -59,8 +54,7 @@
             </li>
 
             <li sec:authorize="hasAnyRole('CHEF','ADMIN')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Guest
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
@@ -70,8 +64,7 @@
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('KITCHEN','ADMIN','CHEF')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink5" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Food
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
@@ -81,8 +74,7 @@
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('KITCHEN','ADMIN','CHEF')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink4" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Stock
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
@@ -94,19 +86,17 @@
 
             <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink3" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Employee
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
                     <a class="dropdown-item" href="/employees">View</a>
-                    <a class="dropdown-item" href="/create_employee.html">Create</a>
+                    <a class="dropdown-item" href="/create_employee">Create</a>
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink2" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Report
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">

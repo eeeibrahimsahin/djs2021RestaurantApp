@@ -1,11 +1,9 @@
 package com.restaurant.reservationApp.drink;
 
-import java.util.List;
-
 public interface DrinkService {
-    public List<Drink> getAllDrinks();
+    public Iterable<Drink> getAllDrinks();
 
-    public Drink getDrinkById(long id);
+    public Drink getDrinkById(int id);
 
     public Drink createDrink(Drink drink);
 }

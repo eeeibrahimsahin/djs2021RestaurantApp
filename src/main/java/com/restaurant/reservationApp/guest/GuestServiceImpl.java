@@ -3,14 +3,18 @@ package com.restaurant.reservationApp.guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class GuestServiceImpl implements GuestService{
+public class GuestServiceImpl implements GuestService {
     GuestRepository guestRepository;
-    public GuestServiceImpl(){
+
+    public GuestServiceImpl() {
 
     }
+
     @Autowired
     public GuestServiceImpl(GuestRepository guestRepository) {
         this.guestRepository = guestRepository;
@@ -18,30 +22,35 @@ public class GuestServiceImpl implements GuestService{
 
     @Override
     public List<Guest> getAllGuests() {
-
-        return guestRepository.getAllGuests();
+        List<Guest> guests = new ArrayList<>();
+        Iterable<Guest> guestIterable = guestRepository.findAll();
+        guestIterable.forEach(guests::add);
+        return guests;
     }
 
     @Override
-    public Guest getGuestById(long id) {
+    public Optional<Guest> getGuestById(long id) {
 
-        return guestRepository.getGuestById(id);
+        return guestRepository.findById(id);
     }
 
     @Override
     public Guest createGuest(Guest guest) {
-
-        return guestRepository.createGuest(guest);
+        return guestRepository.save(guest);
     }
 
     @Override
     public Guest updateGuest(Guest guest) {
-        return guestRepository.updateGuest(guest);
+        if (guestRepository.existsById(guest.getId())) {
+            guestRepository.save(guest);
+            return guest;
+        }
+        return null; //TODO: handle to return null issue.
     }
 
     @Override
     public void deleteGuest(long id) {
-        guestRepository.deleteGuest(id);
+        guestRepository.deleteById(id);
 
     }
 

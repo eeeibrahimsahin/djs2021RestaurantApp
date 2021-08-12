@@ -1,8 +1,15 @@
 package com.restaurant.reservationApp.drink;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Drink {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String name;
     private String type;
     private int quantity;
@@ -12,7 +19,7 @@ public class Drink {
     public Drink() {
     }
 
-    public Drink(long id, String name, String type, int quantity, String typeOfQuantity, double price) {
+    public Drink(int id, String name, String type, int quantity, String typeOfQuantity, double price) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -25,7 +32,7 @@ public class Drink {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

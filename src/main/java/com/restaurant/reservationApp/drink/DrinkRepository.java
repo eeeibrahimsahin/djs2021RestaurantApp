@@ -1,9 +1,12 @@
 package com.restaurant.reservationApp.drink;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DrinkRepository {
-    public List<Drink> getAllDrinks();
-    public Drink getDrinkById(long id);
-    public Drink createDrink(Drink drink);
+import java.util.List;
+@Repository
+public interface DrinkRepository extends CrudRepository<Drink, Integer> {
+    //public List<Drink> getAllDrinks(); findAll() exists in CrudRepository. We can use it instead of getAllDrinks()
+    // public Drink getDrinkById(long id); findById() exists in CrudRepository. We can use it instead of getDrinkById()
+    // public Drink createDrink(Drink drink); save() exists in CrudRepository. We can use it instead of createDrink()
 }

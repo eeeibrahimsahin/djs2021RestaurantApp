@@ -5,14 +5,22 @@ import com.restaurant.reservationApp.employee.Employee;
 import com.restaurant.reservationApp.reservation.Reservation;
 import com.restaurant.reservationApp.table.Table;
 
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @OneToOne
     private Table table;
+    @OneToOne
     private Employee employee;
+    @OneToOne
     private Reservation reservation;
+    @OneToMany
     private List<Dish> dishes;
+    @OneToMany
     private List<Drink> drinkList;
     //private List<Dessert> dessertList;
     private boolean isDiet;

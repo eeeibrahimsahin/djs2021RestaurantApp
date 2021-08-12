@@ -9,15 +9,20 @@ import com.restaurant.reservationApp.guest.Guest;
 import com.restaurant.reservationApp.table.Table;
 import com.restaurant.reservationApp.employee.Employee;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+@Entity
 public class Reservation {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @OneToOne
     private Employee employee;
+    @OneToOne
     private Table table;
+    @OneToOne
     private Guest guest;
     private Date bookingDate;
     @JsonFormat()

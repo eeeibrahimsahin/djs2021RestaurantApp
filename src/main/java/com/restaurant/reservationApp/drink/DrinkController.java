@@ -15,13 +15,13 @@ public class DrinkController {
     private DrinkService drinkService;
 
     @GetMapping("/drinks")
-    public ResponseEntity<List<Drink>> getAllDrinks() {
-        List<Drink> drinks = drinkService.getAllDrinks();
+    public ResponseEntity<Iterable<Drink>> getAllDrinks() {
+        Iterable<Drink> drinks = drinkService.getAllDrinks();
         return new ResponseEntity<>(drinks, HttpStatus.OK);
     }
 
     @GetMapping("/drinks/{id}")
-    public ResponseEntity<Drink> getDrinkById(@PathVariable(name = "id", required = true) long id) {
+    public ResponseEntity<Drink> getDrinkById(@PathVariable(name = "id", required = true) int id) {
         Drink drink = drinkService.getDrinkById(id);
         return new ResponseEntity<>(drink, HttpStatus.OK);
     }

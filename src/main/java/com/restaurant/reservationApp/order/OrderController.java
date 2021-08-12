@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -21,8 +22,10 @@ public class OrderController {
 
     @GetMapping("/orders/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable(name = "id", required = true) long id) {
-        Order order = orderService.getOrderById(id);
-        return new ResponseEntity<>(order, HttpStatus.OK);
+        Optional<Order> order = orderService.getOrderById(id);
+        if (order.isPresent())
+            return new ResponseEntity<>(order.get(), HttpStatus.OK);
+        return null; // TODO:
     }
 
     @PutMapping(value = "/order", produces = "application/json", consumes = "application/json")

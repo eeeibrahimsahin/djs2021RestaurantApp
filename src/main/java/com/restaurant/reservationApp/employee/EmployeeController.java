@@ -32,8 +32,10 @@ public class EmployeeController {
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "id", required = true) long id) {
-        Employee employee = employeeService.getEmployeeById(id);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        Optional<Employee> employee = employeeService.getEmployeeById(id);
+        if (employee.isPresent())
+            return new ResponseEntity<>(employee.get(), HttpStatus.OK);
+        return null;
     }
 
     @RequestMapping(value = "/newEmployee", method = RequestMethod.POST)
@@ -52,10 +54,12 @@ public class EmployeeController {
         Employee employee1 = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
     }
+
     @PutMapping(value = "/willupdateemployee")
     public void willUpdateEmployee(@RequestBody Employee employee) {
-        willUpdateEmployee =employee;
+        willUpdateEmployee = employee;
     }
+
     @GetMapping("/update")
     public ResponseEntity<Employee> getWillUpdateEmployee() {
         return new ResponseEntity<>(willUpdateEmployee, HttpStatus.OK);

@@ -1,13 +1,16 @@
 package com.restaurant.reservationApp.employee;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EmployeeRepository {
-    public List<Employee> getAllEmployee();
+import java.util.List;
+@Repository
+public interface EmployeeRepository extends CrudRepository<Employee,Long> {
+   /* public List<Employee> getAllEmployee();
     public Employee getEmployeeById(long id);
     public Employee createEmployee(Employee employee);
 
     void deleteEmployee(int id);
 
-    Employee updateEmployee(Employee employee);
+    Employee updateEmployee(Employee employee);*/
 }
