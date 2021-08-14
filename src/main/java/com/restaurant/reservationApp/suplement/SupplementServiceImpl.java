@@ -29,14 +29,17 @@ public class SupplementServiceImpl implements SupplementService {
 
     @Override
     public List getSupplementsLessThan(long amount){
-        List<Food> foodList =getAllSupplements().get(0).getFoodList();
-        List<Drink> drinkList = getAllSupplements().get(0).getDrinkList();
-        List list = new ArrayList();
+        if(!getAllSupplements().isEmpty()) {
+            List<Food> foodList = getAllSupplements().get(0).getFoodList();
+            List<Drink> drinkList = getAllSupplements().get(0).getDrinkList();
+            List list = new ArrayList();
 
-        foodList.stream().filter(food -> food.getQuantity()<amount).forEach(list::add);
-        drinkList.stream().filter(drink -> drink.getQuantity()<amount).forEach(list::add);
+            foodList.stream().filter(food -> food.getQuantity() < amount).forEach(list::add);
+            drinkList.stream().filter(drink -> drink.getQuantity() < amount).forEach(list::add);
 
-        return list;
+            return list;
+        }
+        return null;
     }
 
 }

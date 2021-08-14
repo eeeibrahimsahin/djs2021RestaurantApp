@@ -1,6 +1,7 @@
 package com.restaurant.reservationApp.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,12 +31,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Optional<Employee> getEmployeeById(long id) {
-      return employeeRepository.findById(id);
+        return employeeRepository.findById(id);
 
     }
 
     @Override
     public Employee createEmployee(Employee employee) {
+        employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 
@@ -50,11 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             Optional<Employee> employee1 = employeeRepository.findById(employee.getId());
             employee1.get().setFirstName(employee.getFirstName());
             employee1.get().setLastName(employee.getLastName());
-            employee1.get().setUsername(employee.getUsername());
             employee1.get().setPassword(employee.getPassword());
             employeeRepository.save(employee1.get());
             return employee1.get();
         }
         return null; // //TO DO: We should handle to return null situation
     }
+
 }

@@ -27,7 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
 
-
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -38,15 +37,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .csrf().disable()
-                .addFilterBefore(customAuthenticationFilter, CustomAuthenticationFilter.class)
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                // .loginPage("/login" )
+                .loginPage("/login")
                 .successHandler(loginSuccessHandler)
                 .permitAll()
-                .and().logout().permitAll();
+                .and()
+                .logout()
+                .permitAll();
+        //   .and()
+        //     .addFilter(customAuthenticationFilter);
         // .failureUrl("/login")
     }
 

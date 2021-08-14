@@ -14,23 +14,18 @@ public class Employee {
     private String lastName;
     private String username;
     private String password;
+    private String role;
 
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String username, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-    }
-
-    public Employee(long id, String firstName, String lastName, String username, String password) {
+    public Employee(long id, String firstName, String lastName, String username, String password, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public long getId() {
@@ -71,5 +66,13 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
