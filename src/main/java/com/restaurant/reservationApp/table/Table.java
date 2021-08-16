@@ -1,57 +1,21 @@
 package com.restaurant.reservationApp.table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Document(collection = "tables")
 public class Table {
+    @Transient
+    public static final String SEQUENCE_NAME = "tables_sequence";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private int numberOfChairs;
     private int floor;
-
-    public Table() {
-    }
-
-    public Table(long id, int numberOfChairs, int floor) {
-        this.id = id;
-        this.numberOfChairs = numberOfChairs;
-        this.floor = floor;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public int getNumberOfChairs() {
-        return numberOfChairs;
-    }
-
-    public void setNumberOfChairs(int numberOfChairs) {
-        this.numberOfChairs = numberOfChairs;
-    }
-
-    public int getFloor() {
-        return floor;
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
-
-    @Override
-    public String toString() {
-        return "Table{" +
-                "id=" + id +
-                ", numberOfChairs=" + numberOfChairs +
-                ", floor=" + floor +
-                '}';
-    }
 }

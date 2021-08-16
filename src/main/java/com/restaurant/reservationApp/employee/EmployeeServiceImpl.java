@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.employee;
 
+import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,8 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    public EmployeeServiceImpl() {
-    }
-//
-//    @Autowired
-//    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-//        this.employeeRepository = employeeRepository;
-//    }
+    @Autowired
+    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public List<Employee> getAllEmployee() {
@@ -37,8 +32,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
+        System.out.println("employee = " + employee.getPassword());
+        employee.setId(sequenceGenerator.generateSequence(Employee.SEQUENCE_NAME));
         employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
         return employeeRepository.save(employee);
+    }
+
+    @Override
+    public void saveAllEmployee(List<Employee> employeeList) {
+        employeeList.forEach(employee -> createEmployee(employee));
     }
 
     @Override
@@ -53,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee1.get().setFirstName(employee.getFirstName());
             employee1.get().setLastName(employee.getLastName());
             employee1.get().setPassword(employee.getPassword());
+            employee1.get().setRole(employee.getRole());
             employeeRepository.save(employee1.get());
             return employee1.get();
         }

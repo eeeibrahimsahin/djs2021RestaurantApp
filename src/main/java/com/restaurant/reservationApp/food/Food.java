@@ -1,79 +1,25 @@
 package com.restaurant.reservationApp.food;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Document(collection = "foods")
 public class Food {
+    @Transient
+    public static final String SEQUENCE_NAME = "foods_sequence";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
     private String name;
     private String type;
     private double quantity;
     private String typeOfQuantity;
     private double price;
-
-    public Food(){
-
-    }
-
-    public Food(int id, String name, String type, double quantity, double price, String typeOfQuantity) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.quantity = quantity;
-        this.price = price;
-        this.typeOfQuantity=typeOfQuantity;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setTypeOfQuantity(String typeOfQuantity) {
-        this.typeOfQuantity = typeOfQuantity;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public String getTypeOfQuantity() {
-        return typeOfQuantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
 }

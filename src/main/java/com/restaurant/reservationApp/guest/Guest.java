@@ -1,73 +1,24 @@
 package com.restaurant.reservationApp.guest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Document(collection = "guests")
 public class Guest {
+    @Transient
+    public static final String SEQUENCE_NAME = "guests_sequence";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String firstName;
     private String lastName;
     private long phoneNumber;
     private long roomNumber;
-
-    public Guest() {
-    }
-
-    public Guest(long id, String firstName, String lastName, long phoneNumber, long roomNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.roomNumber = roomNumber;
-    }
-
-    public Guest(String firstName, String lastName){
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        System.out.println();return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public long getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(long roomNumber) {
-        this.roomNumber = roomNumber;
-    }
 }

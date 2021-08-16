@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.food;
 
+import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import java.util.Optional;
 public class FoodServiceImpl implements FoodService {
     @Autowired
     FoodRepository foodRepository;
+    @Autowired
+    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public List<Food> getAllFood() {
@@ -28,7 +31,13 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public Food createFood(Food food) {
+        food.setId(sequenceGenerator.generateSequence(Food.SEQUENCE_NAME));
         return foodRepository.save(food);
+    }
+
+    @Override
+    public void saveAllFood(List<Food> foodList) {
+        foodList.forEach(food -> createFood(food));
     }
 }
 

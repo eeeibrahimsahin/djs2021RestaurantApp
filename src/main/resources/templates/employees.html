@@ -19,14 +19,23 @@
     <div class="container">
 
         <div class="jumbotron">
-            <h3>Employees</h3>
+            <div class="d-flex justify-content-end">
+                <a href="/create_employee" data-rel="prev" data-transition="flip">
+                    <i class="fas fa-user-plus"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users-cog fa-10x"></i>
+            </div>
+
+
             <table id="table" class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col"></th>
                         <th scope="col">Firstname</th>
                         <th scope="col">Lastname</th>
-                        <th scope="col">username</th>
+                        <th scope="col">Role</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -92,7 +101,7 @@
                 }, {
                     data: "lastName"
                 }, {
-                    data: "username"
+                    data: "role"
                 }, {
                     data: null,
                     className: "edit",

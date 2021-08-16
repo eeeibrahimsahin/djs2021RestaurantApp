@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.suplement;
 
+import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import com.restaurant.reservationApp.drink.Drink;
 import com.restaurant.reservationApp.food.Food;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class SupplementServiceImpl implements SupplementService {
     @Autowired
     private SupplementRepository supplementRepository;
 
+    @Autowired
+    SequenceGeneratorService sequenceGenerator;
+
     @Override
     public List<Supplement> getAllSupplements() {
         List<Supplement> supplements = new ArrayList<>();
@@ -23,13 +27,19 @@ public class SupplementServiceImpl implements SupplementService {
     }
 
     @Override
+    public Supplement createSupplement(Supplement supplement) {
+        supplement.setId(sequenceGenerator.generateSequence(Supplement.SEQUENCE_NAME));
+        return supplementRepository.save(supplement);
+    }
+
+    @Override
     public Optional<Supplement> getSupplementById(long id) {
         return supplementRepository.findById(id);
     }
 
     @Override
-    public List getSupplementsLessThan(long amount){
-        if(!getAllSupplements().isEmpty()) {
+    public List getSupplementsLessThan(long amount) {
+        if (!getAllSupplements().isEmpty()) {
             List<Food> foodList = getAllSupplements().get(0).getFoodList();
             List<Drink> drinkList = getAllSupplements().get(0).getDrinkList();
             List list = new ArrayList();

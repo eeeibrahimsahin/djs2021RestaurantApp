@@ -7,16 +7,15 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface ReservationService {
-    public List<Reservation> getAllReservation();
+    List<Reservation> getAllReservation();
 
-    public Optional<Reservation> getReservationById(long id);
+    Optional<Reservation> getReservationById(long id);
 
-    public Reservation createReservation(Reservation reservation);
+    Reservation createReservation(Reservation reservation);
 
-    public void deleteReservation(Reservation reservation);
+    void deleteReservation(Reservation reservation);
 
     List<Table> getAvailableTables(String dateAndTime);
-
 
     Map<String, Long> getAmountOfGuest();
 }

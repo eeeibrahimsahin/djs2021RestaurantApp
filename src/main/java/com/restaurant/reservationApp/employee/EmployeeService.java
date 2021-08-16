@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeService {
-    public List<Employee> getAllEmployee();
+    List<Employee> getAllEmployee();
 
-    public Optional<Employee> getEmployeeById(long id);
+    Optional<Employee> getEmployeeById(long id);
 
-    public Employee createEmployee(Employee employee);
+    Employee createEmployee(Employee employee);
+
+    void saveAllEmployee(List<Employee> employeeList);
 
     void deleteEmployee(long id);
 

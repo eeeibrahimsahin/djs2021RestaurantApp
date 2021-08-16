@@ -2,50 +2,28 @@ package com.restaurant.reservationApp.suplement;
 
 import com.restaurant.reservationApp.drink.Drink;
 import com.restaurant.reservationApp.food.Food;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.util.List;
-@Entity
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Document(collection = "supplements")
 public class Supplement {
+    @Transient
+    public static final String SEQUENCE_NAME = "supplements_sequence";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany
+    @DBRef
     private List<Drink> drinkList;
-    @OneToMany
+    @DBRef
     private List<Food> foodList;
 
-    public Supplement (){
-
-    }
-
-    public Supplement(long id, List<Drink> drinkList, List<Food> foodList) {
-        this.id = id;
-        this.drinkList = drinkList;
-        this.foodList = foodList;
-    }
-
-    public List<Drink> getDrinkList() {
-        return drinkList;
-    }
-
-    public void setDrinkList(List<Drink> drinkList) {
-        this.drinkList = drinkList;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public List<Food> getFoodList() {
-        return foodList;
-    }
-
-    public void setFoodList(List<Food> foodList) {
-        this.foodList = foodList;
-    }
 }

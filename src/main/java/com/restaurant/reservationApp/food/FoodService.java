@@ -8,5 +8,7 @@ public interface FoodService {
 
     Optional<Food> getFoodById(long id);
 
-    public Food createFood(Food food);
+    Food createFood(Food food);
+
+    void saveAllFood(List<Food> foodList);
 }

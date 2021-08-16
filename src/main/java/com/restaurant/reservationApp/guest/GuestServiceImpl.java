@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.guest;
 
+import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +10,10 @@ import java.util.Optional;
 
 @Service
 public class GuestServiceImpl implements GuestService {
-    GuestRepository guestRepository;
-
-    public GuestServiceImpl() {
-
-    }
-
     @Autowired
-    public GuestServiceImpl(GuestRepository guestRepository) {
-        this.guestRepository = guestRepository;
-    }
+    GuestRepository guestRepository;
+    @Autowired
+    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public List<Guest> getAllGuests() {
@@ -30,13 +25,18 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public Optional<Guest> getGuestById(long id) {
-
         return guestRepository.findById(id);
     }
 
     @Override
     public Guest createGuest(Guest guest) {
+        guest.setId(sequenceGenerator.generateSequence(Guest.SEQUENCE_NAME));
         return guestRepository.save(guest);
+    }
+
+    @Override
+    public void saveAllGuest(List<Guest> guestList) {
+        guestList.forEach(guest -> createGuest(guest));
     }
 
     @Override

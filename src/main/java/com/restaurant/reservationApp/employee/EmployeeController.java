@@ -38,8 +38,8 @@ public class EmployeeController {
         return null;
     }
 
-    @RequestMapping(value = "/newEmployee", method = RequestMethod.POST)
-    public ResponseEntity<Employee> createEmployee(Employee employee) {
+    @PostMapping(value = "/newEmployee")
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee employee1 = employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee1, HttpStatus.OK);
     }

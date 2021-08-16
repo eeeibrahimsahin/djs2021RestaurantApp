@@ -10,7 +10,9 @@ public interface SupplementService {
 
     List<Supplement> getAllSupplements();
 
-    public Optional<Supplement> getSupplementById(long id);
+    Supplement createSupplement(Supplement supplement);
+
+    Optional<Supplement> getSupplementById(long id);
 
     List getSupplementsLessThan(long amount);
 }

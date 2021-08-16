@@ -10,12 +10,12 @@
 </head>
 
 <body>
-<div th:insert="fragments/navbar.html"> </div>
+    <div th:insert="fragments/navbar.html"> </div>
     <div class="container">
         <div class="jumbotron">
             <h3>New Order</h3>
             <hr/>
-            <form id="orderForm" method="GET" action="http://localhost:8080/api/order">
+            <form id="orderForm">
                 <div class="form-row">
                     <div class="form-group col-md-6 mr">
                         <select class="form-control" aria-label="Default select example">
@@ -124,6 +124,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
+        $("#orderForm").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/order",
+                data: orderJSON,
+                contentType: "application/json",
+                success: function(response) {
+
+                }
+            });
+        });
     </script>
 </body>
 

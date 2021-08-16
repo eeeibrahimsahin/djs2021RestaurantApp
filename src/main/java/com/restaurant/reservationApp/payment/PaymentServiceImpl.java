@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.payment;
 
+import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +10,10 @@ import java.util.Optional;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-    PaymentRepository paymentRepository;
-
-    public PaymentServiceImpl() {
-    }
-
     @Autowired
-    public PaymentServiceImpl(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
-    }
+    PaymentRepository paymentRepository;
+    @Autowired
+    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public List<Payment> getAllPayment() {
@@ -34,7 +30,13 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment createPayment(Payment payment) {
+        payment.setId(sequenceGenerator.generateSequence(Payment.SEQUENCE_NAME));
         return paymentRepository.save(payment);
+    }
+
+    @Override
+    public void saveAllPayment(List<Payment> paymentList) {
+        paymentList.forEach(payment -> createPayment(payment));
     }
 }
 
