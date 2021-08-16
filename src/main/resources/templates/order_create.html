@@ -18,7 +18,7 @@
             <form id="orderForm">
                 <div class="form-row">
                     <div class="form-group col-md-6 mr">
-                        <select class="form-control" aria-label="Default select example">
+                        <select id="breakfast" class="form-control" aria-label="Default select example">
                         <option selected>Breakfast</option>
                         <option value="Pancake">Pancake</option>
                         <option value="Ham and Cheese Croissant">Ham and Cheese Croissant</option>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <select class="form-control" aria-label="Default select example">
+                        <select id="salad" class="form-control" aria-label="Default select example">
                         <option selected>Salad</option>
                         <option value="Potato Salad">Potato Salad</option>
                         <option value="Macaroni">Macaroni</option>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <select class="form-control" aria-label="Default select example">
+                        <select id="pasta" class="form-control" aria-label="Default select example">
                         <option selected>Pasta</option>
                         <option value="Green Pesto">Green Pesto</option>
                         <option value="Penne">Penne</option>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <select class="form-control" aria-label="Default select example">
+                        <select id="entrees" class="form-control" aria-label="Default select example">
                         <option selected>Entrees</option>
                         <option value="Ropa Vieja">Ropa Vieja</option>
                         <option value="Beef Brisket">Beef Brisket</option>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <select class="form-control" aria-label="Default select example">
+                        <select id="beverages" class="form-control" aria-label="Default select example">
                         <option selected>Beverages</option>
                         <option value="House Blend Iced Tea">House Blend Iced Tea</option>
                         <option value="Blue Lemonade">Blue Lemonade</option>
@@ -104,17 +104,14 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputTableNo">Table Number</label>
-                        <input type="number" min="0" class="form-control" id="inputTableNo1" name="inputTableNo" placeholder="Table No">
+                        <input type="number" min="0" class="form-control" id="inputTableNo" name="inputTableNo" placeholder="Table No">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputTableNo">Floor Number</label>
-                        <input type="number" min="0" max="1" class="form-control" id="inputTableNo" name="inputTableNo" placeholder="Table No">
-                    </div>
+
                 </div>
                 <hr/>
                 <div class="form-group">
                     <label for="selectTable">Notes</label>
-                    <input type="text" multiple class="form-control" id="selectTable" name="selectTable" placeholder="Special Daitry Order">
+                    <input type="number" multiple class="form-control" id="selectTable" name="selectTable" placeholder="Special Daitry Order">
                 </div>
                 <input type="submit" class="btn btn-primary mt-1" value="Order">
             </form>
@@ -126,6 +123,33 @@
     <script>
         $("#orderForm").submit(function(e) {
             e.preventDefault();
+            let orderJsObj = {
+
+                table: {
+                    id: $("#inputTableNo").val()
+                },
+                dishes: [{
+                        name: $('#breakfast option:selected').val(),
+                        quantity: $("#quantity1").val()
+                    }, {
+                        name: $('#salad option:selected').val(),
+                        quantity: $("#quantity2").val()
+                    }, {
+                        name: $('#pasta option:selected').val(),
+                        quantity: $("#quantity3").val()
+                    }, {
+                        name: $('#entrees option:selected').val(),
+                        quantity: $("#quantity4").val()
+                    }
+
+                ],
+                drinkList: [{
+                    name: $('#beverages option:selected').val(),
+                    quantity: $("#quantity").val()
+                }]
+            }
+            console.log(orderJsObj)
+            let orderJSON = JSON.stringify(orderJsObj)
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/api/order",

@@ -21,6 +21,7 @@ public class Dish {
     @Id
     private long id;
     private String name;
+    private int quantity;
     @DBRef
     private List<Food> ingredients;
 

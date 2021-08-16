@@ -38,8 +38,6 @@ public class ReservationController {
     public void createNewReservation(@RequestBody Reservation reservation) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
-        System.out.println("userDetails.getUserFirstName() = " + userDetails.getUserFirstName());
-        Optional<Employee> employee = employeeService.getEmployeeById(11);
         Optional<Table> table = tableService.getTableById(reservation.getTable().getId());
         Guest guest = guestService.createGuest(reservation.getGuest());
 

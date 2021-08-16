@@ -63,7 +63,13 @@
                 }, {
                     "data": "guest.phoneNumber"
                 }, {
-                    "data": "guest.roomNumber"
+                    "data": function(rowData, type, row) {
+                        if (rowData.guest.roomNuber == 0 || rowData.guest.roomNuber == null)
+                            return "-";
+                        else {
+                            return rowData.guest.roomNuber
+                        }
+                    }
                 }, {
                     "data": "table.id"
                 }, {
