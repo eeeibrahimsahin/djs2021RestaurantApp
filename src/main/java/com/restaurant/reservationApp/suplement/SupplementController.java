@@ -1,14 +1,10 @@
 package com.restaurant.reservationApp.suplement;
 
 
-import com.restaurant.reservationApp.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +34,12 @@ public class SupplementController {
     @GetMapping("/supplement_amount/{amount}")
     public ResponseEntity<List> getSupplementsLessThan(@PathVariable long amount){
         return new ResponseEntity<>( supplementService.getSupplementsLessThan(amount), HttpStatus.OK);
+    }
+
+    @PostMapping("/addStock")
+    public ResponseEntity<Supplement> createSupplement(@RequestBody Supplement supplement) {
+        System.out.println(supplement.getFoodList());
+        Supplement supplement1 = supplementService.createSupplement(supplement);
+        return new  ResponseEntity<>(supplement1, HttpStatus.OK);
     }
 }

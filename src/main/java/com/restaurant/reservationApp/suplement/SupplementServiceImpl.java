@@ -37,4 +37,9 @@ public class SupplementServiceImpl implements SupplementService {
         return list;
     }
 
+    @Override
+    public Supplement createSupplement(Supplement supplement) {
+        return null;
+    }
+
 }
