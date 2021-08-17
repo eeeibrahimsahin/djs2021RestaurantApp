@@ -35,14 +35,14 @@ public class GuestController {
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/newguest", method = RequestMethod.POST)
-    public ResponseEntity<Guest> createGuest(Guest guest) {
-        System.out.println(guest);
+    @PostMapping("/newguest")
+    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
+        System.out.println(guest.getFirstName());
         Guest guest1 = guestService.createGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/guest")
+    @PutMapping( "/guest")
     public ResponseEntity<Guest> updateGuest(@RequestBody Guest guest){
         Guest guest1 = guestService.updateGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
