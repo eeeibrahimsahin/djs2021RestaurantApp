@@ -37,8 +37,14 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation  deleteReservation (Reservation  reservation) {
-        return reservationRepository.deleteReservation (reservation);
+    public Reservation updateReservation(Reservation reservation) {
+
+        return reservationRepository.updateReservation(reservation);
+    }
+
+    @Override
+    public void deleteReservation (int id) {
+        reservationRepository.deleteReservation (id);
     }
 
     @Override
