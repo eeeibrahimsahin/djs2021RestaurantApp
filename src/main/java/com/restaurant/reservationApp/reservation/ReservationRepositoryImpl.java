@@ -53,15 +53,33 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public Reservation deleteReservation(Reservation reservation) {
-        reservation.setId(reservationList.size() - 1);
-        return reservation;
+    public Reservation updateReservation(Reservation reservation) {
+        final Optional<Reservation> willUpdateReservation = reservationList.stream().filter(reservation1 -> reservation1.getId() == reservation.getId()).findFirst();
+        System.out.println("willUpdateReservation = " + willUpdateReservation.get().getReservationDate());
+        System.out.println("reservation = " + reservation.getReservationDate());
+        if (willUpdateReservation.isPresent()) {
+            willUpdateReservation.get().setGuest(reservation.getGuest());
+            willUpdateReservation.get().setReservationDate(reservation.getReservationDate());
+            willUpdateReservation.get().setTable(reservation.getTable());
+            willUpdateReservation.get().setId(reservation.getId());
+            return willUpdateReservation.get();
+        }
+
+        return null;
     }
-    //public Reservation deleteReservation(Reservation reservation) {
-    //1---for(Reservation reservation:list){
-    //            if (reservation.getId()==id){
-    //                list.remove(reservation);
-    //                break;}
+
+    @Override
+    public void deleteReservation(int id) {
+        for (Reservation reservation:reservationList) {
+            if(reservation.getId() == id){
+                reservationList.remove(reservation);
+                break;
+            }
+        }
+    }
+
+
+
 //2--- reservation = reservationList.stream().filter(reservation1 -> reservation1.getId() == id).findFirst().get();
     //list.remove(reservation);
 

@@ -81,7 +81,7 @@ public class Reservation {
         return reservationDate;
     }
 
-    public void setReservationDate() {
+    public void setReservationDate(LocalDateTime reservationDate) {
         this.reservationDate = reservationDate;
     }
 

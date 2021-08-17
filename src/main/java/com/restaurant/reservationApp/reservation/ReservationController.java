@@ -19,8 +19,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class ReservationController {
-    ReservationService reservationService;
-    private Reservation reservation;
+    private ReservationService reservationService;
+    private Reservation willUpdateReservation;
 
     public ReservationController() {
     }
@@ -58,23 +58,26 @@ public class ReservationController {
     }
 
 
-    @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<Reservation> Reservation(@RequestParam(name = "reservation", required = false) String wish) {
-        if (wish == "create") {
-            Reservation reservation1 = reservationService.createReservation(reservation);
-            return new ResponseEntity<>(reservation1, HttpStatus.OK);
-        }
-        if (wish == "delete") {
-            Reservation reservation1 = reservationService.deleteReservation(reservation);
-            return new ResponseEntity<>(reservation1, HttpStatus.OK);
-        }
-        return null;
+    @DeleteMapping("/reservation/{id}")
+    public void deleteReservation(@PathVariable(name = "id") int id) {
+        reservationService.deleteReservation(id);
     }
-//    @PutMapping(value = "/reservation", produces = "application/json",consumes = "application/json")
-//    public ResponseEntity<Reservation> Reservation(@RequestBody Reservation reservation){
-//        Reservation reservation1 = reservationService.deleteReservation(reservation);
-//        return new ResponseEntity<>(reservation1, HttpStatus.OK);
-//    }
+
+    @PutMapping(value = "/reservation")
+    public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) {
+        System.out.println(reservation.getReservationDate());
+        Reservation reservation1 = reservationService.updateReservation(reservation);
+        return new ResponseEntity<>(reservation1, HttpStatus.OK);
+    }
+    @PutMapping(value = "/willupdatereservation")
+    public void setWillUpdateReservation(@RequestBody Reservation reservation) {
+        willUpdateReservation =reservation;
+    }
+    @GetMapping("/reservation/update")
+    public ResponseEntity<Reservation> getWillUpdateReservation() {
+        return new ResponseEntity<>(willUpdateReservation, HttpStatus.OK);
+    }
+
 
     @GetMapping("/getavailabletables/{dateAndTime}")
     public ResponseEntity<List<Table>> getAvailableTables(@PathVariable(name = "dateAndTime") String dateAndTime) {
