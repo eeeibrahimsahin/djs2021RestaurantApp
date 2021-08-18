@@ -17,7 +17,7 @@
   <div class="jumbotron">
     <h3>New Guest</h3>
     <div class="mt-5">
-      <form id="employeeForm" method="POST" action="http://localhost:8080/api/guest">
+      <form id="guestForm" >
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputName">Firstname</label>
@@ -57,6 +57,29 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script>
+  $("#guestForm").submit(function (e) { 
+    e.preventDefault();
+    var guestName =$("#inputName").val();
+    var guestLastName =$("#inputLastname").val();
+    var guestPhoneNumber = $("#inputPhoneNumber").val();
+    var guestRoomNumber = $("#inputRoomNumber").val();
+    var guestJsObj = {firstName:guestName,
+      lastName:guestLastName,
+      phoneNumber:phoneNumber,
+      roomNumber:roomNumber};
+      var guestJsonObj=JSON.stringify(guestJsObj);
+      $.ajax({
+        type: "post",
+        url: "http://localhost:8080/api/newguest",
+        data: guestJsonObj,
+        contentType: "application/json",
+        success: function (response) {
+          console.log(response)
+          
+        }
+      });
+    
+  });
 
 </script>
 </body>
