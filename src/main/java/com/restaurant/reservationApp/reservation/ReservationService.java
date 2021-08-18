@@ -9,10 +9,13 @@ public interface ReservationService {
     public List<Reservation> getAllReservation();
     public Reservation getReservationById(long id);
     public Reservation createReservation(Reservation reservation);
-    public Reservation deleteReservation(Reservation reservation);
+    Reservation updateReservation(Reservation reservation);
+    public void deleteReservation(int id);
 
     List<Table> getAvailableTables(String dateAndTime);
 
 
     Map<String, Long> getAmountOfGuest();
+
+
 }

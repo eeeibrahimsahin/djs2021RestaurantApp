@@ -3,7 +3,9 @@ import com.restaurant.reservationApp.table.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +39,14 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation  deleteReservation (Reservation  reservation) {
-        return reservationRepository.deleteReservation (reservation);
+    public Reservation updateReservation(Reservation reservation) {
+
+        return reservationRepository.updateReservation(reservation);
+    }
+
+    @Override
+    public void deleteReservation (int id) {
+        reservationRepository.deleteReservation (id);
     }
 
     @Override
@@ -48,8 +56,15 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public Map<String, Long> getAmountOfGuest(){
         LocalDateTime now = LocalDateTime.now();
+        LocalDate nowDate = LocalDate.now();
+        LocalTime nowTime = LocalTime.of(8,0);
+        LocalDateTime startingTime = LocalDateTime.of(nowDate,nowTime);
         long amountOfAllGuest = getAllReservation().stream().count();
-        long amountOfGuestSoFar = getAllReservation().stream().filter(reservation ->now.isAfter(reservation.getReservationDate())).count();
+        //Daily Raport
+        long amountOfGuestSoFar = getAllReservation().stream().filter(reservation ->
+                (now.isAfter(reservation.getReservationDate())&
+                        startingTime.isBefore(reservation.getReservationDate()))).count();
+        System.out.println(amountOfGuestSoFar);
         long amountOfGuestWhoVisitPlanned = getAllReservation().stream().filter(reservation ->reservation.getReservationDate().isAfter(now)).count();
         long amountOfGuestWhoVisitContinue = 2;
 

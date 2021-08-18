@@ -1,101 +1,188 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+      rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/144f4e017a.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <title>Reservation</title>
-    <style>
-        #main {
-            margin: auto;
-            width: 95%;
-            padding: 10px;
-        }
-        
-        a.editor-create {
-            display: inline-block;
-            margin-bottom: 0.5em;
-        }
-    </style>
-</head>
+  </head>
 
-<body>
-    <div th:insert="fragments/navbar.html"> </div>
+  <body>
+    <div th:insert="fragments/navbar.html"></div>
+    <div th:insert="fragments/modal.html"></div>
 
-    <div id="main">
-        <table id="table" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Guest Name</th>
-                    <th>Phone Number</th>
-                    <th>Room No</th>
-                    <th>Table No</th>
-                    <th>Reservation Date</th>
-                    <th>Booking Date</th>
-                    <th>Employee</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
+    <div class="container">
+      <div class="jumbotron">
+        <h3>Reservations</h3>
+        <table id="table" class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Reservation No</th>
+              <th>Guest Name</th>
+              <th>Phone Number</th>
+              <th>Room No</th>
+              <th>Table No</th>
+              <th>Reservation Date</th>
+              <th>Booking Date</th>
+              <th>Employee</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+
+        </tbody>
         </table>
+      </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
     <script>
-        $(document).ready(function() {
+      let dataNew;
+      let rowData;
+      let deleteText =
+        "<p>----Once  you delete an account,  there's no getting it back.----" +
+        "Make sure you want to do this.</p>";
 
-            $('#table').DataTable({
-                "processing": true,
-                ajax: {
-                    url: 'http://localhost:8080/api/allreservations',
-                    dataSrc: ''
-                },
-                "columns": [{
-                    "data": function(rowData, type, row) {
-                        return rowData.guest.firstName + " " + rowData.guest.lastName;
-                    }
-                }, {
-                    "data": "guest.phoneNumber"
-                }, {
-                    "data": "guest.roomNumber"
-                }, {
-                    "data": "table.id"
-                }, {
-                    "data": "reservationDate",
-                    "render": dateChanger
-                }, {
-                    "data": "bookingDate",
-                    "render": dateChanger
-                }, {
-                    "data": "employee.firstName"
-                }, {
-                    data: null,
-                    className: "dt-center editor-edit",
-                    defaultContent: '<i class="far fa-edit"></i>',
-                    orderable: false
-                }, {
-                    data: null,
-                    className: "dt-center editor-delete",
-                    defaultContent: '<i class="far fa-trash-alt"></i>',
-                    orderable: false
-                }]
+      function getData() {
+        $.ajax({
+          url: "http://localhost:8080/api/allreservations",
+          headers: {
+            Accept: "application/json",
+          },
+          type: "GET",
+          /* or type:"GET" or type:"PUT" */
+          dataType: "json",
+          data: {},
+          success: function (data) {
+            console.log(data);
+            console.log("hello from getdata");
+            dataNew = data;
+            putDataToDataTable(data);
+          },
+          error: function () {
+            console.log("error");
+          },
+        });
+      }
+
+      function putDataToDataTable(data) {
+        $("#table").DataTable().clear();
+        $("#table").DataTable().rows.add(data);
+        $("#table").DataTable().columns.adjust().draw();
+      }
+
+      $(document).ready(function () {
+        console.log("hello from table");
+        getData();
+
+        $("#table").DataTable({
+          data: dataNew,
+          columns: [
+            { data: "id" },
+            {
+              data: function (rowData, type, row) {
+                return rowData.guest.firstName + " " + rowData.guest.lastName;
+              },
+            },
+            { data: "guest.phoneNumber" },
+            { data: "guest.roomNumber" },
+            { data: "table.id" },
+            { data: "reservationDate", render: dateChanger },
+            { data: "bookingDate", render: dateChanger },
+            { data: "employee.firstName" },
+            {
+              data: null,
+              className: "dt-center editor-edit",
+              defaultContent: '<i class="far fa-edit"></i>',
+              orderable: false,
+            },
+            {
+              data: null,
+              className: "dt-center editor-delete",
+              defaultContent: '<i class="far fa-trash-alt"></i>',
+              orderable: false,
+            },
+          ]
+        });
+
+        var table = $("#table").DataTable();
+
+        $('#table').on('click', '.fa-trash-alt', function() {
+                $("#confirmButton").addClass("btn-danger");
+                $("#exampleModalLabel").html("Whoa, there!")
+                $("#confirmButton").html("YEP, DELETE IT")
+                $(".modal-body").append(deleteText);
+                $('#exampleModal').modal('show')
+                rowData = table.row($(this).parents('tr').first()).data().id;
+                console.log(rowData);
             });
 
-            function dateChanger(data, type, row, meta) {
-                let dateFormatArray = data.split("T")
-                let date = dateFormatArray[0];
-                let time = dateFormatArray[1].slice(0, 5)
-                return date + " " + time;
-            }
-
+                $("#confirmButton").click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:8080/api/reservation/" + rowData,
+                    success: function(response) {
+                        location.reload();
+                    }
+                });
         });
-    </script>
-</body>
 
+        $("#table").on("click", ".fa-edit", function () {
+          rowData = table.row($(this).parents("tr").first()).data();
+          let rowDataJSON = JSON.stringify(rowData);
+          console.log(rowData);
+          $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/api/willupdatereservation",
+            data: rowDataJSON,
+            contentType: "application/json",
+            success: function (response) {
+              console.log(response);
+              pageRedirect();
+            },
+          });
+        });
+        
+      });
+
+      function dateChanger(data, type, row, meta) {
+          let dateFormatArray = data.split("T");
+          let date = dateFormatArray[0];
+          let time = dateFormatArray[1].slice(0, 5);
+          return date + " " + time;
+        }
+
+      function pageRedirect() {
+        window.location.href = "./update_reservation";
+      }
+    </script>
+  </body>
 </html>
