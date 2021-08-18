@@ -49,7 +49,12 @@
               </select>
           </div>
         </div>
-
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="Price"> Price</label>
+            <input type="number" class="form-control" id="inputPrice" name="price"
+            placeholder="Price">
+          </div>
         <input type="submit" class="btn btn-primary" value="Add">
       </form>
     </div>
@@ -67,17 +72,22 @@
 
 $("#stockForm").submit(function (e) {
   e.preventDefault();
-  let stockName=$("#inputName").val();
-  let stockType=$("#inputType").val();
-  let stockQuantity=$("#inputQuantity").val();
-  let stockSpecify=$("#inputTypeOfQuantity").val();
-  let stockJsObject={stockName,stockType,stockQuantity,stockSpecify};
+  let name=$("#inputName").val();
+  let type=$("#inputType").val();
+  let quantity=$("#inputQuantity").val();
+  let typeOfQuantity=$("#inputTypeOfQuantity").val();
+  let price=$("#inputPrice").val();
+  let stockJsObject={name,type,quantity,typeOfQuantity, price};
   let stockJsonObject=JSON.stringify(stockJsObject);
   console.log(stockJsObject);
   console.log(stockJsonObject);
+  let api="http://localhost:8080/api/drink"
+  if (type=="Food"){
+    api="http://localhost:8080/api/food"
+  }
   $.ajax({
-    type: "POST",
-    url: "http://localhost:8080/api/addStock",
+    type: "PUT",
+    url: api,
     data: stockJsonObject,
     contentType: "application/json",
     success: function (response) {
