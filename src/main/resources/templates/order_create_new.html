@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create Order</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div th:insert="fragments/navbar.html"> </div>
+    <!-- /mainpage -->
+    <div class="p-5" data-role="page" id="mainpage">
+
+        <div data-role="fieldcontain">
+            <input type="text" name="name" id="name" value="" placeholder="Enter table number" />
+        </div>
+
+        <div class="container p-5 bg-secondary">
+            <a href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flow">
+                <i class="fas fa-chair fa-4x"></i>
+            </a>
+            <div class="d-flex justify-content-around">
+                <a href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                    <i class="fas fa-chair fa-4x"></i>
+                </a>
+                <a style="width: 50%;" href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                    <i class="far fa-square fa-10x"></i>
+                </a>
+                <a href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                    <i class="fas fa-chair fa-4x"></i>
+                </a>
+            </div>
+            <a href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                <i class="fas fa-chair fa-4x"></i>
+            </a>
+
+        </div>
+    </div>
+
+
+
+    <!-- New Movie Popup -->
+    <div data-role="dialog" id="popup">
+
+        <div data-role="header" data-theme="a">
+            <h1>Order</h1>
+        </div>
+        <!-- /header -->
+
+        <div data-role="content" data-theme="a">
+            <fieldset class="ui-grid-a">
+
+                <div class="ui-block-a">
+                    <select name="select-choice-1" id="breakfast">
+                            <option selected>Breakfast</option>
+                            <option value="Pancake">Pancake</option>
+                            <option value="Ham and Cheese Croissant">Ham and Cheese Croissant</option>
+                            <option value="Plain Croissant">Plain Croissant</option>
+                            <option value="Hash Browns">Hash Browns</option>
+                            <option value="Sausages">Sausages</option>
+                            <option value="Sausages Roll">Sausages Roll</option>
+                            <option value="Corn Cereal">Corn Cereal</option>
+                            <option value="Quiches">Quiches</option>
+                        </select>
+                </div>
+
+                <div class="ui-block-b">
+                    <select name="select-h-4a" id="breakfastQty">
+                            <option selected>Quantity</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                </div>
+            </fieldset>
+
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                    <select name="select-choice-2" id="salad">
+                            <option selected>Salad</option>
+                            <option value="Potato Salad">Potato Salad</option>
+                            <option value="Macaroni">Macaroni</option>
+                            <option value="Ceasar">Ceasar</option>
+                            <option value="Greek">Greek</option>
+                            <option value="Garden Fresh">Garden Fresh</option>
+                    </select>
+                </div>
+
+                <div class="ui-block-b">
+                    <select name="select-h-4a" id="saladQty">
+                            <option selected>Quantity</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                </div>
+            </fieldset>
+
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                    <select name="select-choice-3" id="pasta">
+                                <<option selected>Pasta</option>
+                            <option value="Green Pesto">Green Pesto</option>
+                            <option value="Penne">Penne</option>
+                            <option value="Puttanesca">Puttanesca</option>
+                            <option value="Bolognese">Bolognese</option>
+                            <option value="Fettuccine">Fettuccine</option>
+                            <option value="Spaghetti">Spaghetti</option>
+                            <option value="Spaghetti with meatballs">Spaghetti with meatballs</option>
+                            <option value="Lasagna">Lasagna</option>
+                                </select>
+                </div>
+
+                <div class="ui-block-b">
+                    <select name="select-h-4a" id="pastaQty">
+                            <option selected>Quantity</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                </div>
+            </fieldset>
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                    <select name="select-choice-4" id="entrees">
+                            <option selected>Entrees</option>
+                                    <option value="Ropa Vieja">Ropa Vieja</option>
+                                    <option value="Beef Brisket">Beef Brisket</option>
+                                    <option value="Braised Beef Stew">Braised Beef Stew</option>
+                                    <option value="Rose Mary Chicken">Rose Mary Chicken</option>
+                                    <option value="Buffalo Wings">Buffalo Wings</option>
+                                    <option value="Classic Pork Ribs">Classic Pork Ribs</option>
+                                    <option value="Baby Ribs">Baby Ribs</option>
+                                    <option value="Hickory Smoked Chicken">Hickory Smoked Chicken</option>
+                                    <option value="Bourbon Glazed Salmon">Bourbon Glazed Salmon</option>
+                                    <option value="Fried Trout in Tomato Sauce">Fried Trout in Tomato Sauce</option>
+                                    <option value="Lemon Pepper Chicken">Lemon Pepper Chicken</option>
+                                    <option value="Buttered Lobster">Buttered Lobster</option>
+                        </select>
+                </div>
+
+                <div class="ui-block-b">
+                    <select name="select-h-4a" id="entreesQty">
+                            <option selected>Quantity</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                </div>
+            </fieldset>
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                    <select name="select-choice-5" id="beverages">
+                            <option selected>Beverages</option>
+                            <option value="House Blend Iced Tea">House Blend Iced Tea</option>
+                            <option value="Blue Lemonade">Blue Lemonade</option>
+                            <option value="Red Iced Tea">Red Iced Tea</option>
+                            <option value="Red Wine">Red Wine</option>
+                            <option value="White Wine">White Wine</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Margarita">Margarita</option>
+                            <option value="Martini">Martini</option>
+                            <option value="Cosmopolitan">Cosmopolitan</option>
+                            <option value="Whiskey Sour">Whiskey Sour</option>
+                            <option value="Green tea">Green tea</option>
+                            <option value="Fresh mint tea">Fresh mint tea</option>
+                        </select>
+                </div>
+
+                <div class="ui-block-b">
+                    <select name="select-h-4a" id="beveragesQty">
+                            <option selected>Quantity</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                </div>
+            </fieldset>
+
+            <label for="textarea-1">Special Notes:</label>
+            <textarea name="textarea-1" id="textarea-1"></textarea>
+            <button onclick="cancelMovie()" id="confirmBtn" class="ui-btn ui-shadow ">Confirm Order</button>
+            <p><a onclick="cancelMovie();" data-role="button" data-icon="back">Cancel</a></p>
+        </div>
+        <!-- /content -->
+
+    </div>
+    <!-- /page popup -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        let chairOneOrder;
+
+        function cancelMovie() {
+            $('[data-role=dialog]').dialog("close");
+        }
+
+        $("#confirmBtn ").click(function(e) {
+            e.preventDefault();
+            let orderJsObj = {
+
+                table: {
+                    id: $("#inputTableNo ").val()
+                },
+                dishes: [{
+                        name: $('#breakfast option:selected').val(),
+                        quantity: $("#breakfastQty option:selected ").val()
+                    }, {
+                        name: $('#salad option:selected').val(),
+                        quantity: $("#saladQty option:selected ").val()
+                    }, {
+                        name: $('#pasta option:selected').val(),
+                        quantity: $("#pastaQty option:selected ").val()
+                    }, {
+                        name: $('#entrees option:selected').val(),
+                        quantity: $("#entreesQty option:selected ").val()
+                    }
+
+                ],
+                drinkList: [{
+                    name: $('#beverages option:selected').val(),
+                    quantity: $("#beveragesQty option:selected ").val()
+                }]
+            }
+            chairOneOrder = orderJsObj;
+            console.log(orderJsObj)
+            let orderJSON = JSON.stringify(orderJsObj)
+            $('#bar').dialog("close")
+        });
+
+
+        console.log(chairOneOrder)
+            // $.ajax({
+            //     type: "POST ",
+            //     url: "http://localhost:8080/api/order ",
+            //     data: orderJSON,
+            //     contentType: "application/json ",
+            //     success: function(response) {
+
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

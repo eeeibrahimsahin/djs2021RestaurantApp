@@ -26,6 +26,7 @@ public class Order {
     public static final String SEQUENCE_NAME = "orders_sequence";
     @Id
     private long id;
+    private String specialNote;
     @DBRef
     private Table table;
     @DBRef

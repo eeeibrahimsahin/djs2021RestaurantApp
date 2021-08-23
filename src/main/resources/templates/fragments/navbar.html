@@ -29,6 +29,15 @@
                     <a class="dropdown-item" href="/order_create">Create</a>
                 </div>
             </li>
+            <li sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN','KITCHEN')" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
+                    <a class="dropdown-item" href="/menu">View</a>
+                    <a class="dropdown-item" href="/create_menu">Create</a>
+                </div>
+            </li>
             <li sec:authorize="hasAnyRole('CASHIER','ADMIN')" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarTcktMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Payment

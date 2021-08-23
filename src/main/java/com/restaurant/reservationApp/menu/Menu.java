@@ -1,6 +1,6 @@
-package com.restaurant.reservationApp.dish;
+package com.restaurant.reservationApp.menu;
 
-import com.restaurant.reservationApp.food.Food;
+import com.restaurant.reservationApp.dish.Dish;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,21 +9,17 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "dishes")
-public class Dish {
+@Document(collection = "menu")
+public class Menu {
     @Transient
-    public static final String SEQUENCE_NAME = "dishes_sequence";
+    public static final String SEQUENCE_NAME = "menu_sequence";
     @Id
     private long id;
     private String name;
-    private int quantity;
+    private String description;
     private String type;
-    @DBRef
-    private List<Food> ingredients;
-
+    private double price;
 }
