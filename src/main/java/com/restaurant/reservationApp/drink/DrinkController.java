@@ -28,6 +28,7 @@ public class DrinkController {
 
     @PutMapping(value = "/drink", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Drink> createEmployee(@RequestBody Drink drink) {
+        System.out.println(drink.getName());
         Drink drink1 = drinkService.createDrink(drink);
         return new ResponseEntity<>(drink1, HttpStatus.OK);
     }
