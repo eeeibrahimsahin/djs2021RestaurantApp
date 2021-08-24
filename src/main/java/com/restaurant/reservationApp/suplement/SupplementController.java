@@ -39,6 +39,7 @@ public class SupplementController {
 
     @GetMapping("/supplement_amount/{amount}")
     public ResponseEntity<List> getSupplementsLessThan(@PathVariable long amount) {
+
         return new ResponseEntity<>(supplementService.getSupplementsLessThan(amount), HttpStatus.OK);
     }
 }

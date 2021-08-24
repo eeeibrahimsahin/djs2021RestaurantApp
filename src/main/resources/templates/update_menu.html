@@ -17,9 +17,9 @@
     <div class="container">
         <div class="jumbotron">
             <div class="text-center">
-                <i class="fas fa-concierge-bell fa-10x"></i>
+                <i class="fas fa-cookie-bite fa-10x"></i>
                 <br/>
-                <h3>Add new dish</h3>
+                <h3>Update the menu</h3>
             </div>
             <div class="mt-5">
                 <form id="menuForm">
@@ -62,8 +62,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         let menuJSON;
-        let createText = "<p>Are you sure want to add the dish to menu?.</p>"
-
+        let nameEl = $("#name");
+        let priceEl = $("#price");
+        let descriptionEl = $("#description");
+        let id;
+        let createText = "<p>Are you sure want to change the menu?.</p>"
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/menu/update",
+                success: function(response) {
+                    console.log(response)
+                    id = response.id;
+                    nameEl.val(response.name);
+                    priceEl.val(response.price);
+                    descriptionEl.val(response.description);
+                    $(`#typeSelect option[value=${response.type}]`).prop('selected', true);
+                }
+            });
+        });
 
         $("#menuForm").submit(function(e) {
             e.preventDefault();
@@ -72,12 +89,12 @@
             let description = $("#description").val();
             let type = $('select[name=typeSelect] option').filter(':selected').val()
             let menuJsObj = {
+                id,
                 name,
                 price,
                 description,
                 type
             }
-            console.log(menuJsObj)
             menuJSON = JSON.stringify(menuJsObj);
             getModal("Hey,there!", createText, "YEP, I'M SURE:)", "btn-primary");
 
@@ -85,13 +102,13 @@
         $("#confirmButton").click(function(e) {
             e.preventDefault();
             $.ajax({
-                type: "POST",
+                type: "PUT",
                 url: "/api/menu",
                 data: menuJSON,
                 contentType: "application/json",
                 success: function(response) {
                     console.log(response)
-                    getModal("Information", "The dish is added to the menu!", "hello", "btn-primary", true)
+                    getModal("Information", "The menu is changed!", "hello", "btn-primary", true)
                 }
             });
         });

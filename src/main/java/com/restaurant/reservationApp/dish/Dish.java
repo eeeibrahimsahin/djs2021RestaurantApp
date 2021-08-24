@@ -23,6 +23,8 @@ public class Dish {
     private String name;
     private int quantity;
     private String type;
+    private String allergy;
+    private String chairNo;
     @DBRef
     private List<Food> ingredients;
 

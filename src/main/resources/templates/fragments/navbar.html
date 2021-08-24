@@ -35,7 +35,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
                     <a class="dropdown-item" href="/menu">View</a>
-                    <a class="dropdown-item" href="/create_menu">Create</a>
+                    <a sec:authorize="hasAnyRole('ADMIN')" class="dropdown-item" href="/create_menu">Create</a>
                 </div>
             </li>
             <li sec:authorize="hasAnyRole('CASHIER','ADMIN')" class="nav-item dropdown">
@@ -57,7 +57,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarRelMenuLink">
                     <a class="dropdown-item" href="/tables">View</a>
-                    <a class="dropdown-item" href="/create_table">Create</a>
+                    <a sec:authorize="hasAnyRole('ADMIN')" class="dropdown-item" href="/create_table">Create</a>
 
                 </div>
             </li>
@@ -72,7 +72,7 @@
 
                 </div>
             </li>
-            <li sec:authorize="hasAnyRole('KITCHEN','ADMIN','CHEF')" class="nav-item dropdown">
+            <li sec:authorize="hasAnyRole('ADMIN','CHEF')" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Food
                 </a>
@@ -82,7 +82,7 @@
 
                 </div>
             </li>
-            <li sec:authorize="hasAnyRole('KITCHEN','ADMIN','CHEF')" class="nav-item dropdown">
+            <li sec:authorize="hasAnyRole('ADMIN','CHEF')" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarAppMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Stock
                 </a>

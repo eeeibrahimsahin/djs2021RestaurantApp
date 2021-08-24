@@ -24,8 +24,8 @@
                         <th scope="col">Table No</th>
                         <th scope="col">Dishes</th>
                         <th scope="col">Drink List</th>
-                        <th scope="col">Reservation</th>
-                        <th scope="col">Diet</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Allergy</th>
                         <th scope="col">Employee</th>
                     </tr>
                 </thead>
@@ -54,28 +54,50 @@
                 success: function(data) {
                     console.log(data);
                     let html;
-                    let dishEl = "";
-                    let dishListEl = "";
-
-
+                    let dishEl;
+                    let dishListEl;
+                    let drinkListEl;
+                    let drikEl;
+                    let allergyList;
+                    let allergy;
+                    let specialNotes;
                     data.forEach(element => {
+                        dishListEl = "";
+                        drinkListEl = "";
+                        dishEl = "";
+                        drikEl = "";
+                        allergyList = "";
+                        allergy = "";
+                        specialNotes = ""
                         dishListEl = `<ul class="list-group list-group-flush">`;
-                        console.log(element.dishes.length)
+                        drinkListEl = `<ul class="list-group list-group-flush">`;
+                        allergyList = `<ul class="list-group list-group-flush">`;
                         if (!(element.dishes.length == 0)) {
-                            console.log("hello")
                             element.dishes.forEach(element => {
-                                dishEl += `<li class="list-group-item list-group-item-secondary">${element.name} X${element.quantity}</li>`
-                                console.log(element.name);
+                                if (element.allergy != "allergy" && element.allergy != null) allergy += `<li class="list-group-item list-group-item-secondary">${element.allergy}</li>`
+                                if (element.type == "food") {
+                                    dishEl += `<li class="list-group-item list-group-item-secondary">${element.name} X${element.quantity}</li>`
+                                } else {
+                                    drikEl += `<li class="list-group-item list-group-item-secondary">${element.name} X${element.quantity}</li>`
+                                }
                             });
                         }
+                        if (!(element.specialNotes.length == 0)) {
+                            element.specialNotes.forEach(element => {
+                                specialNotes += element + "\n";
+                            })
+                        }
                         dishListEl += dishEl + "</ul>"
+                        drinkListEl += drikEl + "</ul>"
+                        if (allergy != "") allergyList += allergy + "</ul>"
+                        else allergyList = "";
                         html += `<tr>
                                         <td>${element.id}</td>
                                         <td>${element.table.id}</td>
                                         <td>${dishListEl}</td>
-                                        <td>Heloo</td>
-                                        <td>${element.reservation == null ? "No" : "Yes"}</td>
-                                        <td>${element.diet ? "Yes" : "No"}</td>
+                                        <td>${drinkListEl}</td>
+                                        <td>${specialNotes}</td>
+                                        <td>${allergyList == "" ? "No" : allergyList}</td>
                                         <td>${element.employee.firstName}</td>
                                     </tr>`
                     });

@@ -20,7 +20,7 @@
 
         <div class="jumbotron">
             <div class="d-flex justify-content-end">
-                <a href="/create_employee" data-rel="prev" data-transition="flip">
+                <a href="/create_menu.html" data-rel="prev" data-transition="flip">
                     <i class="fas fa-plus-circle"></i>
                 </a>
             </div>
@@ -53,7 +53,7 @@
     <script>
         let dataNew;
         let rowData;
-        let deleteText = "<p>----Once  you delete an account,  there's no getting it back.----" +
+        let deleteText = "<p>----Once  you delete a menu,  there's no getting it back.----" +
             "Make sure you want to do this.</p>"
 
         function getData() {
@@ -67,8 +67,7 @@
                 dataType: "json",
                 data: {},
                 success: function(data) {
-                    console.log(data);
-                    console.log("hello from getdata")
+                    console.log(data)
                     dataNew = data;
                     putDataToDataTable(data);
 
@@ -88,7 +87,6 @@
 
 
         $(document).ready(function() {
-            console.log("hello from table")
             getData();
             $('#table').DataTable({
                 data: dataNew,
@@ -123,14 +121,12 @@
                 $(".modal-body").append(deleteText);
                 $('#exampleModal').modal('show')
                 rowData = table.row($(this).parents('tr').first()).data().id;
-                console.log(rowData);
-
             });
             $("#confirmButton").click(function(e) {
                 e.preventDefault();
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:8080/api/employee/" + rowData,
+                    url: "http://localhost:8080/api/menu/" + rowData,
                     success: function(response) {
                         location.reload();
                     }
@@ -139,23 +135,22 @@
             $('#table').on('click', '.fa-edit', function() {
                 rowData = table.row($(this).parents('tr').first()).data();
                 let rowDataJSON = JSON.stringify(rowData)
-                console.log(rowData);
+                console.log(rowDataJSON)
                 $.ajax({
                     type: "PUT",
-                    url: "http://localhost:8080/api/willupdateemployee",
+                    url: "http://localhost:8080/api/menu/willupdatemenu",
                     data: rowDataJSON,
                     contentType: "application/json",
                     success: function(response) {
                         console.log(response)
                         pageRedirect();
-
                     }
                 });
             });
         })
 
         function pageRedirect() {
-            window.location.href = "./update_employee";
+            window.location.href = "./update_menu";
         }
     </script>
 </body>

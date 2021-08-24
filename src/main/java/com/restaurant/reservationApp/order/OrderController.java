@@ -1,7 +1,9 @@
 package com.restaurant.reservationApp.order;
 
 import com.restaurant.reservationApp.auth.CustomUserDetails;
+import com.restaurant.reservationApp.dish.Dish;
 import com.restaurant.reservationApp.dish.DishService;
+import com.restaurant.reservationApp.drink.Drink;
 import com.restaurant.reservationApp.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -40,6 +43,7 @@ public class OrderController {
 
     @PostMapping(value = "/order")
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+        System.out.println("order = " + order);
         order.getDishes().forEach(System.out::println);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();

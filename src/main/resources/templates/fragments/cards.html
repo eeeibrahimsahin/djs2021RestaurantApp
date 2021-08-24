@@ -12,6 +12,8 @@
         <div id="card-2" class="card">
             <div class="card-body">
                 <h5 class="card-title">Stock warning</h5>
+
+                <button id="warningAmountBtn" type="button" class="btn btn-outline-warning btn-block mb-2">Change warning amount</button>
                 <div id="warning-container">
                 </div>
             </div>
@@ -29,6 +31,17 @@
             <div class="form-group mx-sm-3 mb-2">
                 <label for="amount" class="sr-only">Amount</label>
                 <input type="number" class="form-control" id="amount" placeholder="amount">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="typeSelector" class="sr-only">Type</label>
+                <select id="typeSelector" class="form-control">
+                    <option value="kg" >KG</option>
+                    <option value="gr">GR</option>
+                    <option value="lt">LT</option>
+                    <option value="ml">ML</option>
+                    <option value="bottle">BOTTLE</option>
+                    <option value="box">BOX</option>
+                  </select>
             </div>
             <button type="submit" class="btn btn-primary mb-2">Get Items</button>
         </form>

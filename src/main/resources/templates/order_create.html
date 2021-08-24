@@ -21,7 +21,8 @@
 
     <!-- Start of first page -->
     <div data-role="page" id="foo">
-        <div th:insert="fragments/navbar.html"> </div>
+        <div th:insert="fragments/navbar.html"></div>
+        <div th:insert="fragments/modal.html"></div>
         <div data-role="header">
             <h1>Take Order</h1>
         </div>
@@ -36,24 +37,6 @@
                     <div class="ui-block-a"><input id="inputTableNo" type="number" value="" data-theme="a" placeholder="Enter table no"></div>
                     <div class="ui-block-b"><input type="reset" value="Get Table" data-theme="a" onclick="getTable()"></div>
                 </fieldset>
-                <!-- <a id="chair-1" href="#chair1" data-role="button" onclick="openDialog('chair-1');" data-rel="dialog" data-transition="flow">
-                <i class="fas fa-chair fa-4x"></i>
-            </a>
-            <div class="d-flex justify-content-around">
-                <a id="chair-2" class="pt-5" href="#chair2" data-role="button" onclick="openDialog('chair-2');" data-rel="dialog" data-transition="flip">
-                    <i class="fas fa-chair fa-4x"></i>
-                </a>
-                <a style="width: 50%;" href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
-                    <i class="far fa-square fa-10x"></i>
-                </a>
-                <a id='chair-3' class="pt-5" href="#chair3" data-role="button" onclick="openDialog('chair-3');" data-rel="dialog" data-transition="flip">
-                    <i class="fas fa-chair fa-4x"></i>
-                </a>
-            </div>
-            <a id='chair-4' href="#chair4" data-role="button" onclick="openDialog('chair-4');" data-rel="dialog" data-transition="flip">
-                <i class="fas fa-chair fa-4x"></i>
-            </a>
-            <button class="ui-btn bg-warning">Complete Order</button> -->
             </div>
         </div>
     </div>
@@ -68,7 +51,7 @@
 <script>
     let menuData;
     let chairOrder = [];
-    let chairOrder1;
+    let chairOrder1 = [];
     let chairOrder2 = [];
     let chairOrder3 = [];
     let chairOrder4 = [];
@@ -76,6 +59,7 @@
     let chairOrder6 = [];
     let chairOrder7 = [];
     let chairOrder8 = [];
+    let chairOrder100 = [];
     let chairDishes1 = [];
     let chairDishes2 = [];
     let chairDishes3 = [];
@@ -84,6 +68,16 @@
     let chairDishes6 = [];
     let chairDishes7 = [];
     let chairDishes8 = [];
+    let chairDishes100 = [];
+    let chairDriks1 = [];
+    let chairDriks2 = [];
+    let chairDriks3 = [];
+    let chairDriks4 = [];
+    let chairDriks5 = [];
+    let chairDriks6 = [];
+    let chairDriks7 = [];
+    let chairDriks8 = [];
+    let chairDriks100 = [];
     let orderListText1 = "";
     let orderListText2;
     let orderListText3;
@@ -106,6 +100,14 @@
     let optionsForPasta = "";
     let optionsForEntrees = "";
     let optionsForBeverages = "";
+    let optionsQuantityElements = `<option selected>Quantity</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                    <option value="4">Four</option>
+                                    <option value="5">Five</option>`
+    let orderJSON;
+
     $(document).ready(function() {
         //setChairs(8)
         //setPopUpPage(8)
@@ -114,7 +116,6 @@
             url: "http://localhost:8080/api/menu",
             success: function(data) {
                 setDropDownMenus(data)
-                console.log(data)
                 menuData = data;
             }
         });
@@ -176,14 +177,14 @@
             chairsAroundTable = `
                                     <div class="d-flex justify-content-around align-items-center">
                                         <a id="chair-1" href="#chair1" data-role="button" onclick="openDialog('chair-1');" data-rel="dialog" data-transition="flip">
-                                        ${chairIconEl}
-                                    </a>
-                                        <a href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                                            ${chairIconEl}
+                                        </a>
+                                        <a id="chair-100" href="#chair100" data-role="button" onclick="openDialog('chair-100');" data-rel="dialog" data-transition="flip">
                                             ${tableIconEl}
                                         </a>     
                                         <a id="chair-2"  href="#chair2" data-role="button" onclick="openDialog('chair-2');" data-rel="dialog" data-transition="flip">
-                                        ${chairIconEl}
-                                    </a>                        
+                                            ${chairIconEl}
+                                        </a>                        
                                     </div>
                                     `
         }
@@ -197,7 +198,7 @@
                                         <a id="chair-3" href="#chair3" data-role="button" onclick="openDialog('chair-3');" data-rel="dialog" data-transition="flip">
                                             ${chairIconEl}
                                         </a>
-                                        <a class="px-5" href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                                        <a id="chair-100" href="#chair100" data-role="button" onclick="openDialog('chair-100');" data-rel="dialog" data-transition="flip">
                                             ${tableIconEl}
                                         </a>          
                                         <a id="chair-4" href="#chair4" data-role="button" onclick="openDialog('chair-4');" data-rel="dialog" data-transition="flip">
@@ -223,7 +224,7 @@
                                         <a id="chair-3" href="#chair3" data-role="button" onclick="openDialog('chair-3');" data-rel="dialog" data-transition="flip">
                                             ${chairIconEl}
                                         </a>
-                                        <a class="px-5" href="#popup" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                                        <a id="chair-100" href="#chair100" data-role="button" onclick="openDialog('chair-100');" data-rel="dialog" data-transition="flip">
                                             ${tableIconEl}
                                         </a>          
                                         <a id="chair-4" href="#chair4" data-role="button" onclick="openDialog('chair-4');" data-rel="dialog" data-transition="flip">
@@ -255,7 +256,7 @@
                                         <a id="chair-3" href="#chair3" data-role="button" onclick="openDialog('chair-3');" data-rel="dialog" data-transition="flip">
                                             ${chairIconEl}
                                         </a>
-                                        <a class="px-5" href="#chair5" data-role="button" onclick="openDialog();" data-rel="dialog" data-transition="flip">
+                                        <a id="chair-100" href="#chair100" data-role="button" onclick="openDialog('chair-100');" data-rel="dialog" data-transition="flip">
                                             ${tableIconEl}
                                         </a>          
                                         <a id="chair-4" href="#chair4" data-role="button" onclick="openDialog('chair-4');" data-rel="dialog" data-transition="flip">
@@ -290,32 +291,32 @@
     function saveOrder() {
         if (chairId == "chair-1") {
             chairOrder1 = {
-                chairOneOrder: chairDishes1,
-                chairOneNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes1,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
         if (chairId == "chair-2") {
             chairOrder2 = {
-                chairTwoOrder: chairDishes2,
-                chairTwoNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes2,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
         if (chairId == "chair-3") {
             chairOrder3 = {
-                chairThreeOrder: chairDishes3,
-                chairThreeNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes3,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
         if (chairId == "chair-4") {
             chairOrder4 = {
-                chairFourOrder: chairDishes4,
-                chairFourNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes4,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
         if (chairId == "chair-5") {
             chairOrder5 = {
-                chairFiveOrder: chairDishes5,
-                chairFiveNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes5,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
         if (chairId == "chair-6") {
@@ -326,39 +327,22 @@
         }
         if (chairId == "chair-7") {
             chairOrder7 = {
-                chairSevenOrder: chairDishes7,
-                chairSevenNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes7,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
         if (chairId == "chair-8") {
             chairOrder8 = {
-                chairEightOrder: chairDishes8,
-                chairEightNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                dishes: chairDishes8,
+                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
             }
         }
-
-        console.log(chairOrder1)
-            // let orderJsObj = {
-            //     table: {
-            //         id: $("#inputTableNo ").val()
-            //     },
-            //     dishes,
-            //     drinkList
-            // }
-
-        // chairOneOrder.push(orderJsObj);
-        // console.log(orderJsObj)
-        // let orderJSON = JSON.stringify(orderJsObj)
-        // $.ajax({
-        //     type: "POST ",
-        //     url: "http://localhost:8080/api/order ",
-        //     data: orderJSON,
-        //     contentType: "application/json ",
-        //     success: function(response) {
-        //         console.log(response)
-        //     }
-        // });
-        //console.log(chairOneOrder)
+        if (chairId == "chair-100") {
+            chairOrder100 = {
+                dishes: chairDishes100,
+                specialNote: $('#textarea100').val()
+            }
+        }
         $(`#${chairId}`).children('i').addClass("text-success")
     };
 
@@ -375,7 +359,9 @@
                 name: $(`#${firstElId+chairNo} option:selected`).val(),
                 quantity: $(`#${secondElId+chairNo} option:selected`).val(),
                 type: "food",
-                price: getPriceOfTheProduct($(`#${firstElId+chairNo} option:selected`).val())
+                price: getPriceOfTheProduct($(`#${firstElId+chairNo} option:selected`).val()),
+                chairNo: chairNo,
+                allergy: $(`#allergy${chairNo} option:selected`).val(),
             }
             if (chairNo == 1) chairDishes1.push(tmpDish);
             if (chairNo == 2) chairDishes2.push(tmpDish);
@@ -385,6 +371,7 @@
             if (chairNo == 6) chairDishes6.push(tmpDish);
             if (chairNo == 7) chairDishes7.push(tmpDish);
             if (chairNo == 8) chairDishes8.push(tmpDish);
+            if (chairNo == 100) chairDishes100.push(tmpDish);
         }
         if (firstElId == "beverages" && $(`#${firstElId+chairNo} option:selected`).val() != firstElId) {
             let tmpDrink = {
@@ -400,6 +387,8 @@
             if (chairNo == 6) chairDishes6.push(tmpDrink);
             if (chairNo == 7) chairDishes7.push(tmpDrink);
             if (chairNo == 8) chairDishes8.push(tmpDrink);
+            if (chairNo == 100) chairDishes100.push(tmpDish);
+
         }
         if (chairNo == 1) {
             setOrderItemToTextArea(chairDishes1, chairNo);
@@ -425,6 +414,10 @@
         if (chairNo == 8) {
             setOrderItemToTextArea(chairDishes8, chairNo);
         }
+        if (chairNo == 100) {
+            setOrderItemToTextArea(chairDishes100, chairNo);
+        }
+
     }
 
     function increaseQuantityOfOrder(chairNo, index, currentNumber) {
@@ -437,6 +430,7 @@
         if (chairNo == 6) arrayList = chairDishes6;
         if (chairNo == 7) arrayList = chairDishes7;
         if (chairNo == 8) arrayList = chairDishes8;
+        if (chairNo == 100) arrayList = chairDishes100;
 
         arrayList[index].quantity = ++arrayList[index].quantity;
         setOrderItemToTextArea(arrayList, chairNo)
@@ -452,6 +446,7 @@
         if (chairNo == 6) arrayList = chairDishes6;
         if (chairNo == 7) arrayList = chairDishes7;
         if (chairNo == 8) arrayList = chairDishes8;
+        if (chairNo == 100) arrayList = chairDishes100;
         if (currentNumber > 1) {
             arrayList[index].quantity = arrayList[index].quantity - 1;
             console.log(arrayList[index].quantity)
@@ -491,28 +486,79 @@
         }
     }
 
+    function isEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
     function makeGeneralOrderList() {
-        dishList = [
-            chairOrder1,
-            chairOrder2,
-            chairOrder3,
-            chairOrder4,
-            chairOrder5,
-            chairOrder6,
-            chairOrder7,
-            chairOrder8,
-        ]
+        let specialNoteList = [];
+
+        if (!isEmpty(chairOrder1)) {
+            dishList.push(...chairOrder1.dishes);
+            specialNoteList.push(chairOrder1.specialNote);
+        };
+        if (!isEmpty(chairOrder2)) {
+            dishList.push(...chairOrder2.dishes);
+            specialNoteList.push(chairOrder2.specialNote);
+        };
+        if (!isEmpty(chairOrder3)) {
+            dishList.push(...chairOrder3.dishes);
+            specialNoteList.push(chairOrder3.specialNote);
+        };
+        if (!isEmpty(chairOrder4)) {
+            dishList.push(...chairOrder4.dishes);
+            specialNoteList.push(chairOrder4.specialNote);
+        };
+        if (!isEmpty(chairOrder5)) {
+            dishList.push(...chairOrder5.dishes);
+            specialNoteList.push(chairOrder5.specialNote);
+        };
+        if (!isEmpty(chairOrder6)) {
+            dishList.push(...chairOrder6.dishes);
+            specialNoteList.push(chairOrder6.specialNote);
+        };
+        if (!isEmpty(chairOrder7)) {
+            dishList.push(...chairOrder7.dishes);
+            specialNoteList.push(chairOrder7.specialNote);
+        };
+        if (!isEmpty(chairOrder8)) {
+            dishList.push(...chairOrder8.dishes);
+            specialNoteList.push(chairOrder8.specialNote);
+        };
+        if (!isEmpty(chairOrder100)) {
+            dishList.push(...chairOrder100.dishes);
+            specialNoteList.push(chairOrder100.specialNote);
+        };
+
+        let orderJsObj = {
+            table: {
+                id: $("#inputTableNo ").val()
+            },
+            dishes: dishList,
+            specialNotes: specialNoteList
+        }
+        orderJSON = JSON.stringify(orderJsObj);
+        getModal("Hey,there!", "Check Order", "YEP, I'M SURE:)", "btn-primary");
     }
 
     function setPopUpPage(amountOfChairs) {
         let popUpHtml = "";
-        for (let i = 0; i < amountOfChairs; i++) {
+        for (let i = 0; i <= amountOfChairs; i++) {
+            if (i == amountOfChairs) {
+                i = 99;
+            }
             popUpHtml += `<div data-role="page" id="chair${i+1}">
                             <div data-role="header">
                                 <h1>Order</h1>
                     </div> 
                     <div role="main" class="ui-content">
                         <form id="orderForm">
+                                <select name="select-native-1" id="allergy${i+1}">
+                                    <option value="allergy" disabled selected>Allergy</option>
+                                    <option value="Peanut">Peanut allergy</option>
+                                    <option value="Milk">Milk allergy</option>
+                                    <option value="Walnut">Walnut allergy</option>
+                                </select>
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
                                     <select name="select-choice-1" id="breakfast${i+1}">
@@ -521,10 +567,7 @@
                                 </div>
                                 <div class="ui-block-b">
                                     <select name="select-h-4a" id="breakfastQty${i+1}">
-                                        <option selected>Quantity</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
@@ -534,76 +577,28 @@
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
                                     <select name="select-choice-2" id="salad${i+1}">
-                                        <option value="salad" disabled selected>Salad</option>
-                                        <option value="Potato Salad">Potato Salad</option>
-                                        <option value="Macaroni">Macaroni</option>
-                                        <option value="Ceasar">Ceasar</option>
-                                        <option value="Greek">Greek</option>
-                                        <option value="Garden Fresh">Garden Fresh</option>
+                                        ${optionsForSalad}
                                     </select>
                                 </div>
                                 <div class="ui-block-b">
                                     <select name="select-h-4a" id="saladQty${i+1}">
-                                        <option selected>Quantity</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
                                     <input type="button" onclick='addToList("salad","saladQty",${i+1})' value="Add">
                                 </div>
                             </fieldset>
-                            <fieldset class="ui-grid-b">
-                                <div class="ui-block-a">
-                                    <select name="select-choice-3" id="pasta${i+1}">
-                                        <option value="pasta" disabled selected> Pasta </option>
-                                        <option value="Green Pesto">Green Pesto</option>
-                                        <option value="Penne">Penne</option>
-                                        <option value="Puttanesca">Puttanesca</option>
-                                        <option value="Bolognese">Bolognese</option>
-                                        <option value="Fettuccine">Fettuccine</option>
-                                        <option value="Spaghetti">Spaghetti</option>
-                                        <option value="Spaghetti with meatballs">Spaghetti with meatballs</option>
-                                        <option value="Lasagna">Lasagna</option>
-                                    </select>
-                                </div>
-                                <div class="ui-block-b">
-                                    <select name="select-h-4a" id="pastaQty${i+1}">
-                                        <option selected>Quantity</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <div class="ui-block-c">
-                                    <input type="button" onclick='addToList("pasta","pastaQty",${i+1})' value="Add">
-                                </div>
-                            </fieldset>
+                            
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
                                     <select name="select-choice-4" id="entrees${i+1}">
-                                        <option value="entrees" disabled selected>Entrees</option>
-                                            <option value="Ropa Vieja">Ropa Vieja</option>
-                                            <option value="Beef Brisket">Beef Brisket</option>
-                                            <option value="Braised Beef Stew">Braised Beef Stew</option>
-                                            <option value="Rose Mary Chicken">Rose Mary Chicken</option>
-                                            <option value="Buffalo Wings">Buffalo Wings</option>
-                                            <option value="Classic Pork Ribs">Classic Pork Ribs</option>
-                                            <option value="Baby Ribs">Baby Ribs</option>
-                                            <option value="Hickory Smoked Chicken">Hickory Smoked Chicken</option>
-                                            <option value="Bourbon Glazed Salmon">Bourbon Glazed Salmon</option>
-                                            <option value="Fried Trout in Tomato Sauce">Fried Trout in Tomato Sauce</option>
-                                            <option value="Lemon Pepper Chicken">Lemon Pepper Chicken</option>
-                                            <option value="Buttered Lobster">Buttered Lobster</option>
+                                        ${optionsForEntrees}
                                     </select>
                                 </div>
                                 <div class="ui-block-b">
                                     <select name="select-h-4a" id="entreesQty${i+1}">
-                                        <option selected>Quantity</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
@@ -613,28 +608,13 @@
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
                                     <select name="select-choice-5" id="beverages${i+1}">
-                                        <option value="beverages" disabled selected>Beverages</option>
-                                        <option value="House Blend Iced Tea">House Blend Iced Tea</option>
-                                        <option value="Blue Lemonade">Blue Lemonade</option>
-                                        <option value="Red Iced Tea">Red Iced Tea</option>
-                                        <option value="Red Wine">Red Wine</option>
-                                        <option value="White Wine">White Wine</option>
-                                        <option value="Coffee">Coffee</option>
-                                        <option value="Margarita">Margarita</option>
-                                        <option value="Martini">Martini</option>
-                                        <option value="Cosmopolitan">Cosmopolitan</option>
-                                        <option value="Whiskey Sour">Whiskey Sour</option>
-                                        <option value="Green tea">Green tea</option>
-                                        <option value="Fresh mint tea">Fresh mint tea</option>
+                                        ${optionsForBeverages}
                                     </select>
                                 </div>
 
                                 <div class="ui-block-b">
                                     <select name="select-h-4a" id="beveragesQty${i+1}">
-                                        <option selected>Quantity</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
@@ -668,13 +648,33 @@
         specialNotes = $(`#${elId}`).val();
     }
 
-    function seperateSpecialNotesAndOrders() {
-        for (let i = 0; i < dishes.length; i++) {
-            let note = myArr[i].substring(dishes[i].name.length + 3);
-            if (note.trim().length != 0) notes.push(note)
-            console.log("notes" + notes)
+    function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
+        $("#confirmButton").show();
+        $("#confirmButton").addClass(buttonColor);
+        $("#exampleModalLabel").html(header)
+        $("#confirmButton").html(confirmationWord)
+        $(".modal-body").html(text);
+        $('#exampleModal').modal('show')
+        if (deleteButton == true) {
+            $("#confirmButton").hide();
+            $("#cancelButton").html("Close")
         }
     }
+
+    $("#confirmButton").click(function(e) {
+        e.preventDefault();
+        console.log(orderJSON)
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/order",
+            data: orderJSON,
+            contentType: "application/json",
+            success: function(response) {
+                console.log(response)
+                getModal("Information", "The account is created!", "hello", "btn-primary", true)
+            }
+        });
+    });
 </script>
 
 </body>
