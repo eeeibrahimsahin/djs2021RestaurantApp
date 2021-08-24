@@ -11,28 +11,25 @@ import com.restaurant.reservationApp.employee.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "reservations")
+@Entity
 public class Reservation {
-    @Transient
-    public static final String SEQUENCE_NAME = "reservations_sequence";
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @DBRef
+    @OneToOne
     private Employee employee;
-    @DBRef
+    @OneToOne
     private Table table;
-    @DBRef
+    @OneToOne
     private Guest guest;
     private Date bookingDate;
     @JsonFormat()

@@ -1,19 +1,17 @@
 package com.restaurant.reservationApp.menu;
 
-import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import com.restaurant.reservationApp.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MenuServiceImpl implements MenuService {
     @Autowired
-    MenuRepository menuRepository;
-    @Autowired
-    SequenceGeneratorService sequenceGenerator;
+    private MenuRepository menuRepository;
 
     @Override
     public Optional<Menu> getMenuById(long id) {
@@ -22,19 +20,21 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> findAllMenu() {
-        return menuRepository.findAll();
+        Iterable<Menu> menuIterable = menuRepository.findAll();
+        List<Menu> menuList = new ArrayList<>();
+        menuIterable.forEach(menuList::add);
+        return menuList;
     }
 
     @Override
     public Menu save(Menu menu) {
-        menu.setId(sequenceGenerator.generateSequence(Menu.SEQUENCE_NAME));
         return menuRepository.save(menu);
     }
 
     @Override
     public Menu updateMenu(Menu menu) {
         Optional<Menu> menuOptional = menuRepository.findById(menu.getId());
-        if(menuOptional.isEmpty()) throw new NotFoundException();
+        if (menuOptional.isEmpty()) throw new NotFoundException();
         menuOptional.get().setName(menu.getName());
         menuOptional.get().setPrice(menu.getPrice());
         menuOptional.get().setDescription(menu.getDescription());

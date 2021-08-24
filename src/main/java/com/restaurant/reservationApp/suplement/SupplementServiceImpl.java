@@ -1,6 +1,5 @@
 package com.restaurant.reservationApp.suplement;
 
-import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import com.restaurant.reservationApp.drink.Drink;
 import com.restaurant.reservationApp.drink.DrinkService;
 import com.restaurant.reservationApp.food.Food;
@@ -20,8 +19,6 @@ public class SupplementServiceImpl implements SupplementService {
     private FoodService foodService;
     @Autowired
     private DrinkService drinkService;
-    @Autowired
-    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public List<Supplement> getAllSupplements() {
@@ -33,7 +30,6 @@ public class SupplementServiceImpl implements SupplementService {
 
     @Override
     public Supplement createSupplement(Supplement supplement) {
-        supplement.setId(sequenceGenerator.generateSequence(Supplement.SEQUENCE_NAME));
         return supplementRepository.save(supplement);
     }
 

@@ -1,8 +1,8 @@
 package com.restaurant.reservationApp.drink;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DrinkRepository extends MongoRepository<Drink, Integer> {
+public interface DrinkRepository extends CrudRepository<Drink, Integer> {
 }

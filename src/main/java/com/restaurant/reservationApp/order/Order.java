@@ -9,33 +9,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-@Document(collection = "orders")
+@Entity
 public class Order {
-    @Transient
-    public static final String SEQUENCE_NAME = "orders_sequence";
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @DBRef
+    @OneToOne
     private Table table;
-    @DBRef
+    @OneToOne
     private Employee employee;
-    @DBRef
+    @OneToOne
     private Reservation reservation;
-    @DBRef
+    @OneToMany
     private List<Dish> dishes;
+    @ElementCollection
     private List<String> specialNotes;
-    @DBRef
+    @OneToMany
     private List<Drink> drinkList;
     //private List<Dessert> dessertList;
     private boolean isDiet;

@@ -1,6 +1,5 @@
 package com.restaurant.reservationApp.employee;
 
-import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,6 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public List<Employee> getAllEmployee() {
@@ -33,7 +30,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee createEmployee(Employee employee) {
         System.out.println("employee = " + employee.getPassword());
-        employee.setId(sequenceGenerator.generateSequence(Employee.SEQUENCE_NAME));
         employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }

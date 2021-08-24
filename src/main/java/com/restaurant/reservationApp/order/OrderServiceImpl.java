@@ -1,7 +1,6 @@
 package com.restaurant.reservationApp.order;
 
 
-import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    SequenceGeneratorService sequenceGenerator;
+
 
     @Override
     public List<Order> getAllOrders() {
@@ -31,7 +29,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder(Order order) {
-        order.setId(sequenceGenerator.generateSequence(Order.SEQUENCE_NAME));
         return orderRepository.save(order);
     }
 

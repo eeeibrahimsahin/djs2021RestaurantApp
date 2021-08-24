@@ -4,28 +4,24 @@ import com.restaurant.reservationApp.food.Food;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "dishes")
+@Entity
 public class Dish {
-    @Transient
-    public static final String SEQUENCE_NAME = "dishes_sequence";
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private int quantity;
     private String type;
     private String allergy;
     private String chairNo;
-    @DBRef
+    @OneToMany
     private List<Food> ingredients;
 
 }

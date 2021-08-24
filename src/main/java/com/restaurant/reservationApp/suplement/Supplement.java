@@ -5,25 +5,22 @@ import com.restaurant.reservationApp.food.Food;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "supplements")
+@Entity
 public class Supplement {
-    @Transient
-    public static final String SEQUENCE_NAME = "supplements_sequence";
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @DBRef
+    @OneToMany
     private List<Drink> drinkList;
-    @DBRef
+    @OneToMany
     private List<Food> foodList;
 
 }

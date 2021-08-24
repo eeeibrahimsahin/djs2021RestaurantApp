@@ -1,6 +1,5 @@
 package com.restaurant.reservationApp.table;
 
-import com.restaurant.reservationApp.db.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +11,7 @@ import java.util.Optional;
 public class TableServiceImpl implements TableService {
     @Autowired
     TableRepository tableRepository;
-    @Autowired
-    SequenceGeneratorService sequenceGenerator;
+
 
     @Override
     public List<Table> getAllTable() {
@@ -30,7 +28,6 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Table createTable(Table table) {
-        table.setId(sequenceGenerator.generateSequence(Table.SEQUENCE_NAME));
         return tableRepository.save(table);
     }
 

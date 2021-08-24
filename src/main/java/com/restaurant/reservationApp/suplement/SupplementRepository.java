@@ -1,8 +1,8 @@
 package com.restaurant.reservationApp.suplement;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SupplementRepository extends MongoRepository<Supplement,Long> {
+public interface SupplementRepository extends CrudRepository<Supplement,Long> {
 }

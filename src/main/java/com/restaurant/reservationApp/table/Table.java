@@ -3,18 +3,19 @@ package com.restaurant.reservationApp.table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "tables")
+@Entity
 public class Table {
-    @Transient
-    public static final String SEQUENCE_NAME = "tables_sequence";
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private int numberOfChairs;
     private int floor;

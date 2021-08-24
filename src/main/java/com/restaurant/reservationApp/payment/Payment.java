@@ -4,22 +4,20 @@ import com.restaurant.reservationApp.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.*;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "payments")
+@Entity
 public class Payment {
-    @Transient
-    public static final String SEQUENCE_NAME = "payments_sequence";
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String paymentMethod;
-    @DBRef
+    @OneToOne
     private Order order;
     private double totalPrice;
 }
