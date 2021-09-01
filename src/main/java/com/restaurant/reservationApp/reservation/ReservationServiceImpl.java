@@ -1,41 +1,38 @@
 package com.restaurant.reservationApp.reservation;
+
 import com.restaurant.reservationApp.table.Table;
+import com.restaurant.reservationApp.table.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
-public class ReservationServiceImpl implements ReservationService{
+public class ReservationServiceImpl implements ReservationService {
+    @Autowired
     ReservationRepository reservationRepository;
 
-    public ReservationServiceImpl() {
-    }
-
     @Autowired
-    public ReservationServiceImpl(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
-    }
+    TableRepository tableRepository;
 
     @Override
     public List<Reservation> getAllReservation() {
-
-        return reservationRepository.getAllReservation();
+        List<Reservation> reservations = new ArrayList<>();
+        Iterable<Reservation> reservationIterable = reservationRepository.findAll();
+        reservationIterable.forEach(reservations::add);
+        return reservations;
     }
 
     @Override
-    public Reservation getReservationById(long id) {
-        return reservationRepository.getReservationById(id);
+    public Optional<Reservation> getReservationById(long id) {
+        return reservationRepository.findById(id);
     }
 
     @Override
-    public Reservation  createReservation (Reservation reservation ) {
-        return reservationRepository.createReservation (reservation);
+    public Reservation createReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
     }
 
     @Override
@@ -44,34 +41,49 @@ public class ReservationServiceImpl implements ReservationService{
         return reservationRepository.updateReservation(reservation);
     }
 
-    @Override
-    public void deleteReservation (int id) {
-        reservationRepository.deleteReservation (id);
+    public void deleteReservation(Reservation reservation) {
+        reservationRepository.delete(reservation);
     }
 
     @Override
     public List<Table> getAvailableTables(String dateAndTime) {
-        return reservationRepository.getAvailableTables(dateAndTime);
+        return findAvailableTables(dateAndTime);
     }
+
+    public List<Table> findAvailableTables(String dateAndTime) {
+        List<Table> availableTableList = new ArrayList<>();
+        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime);
+        Iterable<Reservation> reservationList = reservationRepository.findAll();
+        if (!reservationList.iterator().hasNext()) {
+
+            Iterable<Table> tableIterable = tableRepository.findAll();
+            tableIterable.forEach(availableTableList::add);
+            return availableTableList;
+        }
+        for (Reservation reservation : reservationList) {
+            if (reservation.getReservationDate().isBefore(dateTime) || reservation.getReservationDate().isAfter(dateTime)) {
+                availableTableList.add(reservation.getTable());
+            }
+        }
+        return availableTableList;
+    }
+
+
     @Override
-    public Map<String, Long> getAmountOfGuest(){
+    public Map<String, Long> getAmountOfGuest() {
         LocalDateTime now = LocalDateTime.now();
         LocalDate nowDate = LocalDate.now();
         LocalTime nowTime = LocalTime.of(8,0);
         LocalDateTime startingTime = LocalDateTime.of(nowDate,nowTime);
         long amountOfAllGuest = getAllReservation().stream().count();
-        //Daily Raport
-        long amountOfGuestSoFar = getAllReservation().stream().filter(reservation ->
-                (now.isAfter(reservation.getReservationDate())&
-                        startingTime.isBefore(reservation.getReservationDate()))).count();
-        System.out.println(amountOfGuestSoFar);
-        long amountOfGuestWhoVisitPlanned = getAllReservation().stream().filter(reservation ->reservation.getReservationDate().isAfter(now)).count();
+        long amountOfGuestSoFar = getAllReservation().stream().filter(reservation -> now.isAfter(reservation.getReservationDate())).count();
+        long amountOfGuestWhoVisitPlanned = getAllReservation().stream().filter(reservation -> reservation.getReservationDate().isAfter(now)).count();
         long amountOfGuestWhoVisitContinue = 2;
 
-         Map<String,Long> amountOfGuestMap = new HashMap<>();
-         amountOfGuestMap.put("amountOfGuestSoFar",amountOfGuestSoFar);
-         amountOfGuestMap.put("amountOfGuestWhoVisitPlanned",amountOfGuestWhoVisitPlanned);
-         amountOfGuestMap.put("amountOfGuestWhoVisitContinue",amountOfGuestWhoVisitContinue);
-         return amountOfGuestMap;
+        Map<String, Long> amountOfGuestMap = new HashMap<>();
+        amountOfGuestMap.put("amountOfGuestSoFar", amountOfGuestSoFar);
+        amountOfGuestMap.put("amountOfGuestWhoVisitPlanned", amountOfGuestWhoVisitPlanned);
+        amountOfGuestMap.put("amountOfGuestWhoVisitContinue", amountOfGuestWhoVisitContinue);
+        return amountOfGuestMap;
     }
 }

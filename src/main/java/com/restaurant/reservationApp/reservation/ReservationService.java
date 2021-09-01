@@ -4,16 +4,18 @@ import com.restaurant.reservationApp.table.Table;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface ReservationService {
-    public List<Reservation> getAllReservation();
-    public Reservation getReservationById(long id);
-    public Reservation createReservation(Reservation reservation);
-    Reservation updateReservation(Reservation reservation);
-    public void deleteReservation(int id);
+    List<Reservation> getAllReservation();
+
+    Optional<Reservation> getReservationById(long id);
+
+    Reservation createReservation(Reservation reservation);
+
+    void deleteReservation(Reservation reservation);
 
     List<Table> getAvailableTables(String dateAndTime);
-
 
     Map<String, Long> getAmountOfGuest();
 

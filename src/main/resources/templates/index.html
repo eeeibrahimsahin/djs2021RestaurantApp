@@ -12,26 +12,21 @@
 </head>
 
 <body>
-    <div th:insert="fragments/navbar.html"> </div>
+    <div th:insert="fragments/navbar.html"></div>
+    <div th:insert="fragments/modal.html"></div>
+
     <div class="container">
 
         <div class="jumbotron">
 
             <div class="row text-center">
                 <div class="container">
-
-                    <h3 sec:authorize="hasAnyRole('CHEF')"> Welcome CHEF</h3>
-                    <h3 sec:authorize="hasAnyRole('WAITER')"> Welcome WAITER</h3>
-                    <h3 sec:authorize="hasAnyRole('KITCHEN')"> Welcome KITCHEN</h3>
-                    <h3 sec:authorize="hasAnyRole('ADMIN')"> Welcome ADMIN</h3>
-                    <h3 sec:authorize="hasAnyRole('RECEPTIONIST')"> Welcome RECEPTIONIST</h3>
-                    <h3 sec:authorize="hasAnyRole('CASHIER')"> Welcome CASHIER</h3>
-
+                    <h3 sec:authorize="isAuthenticated()"> Welcome <span th:text="${#authentication.getPrincipal().getUser().getFirstName()}"></span></h3>
                     <p>
                         What do you want to do with me?
                     </p>
                     <img sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN','CASHIER','KITCHEN','WAITER')" src="/images/header-bg.jpg" style="width:75%" class="mx-auto" />
-                    <div sec:authorize="hasAnyRole('CHEF')" th:insert="fragments/cards.html"> </div>
+                    <div sec:authorize="hasAnyRole('CHEF')" th:insert="fragments/cards.html"></div>
                 </div>
             </div>
 
@@ -60,6 +55,7 @@
                 <tbody id="tableBody">
 
                 </tbody>`
+        let warningElement = '';
 
         function putDataToDataTable(data) {
             $('#table').DataTable().clear();
@@ -68,7 +64,7 @@
         }
 
         $(document).ready(function() {
-            let warningElement = '';
+
 
             $.ajax({
                 type: "GET",
@@ -90,6 +86,7 @@
                 type: "GET",
                 url: "http://localhost:8080/api/supplement_amount/" + 10,
                 success: function(response) {
+                    console.log(response)
                     response.forEach(element => {
                         warningElement += `<div class="alert alert-danger" role="alert">
                                                 ${element.quantity} ${element.typeOfQuantity} of ${element.name} left!
@@ -105,6 +102,7 @@
         $(".form-inline").submit(function(e) {
             e.preventDefault();
             let amount = $("#amount").val();
+            let typeOfAmount = $(`#typeSelector option:selected`).val()
             $("#table").empty();
             $.ajax({
                 type: "GET",
@@ -114,12 +112,20 @@
                 success: function(response) {
                     console.log(response)
                     $("#table").append(tableHead);
-                    createTable("#table", response);
+                    //$("#table").DataTable().clear().draw()
+                    // $("#table").DataTable().rows.add()
+                    createTable("#table", sortDataByTypeOfAmount(response, typeOfAmount));
                     //$("#table").DataTable().ajax.reload();
                 }
             });
         });
 
+        function sortDataByTypeOfAmount(arr, filterType) {
+            console.log(arr)
+            let result = arr.filter(food => food.typeOfQuantity == filterType);
+            console.log(result);
+            return result;
+        }
 
         function createTable(tableId, dataNew) {
             $(tableId).DataTable({
@@ -141,6 +147,46 @@
                     data: "typeOfQuantity"
                 }]
             });
+        }
+
+        let modalBody = `<div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="Enter new warning limit" id="newAmaountOfWarning" aria-describedby="basic-addon2">
+                        </div>`
+        $("#warningAmountBtn").click(function(e) {
+            e.preventDefault();
+            getModal("Hey,there!", modalBody, "YEP, I'M SURE:)", "btn-primary");
+
+        });
+        $("#confirmButton").click(function(e) {
+            e.preventDefault();
+            let newLimit = $("#newAmaountOfWarning").val();
+            console.log(newLimit)
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/supplement_amount/" + newLimit,
+                success: function(response) {
+                    warningElement = '';
+                    response.forEach(element => {
+                        warningElement += `<div class="alert alert-danger" role="alert">
+                                                ${element.quantity} ${element.typeOfQuantity} of ${element.name} left!
+                                         </div>`
+                    });
+                    $("#warning-container").html(warningElement);
+                }
+            });
+        });
+
+        function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
+            $("#confirmButton").show();
+            $("#confirmButton").addClass(buttonColor);
+            $("#exampleModalLabel").html(header)
+            $("#confirmButton").html(confirmationWord)
+            $(".modal-body").html(text);
+            $('#exampleModal').modal('show')
+            if (deleteButton == true) {
+                $("#confirmButton").hide();
+                $("#cancelButton").html("Close")
+            }
         }
     </script>
 

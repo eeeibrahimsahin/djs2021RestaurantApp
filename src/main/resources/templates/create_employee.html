@@ -5,58 +5,112 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
     <title>Create Employee!</title>
 </head>
 
 <body>
+    <div th:insert="fragments/navbar.html"></div>
+    <div th:insert="fragments/modal.html"></div>
+
     <div class="container">
         <div class="jumbotron">
-            <h3>New employee</h3>
-           <div class="mt-5">
-            <form id="employeeForm" method="POST" action="http://localhost:8080/api/newEmployee">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputName">Firstname</label>
-                        <input type="text" class="form-control" id="inputName" name="firstName" placeholder="Firstname">
+            <div class="text-center">
+                <i class="fas fa-user-tie fa-10x"></i>
+                <br/>
+                <h3>Add new employee</h3>
+            </div>
+            <div class="mt-5">
+                <form id="employeeForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Firstname</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Firstname">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputLastname">Lastname</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Lastname">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputLastname">Lastname</label>
-                        <input type="text" class="form-control" id="inputLastname" name="lastName"
-                            placeholder="Lastname">
-                    </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputUsername">Username</label>
-                        <input type="text" class="form-control" id="inputUsername" name="username"
-                            placeholder="Username">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pin">Pin</label>
+                            <input type="password" class="form-control" id="pin" name="pin" placeholder="Pin">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="roleSelect">Role</label>
+                            <select class="custom-select" id="roleSelect" name="selector">
+                                <option selected>Choose...</option>
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="CHEF">CHEF</option>
+                                <option value="RECEPTIONIST">RECEPTIONIST</option>
+                                <option value="WAITER">WAITER</option>
+                                <option value="KITCHEN">KITCHEN</option>
+                                <option value="CASHIER">CASHIER</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="password"
-                            placeholder="Password">
-                    </div>
-                </div>
 
-                <input type="submit" class="btn btn-primary" value="Save">
-            </form>
-           </div>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </form>
+            </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
+        let employeeJSON;
+        let createText = "<p>Are you sure want to create the account?.</p>"
 
+
+        $("#employeeForm").submit(function(e) {
+            e.preventDefault();
+            let firstName = $("#firstName").val();
+            let lastName = $("#lastName").val();
+            let username = $("#pin").val();
+            let password = $("#pin").val();
+            let role = $('select[name=selector] option').filter(':selected').val()
+            let employeeJsObj = {
+                firstName,
+                lastName,
+                username,
+                password,
+                role
+            }
+            console.log(employeeJsObj)
+            employeeJSON = JSON.stringify(employeeJsObj);
+            getModal("Hey,there!", createText, "YEP, I'M SURE:)", "btn-primary");
+
+        });
+        $("#confirmButton").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/newEmployee",
+                data: employeeJSON,
+                contentType: "application/json",
+                success: function(response) {
+                    console.log(response)
+                    getModal("Information", "The account is created!", "hello", "btn-primary", true)
+                }
+            });
+        });
+
+        function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
+            $("#confirmButton").show();
+            $("#confirmButton").addClass(buttonColor);
+            $("#exampleModalLabel").html(header)
+            $("#confirmButton").html(confirmationWord)
+            $(".modal-body").html(text);
+            $('#exampleModal').modal('show')
+            if (deleteButton == true) {
+                $("#confirmButton").hide();
+                $("#cancelButton").html("Close")
+            }
+        }
     </script>
 </body>
 

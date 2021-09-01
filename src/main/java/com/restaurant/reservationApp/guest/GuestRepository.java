@@ -1,11 +1,8 @@
 package com.restaurant.reservationApp.guest;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GuestRepository {
-    public List<Guest> getAllGuests();
-    public Guest getGuestById(long id);
-    public Guest createGuest(Guest guest);
-    void deleteGuest(long id);
-    Guest updateGuest(Guest guest);
+@Repository
+public interface GuestRepository extends CrudRepository<Guest, Long> {
 }

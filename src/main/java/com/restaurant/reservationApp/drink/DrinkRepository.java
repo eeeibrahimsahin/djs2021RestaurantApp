@@ -1,9 +1,8 @@
 package com.restaurant.reservationApp.drink;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DrinkRepository {
-    public List<Drink> getAllDrinks();
-    public Drink getDrinkById(long id);
-    public Drink createDrink(Drink drink);
+@Repository
+public interface DrinkRepository extends CrudRepository<Drink, Integer> {
 }

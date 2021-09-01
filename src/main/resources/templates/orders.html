@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Orders</title>
 </head>
 
 <body>
 
-<div th:insert="fragments/navbar.html"> </div>
+    <div th:insert="fragments/navbar.html"> </div>
 
     <div class="container">
         <div class="jumbotron">
@@ -23,9 +22,10 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">Table No</th>
+                        <th scope="col">Dishes</th>
                         <th scope="col">Drink List</th>
-                        <th scope="col">Reservation</th>
-                        <th scope="col">Diet</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Allergy</th>
                         <th scope="col">Employee</th>
                     </tr>
                 </thead>
@@ -38,32 +38,66 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $.ajax({
                 url: 'http://localhost:8080/api/orders',
-                headers: { "Accept": "application/json" },
-                type: "GET", /* or type:"GET" or type:"PUT" */
-                dataType: "json",
-                data: {
+                headers: {
+                    "Accept": "application/json"
                 },
-                success: function (data) {
+                type: "GET",
+                /* or type:"GET" or type:"PUT" */
+                dataType: "json",
+                data: {},
+                success: function(data) {
                     console.log(data);
-
                     let html;
+                    let dishEl;
+                    let dishListEl;
+                    let drinkListEl;
+                    let drikEl;
+                    let allergyList;
+                    let allergy;
+                    let specialNotes;
                     data.forEach(element => {
+                        dishListEl = "";
+                        drinkListEl = "";
+                        dishEl = "";
+                        drikEl = "";
+                        allergyList = "";
+                        allergy = "";
+                        specialNotes = ""
+                        dishListEl = `<ul class="list-group list-group-flush">`;
+                        drinkListEl = `<ul class="list-group list-group-flush">`;
+                        allergyList = `<ul class="list-group list-group-flush">`;
+                        if (!(element.dishes.length == 0)) {
+                            element.dishes.forEach(element => {
+                                if (element.allergy != "allergy" && element.allergy != null) allergy += `<li class="list-group-item list-group-item-secondary">${element.allergy}</li>`
+                                if (element.type == "food") {
+                                    dishEl += `<li class="list-group-item list-group-item-secondary">${element.name} X${element.quantity}</li>`
+                                } else {
+                                    drikEl += `<li class="list-group-item list-group-item-secondary">${element.name} X${element.quantity}</li>`
+                                }
+                            });
+                        }
+                        if (!(element.specialNotes.length == 0)) {
+                            element.specialNotes.forEach(element => {
+                                specialNotes += element + "\n";
+                            })
+                        }
+                        dishListEl += dishEl + "</ul>"
+                        drinkListEl += drikEl + "</ul>"
+                        if (allergy != "") allergyList += allergy + "</ul>"
+                        else allergyList = "";
                         html += `<tr>
                                         <td>${element.id}</td>
                                         <td>${element.table.id}</td>
-                                        <td>${element.drinkList[0].name}, ${element.drinkList[1].name}</td>
-                                        <td>${element.reservation.id == null ? "No" : "Yes"}</td>
-                                        <td>${element.diet ? "Yes" : "No"}</td>
+                                        <td>${dishListEl}</td>
+                                        <td>${drinkListEl}</td>
+                                        <td>${specialNotes}</td>
+                                        <td>${allergyList == "" ? "No" : allergyList}</td>
                                         <td>${element.employee.firstName}</td>
                                     </tr>`
                     });
@@ -71,12 +105,11 @@
                     $('#tableBody').append(html);
 
                 },
-                error: function () {
+                error: function() {
                     console.log("error");
                 }
             });
         })
-
     </script>
 </body>
 

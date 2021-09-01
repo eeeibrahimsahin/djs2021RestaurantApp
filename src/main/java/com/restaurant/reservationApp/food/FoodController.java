@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -20,11 +21,15 @@ public class FoodController {
 
         return new ResponseEntity<>(serviceFood.getAllFood(), HttpStatus.OK);
     }
+
     @GetMapping("/foodsById/{id}")
     public ResponseEntity<Food> getFoodById(@PathVariable(name = "id", required = true) long id) {
-        Food food = serviceFood.getFoodById(id);
-        return new ResponseEntity<>(food, HttpStatus.OK);
+        Optional<Food> foodOptional = serviceFood.getFoodById(id);
+        if (foodOptional.isPresent())
+            return new ResponseEntity<>(foodOptional.get(), HttpStatus.OK);
+        return null;
     }
+
     @PutMapping(value = "/food", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Food> createEmployee(@RequestBody Food food) {
         Food food1 = serviceFood.createFood(food);

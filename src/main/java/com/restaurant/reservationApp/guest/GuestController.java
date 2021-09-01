@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -31,8 +32,10 @@ public class GuestController {
 
     @GetMapping("/guest/{id}")
     public ResponseEntity<Guest> getGuestById(@PathVariable(name = "id", required = true) long id) {
-        Guest guest = guestService.getGuestById(id);
-        return new ResponseEntity<>(guest, HttpStatus.OK);
+        Optional<Guest> guest = guestService.getGuestById(id);
+        if (guest.isPresent())
+            return new ResponseEntity<>(guest.get(), HttpStatus.OK);
+        return null;
     }
 
     @PostMapping("/newguest")
@@ -42,15 +45,15 @@ public class GuestController {
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
 
-    @PutMapping( "/guest")
-    public ResponseEntity<Guest> updateGuest(@RequestBody Guest guest){
+    @PutMapping(value = "/guest")
+    public ResponseEntity<Guest> updateGuest(@RequestBody Guest guest) {
         Guest guest1 = guestService.updateGuest(guest);
         return new ResponseEntity<>(guest1, HttpStatus.OK);
     }
 
     @PutMapping(value = "/willupdateguest")
     public void willUpdateGuest(@RequestBody Guest guest) {
-        willUpdateGuest =guest;
+        willUpdateGuest = guest;
     }
 
     @GetMapping("/updateguest")

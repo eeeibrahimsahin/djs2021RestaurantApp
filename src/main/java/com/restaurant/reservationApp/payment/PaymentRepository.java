@@ -1,10 +1,9 @@
 package com.restaurant.reservationApp.payment;
 
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PaymentRepository {
-    public List<Payment> getAllPayment();
-    public Payment getPaymentById(long id);
-    public Payment createPayment(Payment payment);
+@Repository
+public interface PaymentRepository extends CrudRepository<Payment, Long> {
 }

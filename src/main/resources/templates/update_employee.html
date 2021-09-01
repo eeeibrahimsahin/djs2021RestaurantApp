@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
     <title>Update Employee</title>
 </head>
 
@@ -15,32 +14,38 @@
     <div th:insert="fragments/modal.html"></div>
     <div class="container">
         <div class="jumbotron">
-            <h3>Update employee</h3>
+            <div class="text-center">
+                <i class="fas fa-user-edit fa-10x"></i>
+            </div>
             <div class="mt-5">
                 <form id="employeeForm">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Firstname</label>
-                            <input type="text" class="form-control" id="inputName" name="firstName"
-                                placeholder="Firstname">
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Firstname">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputLastname">Lastname</label>
-                            <input type="text" class="form-control" id="inputLastname" name="lastName"
-                                placeholder="Lastname">
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Lastname">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" name="username"
-                                placeholder="Username">
+                            <label for="pin">Pin</label>
+                            <input type="password" class="form-control" id="pin" name="pin" placeholder="Pin">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" name="password"
-                                placeholder="Password">
+                            <label for="roleSelect">Role</label>
+                            <select class="custom-select" id="roleSelect" name="selector">
+                                <option selected>Choose...</option>
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="CHEF">CHEF</option>
+                                <option value="RECEPTIONIST">RECEPTIONIST</option>
+                                <option value="WAITER">WAITER</option>
+                                <option value="KITCHEN">KITCHEN</option>
+                                <option value="CASHIER">CASHIER</option>
+                            </select>
                         </div>
                     </div>
 
@@ -50,63 +55,57 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         let employeeData;
         let employeeJSON;
-        let firstNameEl = $("#inputName");
-        let lastNameEl = $("#inputLastname");
-        let usernameEl = $("#inputUsername");
-        let passwordEl = $("#inputPassword4");
+        let firstNameEl = $("#firstName");
+        let lastNameEl = $("#lastName");
+        let passwordEl = $("#pin");
         let updateText = "<p>Are you sure want to update the account?.</p>"
-        $(document).ready(function () {
+        $(document).ready(function() {
             getData();
         });
+
         function getData() {
             $.ajax({
                 type: "GET",
                 url: "http://localhost:8080/api/update",
-                success: function (response) {
+                success: function(response) {
                     employeeData = response;
                     console.log(employeeData)
                     firstNameEl.val(employeeData.firstName);
                     lastNameEl.val(employeeData.lastName);
-                    usernameEl.val(employeeData.username);
                     passwordEl.val(employeeData.password);
+                    $(`#roleSelect option[value=${employeeData.role}]`).prop('selected', true);
                 }
             });
         }
 
-        $("#employeeForm").submit(function (e) {
+        $("#employeeForm").submit(function(e) {
             e.preventDefault();
             let employeeJsObj = {
                 id: employeeData.id,
                 firstName: firstNameEl.val(),
                 lastName: lastNameEl.val(),
-                username: usernameEl.val(),
-                password: passwordEl.val()
+                username: passwordEl.val(),
+                password: passwordEl.val(),
+                role: $('select[name=selector] option').filter(':selected').val()
             };
-
             employeeJSON = JSON.stringify(employeeJsObj);
             getModal("Hey,there!", updateText, "YEP, I'M SURE:)", "btn-primary");
 
         });
 
-        $("#confirmButton").click(function (e) {
+        $("#confirmButton").click(function(e) {
             e.preventDefault();
             $.ajax({
                 type: "PUT",
                 url: "http://localhost:8080/api/employee",
                 data: employeeJSON,
                 contentType: "application/json",
-                success: function (response) {
-                    console.log(response)
+                success: function(response) {
                     getModal("Information", "The account is updated!", "hello", "btn-primary", true)
                 }
             });

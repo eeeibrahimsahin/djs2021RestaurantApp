@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -22,18 +23,19 @@ public class SupplementController {
 
     @GetMapping("/supplement/{id}")
     public ResponseEntity<Supplement> getSupplementById(@PathVariable(name = "id", required = true) long id) {
-        Supplement supplement = supplementService.getSupplementById(id);
-        return new ResponseEntity<>(supplement, HttpStatus.OK);
+        Optional<Supplement> supplement = supplementService.getSupplementById(id);
+        return new ResponseEntity<>(supplement.get(), HttpStatus.OK);
     }
+
     @GetMapping("supplement/{name}")
-    public ResponseEntity<Supplement> getSupplementByName(@PathVariable(name = "name", required = true) String name){
+    public ResponseEntity<Supplement> getSupplementByName(@PathVariable(name = "name", required = true) String name) {
         Supplement supplement = SupplementService.getSupplementByName(name);
         return new ResponseEntity<>(supplement, HttpStatus.OK);
     }
 
     @GetMapping("/supplement_amount/{amount}")
-    public ResponseEntity<List> getSupplementsLessThan(@PathVariable long amount){
-        return new ResponseEntity<>( supplementService.getSupplementsLessThan(amount), HttpStatus.OK);
+    public ResponseEntity<List> getSupplementsLessThan(@PathVariable long amount) {
+        return new ResponseEntity<>(supplementService.getSupplementsLessThan(amount), HttpStatus.OK);
     }
 
     @PostMapping("/addStock")
