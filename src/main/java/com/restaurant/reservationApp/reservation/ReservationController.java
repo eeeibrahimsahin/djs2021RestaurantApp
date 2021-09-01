@@ -61,19 +61,6 @@ public class ReservationController {
         return new ResponseEntity<>(reservation.get(), HttpStatus.OK);
     }
 
-
-    //    @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
-//    public ResponseEntity<Reservation> Reservation(@RequestParam(name = "reservation", required = false) String wish) {
-//        if (wish == "create") {
-//            Reservation reservation1 = reservationService.createReservation(reservation);
-//            return new ResponseEntity<>(reservation1, HttpStatus.OK);
-//        }
-//        if (wish == "delete") {
-//            Reservation reservation1 = reservationService.deleteReservation(reservation);
-//            return new ResponseEntity<>(reservation1, HttpStatus.OK);
-//        }
-//        return null;
-//    }
     @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
     public void Reservation(@RequestBody Reservation reservation) {
         reservationService.deleteReservation(reservation);

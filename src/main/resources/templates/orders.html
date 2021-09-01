@@ -74,7 +74,7 @@
                         allergyList = `<ul class="list-group list-group-flush">`;
                         if (!(element.dishes.length == 0)) {
                             element.dishes.forEach(element => {
-                                if (element.allergy != "allergy" && element.allergy != null) allergy += `<li class="list-group-item list-group-item-secondary">${element.allergy}</li>`
+                                if (element.allergy !== "allergy" && element.allergy != null) allergy += `<li class="list-group-item list-group-item-secondary">${element.allergy}</li>`
                                 if (element.type == "food") {
                                     dishEl += `<li class="list-group-item list-group-item-secondary">${element.name} X${element.quantity}</li>`
                                 } else {

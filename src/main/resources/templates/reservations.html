@@ -64,10 +64,11 @@
                     "data": "guest.phoneNumber"
                 }, {
                     "data": function(rowData, type, row) {
-                        if (rowData.guest.roomNuber == 0 || rowData.guest.roomNuber == null)
+                        console.log(rowData.guest.roomNumber)
+                        if (rowData.guest.roomNumber == 0 || rowData.guest.roomNumber == null)
                             return "-";
                         else {
-                            return rowData.guest.roomNuber
+                            return rowData.guest.roomNumber
                         }
                     }
                 }, {

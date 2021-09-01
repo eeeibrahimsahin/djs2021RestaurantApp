@@ -134,13 +134,8 @@
             dateAndTime = $("#date-time").val();
 
             $.ajax({
-                url: "http://localhost:8080/api/getavailabletables/" + dateAndTime,
-                headers: {
-                    Accept: "application/json"
-                },
                 type: "GET" /* or type:"GET" or type:"PUT" */ ,
-                dataType: "json",
-                data: {},
+                url: "http://localhost:8080/api/getavailabletables/" + dateAndTime,
                 success: function(data) {
                     console.log(data);
 
