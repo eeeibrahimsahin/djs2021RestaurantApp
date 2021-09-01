@@ -64,7 +64,6 @@ public class ReservationServiceImpl implements ReservationService {
         long amountOfGuestSoFar = getAllReservation().stream().filter(reservation -> now.isAfter(reservation.getReservationDate())).count();
         long amountOfGuestWhoVisitPlanned = getAllReservation().stream().filter(reservation -> reservation.getReservationDate().isAfter(now)).count();
         long amountOfGuestWhoVisitContinue = 2;
-
         Map<String, Long> amountOfGuestMap = new HashMap<>();
         amountOfGuestMap.put("amountOfGuestSoFar", amountOfGuestSoFar);
         amountOfGuestMap.put("amountOfGuestWhoVisitPlanned", amountOfGuestWhoVisitPlanned);
