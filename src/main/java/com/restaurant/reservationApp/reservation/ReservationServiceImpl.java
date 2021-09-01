@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 @Service
@@ -37,8 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation updateReservation(Reservation reservation) {
-
-        return reservationRepository.updateReservation(reservation);
+        return reservationRepository.save(reservation);
     }
 
     public void deleteReservation(Reservation reservation) {

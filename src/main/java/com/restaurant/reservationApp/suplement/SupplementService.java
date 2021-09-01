@@ -16,5 +16,4 @@ public interface SupplementService {
 
     List getSupplementsLessThan(long amount);
 
-     Supplement createSupplement(Supplement supplement);
 }

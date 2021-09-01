@@ -32,6 +32,7 @@ public class ReservationController {
     @Autowired
     TableService tableService;
     private Reservation reservation;
+    private Reservation willUpdateReservation;
 
 
     @PostMapping("/createNewReservation")
@@ -64,7 +65,7 @@ public class ReservationController {
     @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
     public void Reservation(@RequestBody Reservation reservation) {
         reservationService.deleteReservation(reservation);
-
+    }
     @PutMapping(value = "/reservation")
     public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) {
         System.out.println(reservation.getReservationDate());

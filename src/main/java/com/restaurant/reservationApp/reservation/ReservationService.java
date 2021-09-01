@@ -20,4 +20,5 @@ public interface ReservationService {
     Map<String, Long> getAmountOfGuest();
 
 
+    Reservation updateReservation(Reservation reservation);
 }
