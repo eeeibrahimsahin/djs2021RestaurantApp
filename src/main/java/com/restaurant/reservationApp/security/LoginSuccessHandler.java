@@ -21,7 +21,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
 
-        System.out.println(authentication.getPrincipal());
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         List<String> roles = authorities.stream().map(auth -> auth.getAuthority()).collect(Collectors.toList());

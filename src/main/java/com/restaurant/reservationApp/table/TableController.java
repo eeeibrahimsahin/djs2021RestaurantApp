@@ -23,7 +23,6 @@ public class TableController {
 
     @GetMapping("/tables")
     public ResponseEntity<List<Table>> getAllTable() {
-
         List<Table> allTable = tableService.getAllTable();
         return new ResponseEntity<>(allTable, HttpStatus.OK);
     }

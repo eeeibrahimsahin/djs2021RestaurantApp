@@ -47,9 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-        //   .and()
-        //     .addFilter(customAuthenticationFilter);
-        // .failureUrl("/login")
     }
 
 
@@ -61,25 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)
-//            throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("ibrahim").password(passwordEncoder().encode("12345")).roles("RECEPTIONIST")
-//                .and()
-//                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
-//                .and()
-//                .withUser("waiter").password(passwordEncoder().encode("12345")).roles("WAITER")
-//                .and()
-//                .withUser("chef").password(passwordEncoder().encode("12345")).roles("CHEF")
-//                .and()
-//                .withUser("cashier").password(passwordEncoder().encode("12345")).roles("CASHIER")
-//                .and()
-//                .withUser("kitchen").password(passwordEncoder().encode("12345")).roles("KITCHEN");
-//
-//
-//    }
 
     @Bean
     AuthenticationProvider authenticationProvider() {

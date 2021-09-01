@@ -1,7 +1,7 @@
 package com.restaurant.reservationApp.reservation;
 
 import com.restaurant.reservationApp.table.Table;
-import com.restaurant.reservationApp.table.TableRepository;
+import com.restaurant.reservationApp.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class ReservationServiceImpl implements ReservationService {
     ReservationRepository reservationRepository;
 
     @Autowired
-    TableRepository tableRepository;
+    TableService tableService;
 
     @Override
     public List<Reservation> getAllReservation() {
@@ -51,18 +51,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     public List<Table> findAvailableTables(String dateAndTime) {
-        List<Table> availableTableList = new ArrayList<>();
+        List<Table> availableTableList = tableService.getAllTable();
         LocalDateTime dateTime = LocalDateTime.parse(dateAndTime);
-        Iterable<Reservation> reservationList = reservationRepository.findAll();
-        if (!reservationList.iterator().hasNext()) {
-
-            Iterable<Table> tableIterable = tableRepository.findAll();
-            tableIterable.forEach(availableTableList::add);
-            return availableTableList;
-        }
+        List<Reservation> reservationList = (List<Reservation>) reservationRepository.findAll();
         for (Reservation reservation : reservationList) {
-            if (reservation.getReservationDate().isBefore(dateTime) || reservation.getReservationDate().isAfter(dateTime)) {
-                availableTableList.add(reservation.getTable());
+            if (!(reservation.getReservationDate().isBefore(dateTime) || reservation.getReservationDate().isAfter(dateTime))) {
+                availableTableList.remove(reservation.getTable());
             }
         }
         return availableTableList;

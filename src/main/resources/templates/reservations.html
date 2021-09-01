@@ -166,6 +166,48 @@
                 });
               });
 
+            $('#table').DataTable({
+                "processing": true,
+                ajax: {
+                    url: 'http://localhost:8080/api/allreservations',
+                    dataSrc: ''
+                },
+                "columns": [{
+                    "data": function(rowData, type, row) {
+                        return rowData.guest.firstName + " " + rowData.guest.lastName;
+                    }
+                }, {
+                    "data": "guest.phoneNumber"
+                }, {
+                    "data": function(rowData, type, row) {
+                        console.log(rowData.guest.roomNumber)
+                        if (rowData.guest.roomNumber == 0 || rowData.guest.roomNumber == null)
+                            return "-";
+                        else {
+                            return rowData.guest.roomNumber
+                        }
+                    }
+                }, {
+                    "data": "table.id"
+                }, {
+                    "data": "reservationDate",
+                    "render": dateChanger
+                }, {
+                    "data": "bookingDate",
+                    "render": dateChanger
+                }, {
+                    "data": "employee.firstName"
+                }, {
+                    data: null,
+                    className: "dt-center editor-edit",
+                    defaultContent: '<i class="far fa-edit"></i>',
+                    orderable: false
+                }, {
+                    data: null,
+                    className: "dt-center editor-delete",
+                    defaultContent: '<i class="far fa-trash-alt"></i>',
+                    orderable: false
+                }]
             });
 
             function dateChanger(data, type, row, meta) {
