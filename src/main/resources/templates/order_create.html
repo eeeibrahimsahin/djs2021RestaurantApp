@@ -1,180 +1,221 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <!--JQuery Mobile-->
+        <link
+            rel="stylesheet"
+            href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+        />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <!--Fontawesome-->
+        <script
+            src="https://kit.fontawesome.com/144f4e017a.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
 
-<head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--JQuery Mobile-->
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--Fontawesome-->
-    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
-
-</head>
-
-<body>
-
-    <!-- Start of first page -->
-    <div data-role="page" id="foo">
-        <div th:insert="fragments/navbar.html"></div>
-        <div th:insert="fragments/modal.html"></div>
-        <div data-role="header">
-            <h1>Take Order</h1>
-        </div>
-        <!-- /header -->
-        <div role="main" class="ui-content">
-            <div id="chairsAroundTable" class="container p-5 bg-light w-50">
-                <!-- <div class="d-flex justify-content-between pt-2 mx-auto mb-0">
-                    <input type="text" name="text-basic" id="inputTableNo" value="" placeholder="Enter table Number">
-                    <button onclick="getTable()" class="ui-btn ui-btn-inline">Get Table</button>
-                </div> -->
-                <fieldset class="ui-grid-a">
-                    <div class="ui-block-a"><input id="inputTableNo" type="number" value="" data-theme="a" placeholder="Enter table no"></div>
-                    <div class="ui-block-b"><input type="reset" value="Get Table" data-theme="a" onclick="getTable()"></div>
-                </fieldset>
+    <body>
+        <!-- Start of first page -->
+        <div data-role="page" id="foo">
+            <div th:insert="fragments/navbar.html"></div>
+            <div th:insert="fragments/modal.html"></div>
+            <div data-role="header">
+                <h1>Take Order</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <div id="chairsAroundTable" class="container p-5 bg-light w-50">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <input
+                                id="inputTableNo"
+                                type="number"
+                                value=""
+                                data-theme="a"
+                                placeholder="Enter table no"
+                            />
+                        </div>
+                        <div class="ui-block-b">
+                            <input
+                                type="reset"
+                                value="Get Table"
+                                data-theme="a"
+                                onclick="getTable()"
+                            />
+                        </div>
+                    </fieldset>
+                </div>
             </div>
         </div>
-    </div>
-</body>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+            crossorigin="anonymous "
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+            crossorigin="anonymous "
+        ></script>
 
-<script>
-    let menuData;
-    let chairOrder = [];
-    let chairOrder1 = [];
-    let chairOrder2 = [];
-    let chairOrder3 = [];
-    let chairOrder4 = [];
-    let chairOrder5 = [];
-    let chairOrder6 = [];
-    let chairOrder7 = [];
-    let chairOrder8 = [];
-    let chairOrder100 = [];
-    let chairDishes1 = [];
-    let chairDishes2 = [];
-    let chairDishes3 = [];
-    let chairDishes4 = [];
-    let chairDishes5 = [];
-    let chairDishes6 = [];
-    let chairDishes7 = [];
-    let chairDishes8 = [];
-    let chairDishes100 = [];
-    let chairDriks1 = [];
-    let chairDriks2 = [];
-    let chairDriks3 = [];
-    let chairDriks4 = [];
-    let chairDriks5 = [];
-    let chairDriks6 = [];
-    let chairDriks7 = [];
-    let chairDriks8 = [];
-    let chairDriks100 = [];
-    let orderListText1 = "";
-    let orderListText2;
-    let orderListText3;
-    let orderListText4;
-    let orderListText5;
-    let orderListText6;
-    let orderListText7;
-    let orderListText8;
-    let chairId;
-    let chairsAroundTable = "";
-    let dishList = [];
-    let drinkList = [];
-    let orderList = "";
-    let myArr = [];
-    let notes = [];
-    let collapseItem = "";
-    let specialNotes = "";
-    let optionsForBreakfast = "";
-    let optionsForSalad = "";
-    let optionsForPasta = "";
-    let optionsForEntrees = "";
-    let optionsForBeverages = "";
-    let optionsQuantityElements = `<option selected>Quantity</option>
+        <script>
+            let menuData;
+            let chairOrder = [];
+            let chairOrder1 = [];
+            let chairOrder2 = [];
+            let chairOrder3 = [];
+            let chairOrder4 = [];
+            let chairOrder5 = [];
+            let chairOrder6 = [];
+            let chairOrder7 = [];
+            let chairOrder8 = [];
+            let chairOrder100 = [];
+            let chairDishes1 = [];
+            let chairDishes2 = [];
+            let chairDishes3 = [];
+            let chairDishes4 = [];
+            let chairDishes5 = [];
+            let chairDishes6 = [];
+            let chairDishes7 = [];
+            let chairDishes8 = [];
+            let chairDishes100 = [];
+            let chairId;
+            let chairsAroundTable = "";
+            let dishList = [];
+            let collapseItem = "";
+            let specialNotes = "";
+            let optionsForBreakfast = "";
+            let optionsForSalad = "";
+            let optionsForPasta = "";
+            let optionsForEntrees = "";
+            let optionsForBeverages = "";
+            let optionsQuantityElements = `<option selected>Quantity</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                     <option value="4">Four</option>
-                                    <option value="5">Five</option>`
-    let orderJSON;
+                                    <option value="5">Five</option>`;
+            let orderJSON;
 
-    $(document).ready(function() {
-        //setChairs(8)
-        //setPopUpPage(8)
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/api/menu",
-            success: function(data) {
-                setDropDownMenus(data)
-                menuData = data;
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/menu",
+                    success: function (data) {
+                        console.log(data);
+                        setDropDownMenus(data);
+                        menuData = data;
+                    },
+                });
+            });
+
+            function setDropDownMenus(arr) {
+                let breakfastArr = createArrayBasedOnCustomFilter(
+                    arr,
+                    "BREAKFAST"
+                );
+                console.log(breakfastArr);
+                optionsForBreakfast = createOptions(
+                    breakfastArr,
+                    optionsForBreakfast,
+                    "Breakfast"
+                );
+
+                let saladArr = createArrayBasedOnCustomFilter(arr, "SALAD");
+                optionsForSalad = createOptions(
+                    saladArr,
+                    optionsForSalad,
+                    "Salad"
+                );
+
+                let pastaArr = createArrayBasedOnCustomFilter(arr, "PASTA");
+                optionsForPasta = createOptions(
+                    pastaArr,
+                    optionsForPasta,
+                    "Pasta"
+                );
+
+                let entreesArr = createArrayBasedOnCustomFilter(arr, "ENTREES");
+                optionsForEntrees = createOptions(
+                    entreesArr,
+                    optionsForEntrees,
+                    "Entrees"
+                );
+
+                let beveragesArr = createArrayBasedOnCustomFilter(
+                    arr,
+                    "BEVERAGES"
+                );
+                optionsForBeverages = createOptions(
+                    beveragesArr,
+                    optionsForBeverages,
+                    "Beverages"
+                );
             }
-        });
-    });
 
-    function setDropDownMenus(arr) {
-
-        let breakfastArr = createArrayBasedOnCustomFilter(arr, "BREAKFAST");
-        console.log(breakfastArr)
-        optionsForBreakfast = createOptions(breakfastArr, optionsForBreakfast, "Breakfast");
-
-        let saladArr = createArrayBasedOnCustomFilter(arr, "SALAD");
-        optionsForSalad = createOptions(saladArr, optionsForSalad, "Salad");
-
-        let pastaArr = createArrayBasedOnCustomFilter(arr, "PASTA");
-        optionsForPasta = createOptions(pastaArr, optionsForPasta, "Pasta");
-
-        let entreesArr = createArrayBasedOnCustomFilter(arr, "ENTREES");
-        optionsForEntrees = createOptions(entreesArr, optionsForEntrees, "Entrees");
-
-        let beveragesArr = createArrayBasedOnCustomFilter(arr, "BEVERAGES");
-        optionsForBeverages = createOptions(beveragesArr, optionsForBeverages, "Beverages");
-    }
-
-    function createArrayBasedOnCustomFilter(arr, filterName) {
-        let result = arr.filter(function(el) {
-            return el.type == filterName;
-        })
-        return result;
-    }
-
-    function createOptions(arr, optionEl, elId) {
-        optionEl += `<option value="${elId.toLowerCase()}" disabled selected>${elId}</option>`
-        arr.forEach(element => {
-            optionEl += `<option value="${element.name}">${element.name}</option>`
-        });
-        return optionEl;
-    }
-
-    function getTable() {
-        let tableNo = $("#inputTableNo").val();
-        $.ajax({
-            type: "GET",
-            url: "/api/table/" + tableNo,
-            success: function(response) {
-                console.log(response)
-                setChairs(response.numberOfChairs);
-                setPopUpPage(response.numberOfChairs);
+            function createArrayBasedOnCustomFilter(arr, filterName) {
+                let result = arr.filter(function (el) {
+                    return el.type == filterName;
+                });
+                return result;
             }
-        });
 
-    }
+            function createOptions(arr, optionEl, elId) {
+                optionEl += `<option value="${elId.toLowerCase()}" disabled selected>${elId}</option>`;
+                arr.forEach((element) => {
+                    optionEl += `<option value="${element.name}">${element.name}</option>`;
+                });
+                return optionEl;
+            }
 
-    function setChairs(amountOfChairs) {
-        let chairIconEl = '<i class = "fas fa-chair fa-4x" > </i>';
-        let tableIconEl = '<i class="far fa-square fa-10x"></i>'
-        let orderBtnEl = '<button onclick="makeGeneralOrderList()" class="ui-btn bg-warning">Complete Order</button>'
-        if (amountOfChairs == 2) {
-            chairsAroundTable = `
+            function getTable() {
+                let tableNo = $("#inputTableNo").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/table/" + tableNo,
+                    success: function (response) {
+                        console.log(response);
+                        setChairs(response.numberOfChairs);
+                        setPopUpPage(response.numberOfChairs);
+                    },
+                    error: function (response) {
+                        getModal(
+                            "Information",
+                            `Table number is wrong, there is not a table with number ${tableNo}`,
+                            "hello",
+                            "btn-primary",
+                            true
+                        );
+                    },
+                });
+            }
+
+            function setChairs(amountOfChairs) {
+                let chairIconEl = '<i class = "fas fa-chair fa-4x" > </i>';
+                let tableIconEl = '<i class="far fa-square fa-10x"></i>';
+                let orderBtnEl =
+                    '<button onclick="makeGeneralOrderList()" class="ui-btn bg-warning">Complete Order</button>';
+                if (amountOfChairs == 2) {
+                    chairsAroundTable = `
                                     <div class="d-flex justify-content-around align-items-center">
                                         <a id="chair-1" href="#chair1" data-role="button" onclick="openDialog('chair-1');" data-rel="dialog" data-transition="flip">
                                             ${chairIconEl}
@@ -186,10 +227,10 @@
                                             ${chairIconEl}
                                         </a>                        
                                     </div>
-                                    `
-        }
-        if (amountOfChairs == 4) {
-            chairsAroundTable = `<div class="d-flex justify-content-center">
+                                    `;
+                }
+                if (amountOfChairs == 4) {
+                    chairsAroundTable = `<div class="d-flex justify-content-center">
                                     <a id="chair-1" class="px-2" href="#chair1" data-role="button" onclick="openDialog('chair-1');" data-rel="dialog" data-transition="flip">
                                         ${chairIconEl}
                                     </a>                                 
@@ -209,10 +250,10 @@
                                     <a id="chair-2" class="px-2" href="#chair2" data-role="button" onclick="openDialog('chair-2');" data-rel="dialog" data-transition="flip">
                                         ${chairIconEl}
                                     </a>
-                                    </div>`
-        }
-        if (amountOfChairs == 6) {
-            chairsAroundTable = `<div class="d-flex justify-content-center">
+                                    </div>`;
+                }
+                if (amountOfChairs == 6) {
+                    chairsAroundTable = `<div class="d-flex justify-content-center">
                                     <a id="chair-1" class="px-2" href="#chair1" data-role="button" onclick="openDialog('chair-1');" data-rel="dialog" data-transition="flip">
                                         ${chairIconEl}
                                     </a>
@@ -238,10 +279,10 @@
                                     <a id="chair-2" class="px-2" href="#chair2" data-role="button" onclick="openDialog('chair-2');" data-rel="dialog" data-transition="flip">
                                         ${chairIconEl}
                                     </a>
-                                    </div>`
-        }
-        if (amountOfChairs == 8) {
-            chairsAroundTable = `<div class="d-flex justify-content-center">
+                                    </div>`;
+                }
+                if (amountOfChairs == 8) {
+                    chairsAroundTable = `<div class="d-flex justify-content-center">
                                     <a id="chair-1" class="px-2" href="#chair1" data-role="button" onclick="openDialog('chair-1');" data-rel="dialog" data-transition="flip">
                                         ${chairIconEl}
                                     </a>
@@ -273,200 +314,236 @@
                                     <a id="chair-2" class="px-2" href="#chair2" data-role="button" onclick="openDialog('chair-2');" data-rel="dialog" data-transition="flip">
                                         ${chairIconEl}
                                     </a>
-                                    </div>`
-        }
-        if (amountOfChairs == 10) {}
-        $("#chairsAroundTable").append(chairsAroundTable);
-        $("#chairsAroundTable").append(orderBtnEl);
-    }
-
-    function cancelOrder() {
-        $(`#${chairId}`).children('i').removeClass("text-success")
-    }
-
-    function openDialog(e) {
-        chairId = e;
-    }
-
-    function saveOrder() {
-        if (chairId == "chair-1") {
-            chairOrder1 = {
-                dishes: chairDishes1,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
+                                    </div>`;
+                }
+                if (amountOfChairs == 10) {
+                }
+                $("#chairsAroundTable").append(chairsAroundTable);
+                $("#chairsAroundTable").append(orderBtnEl);
             }
-        }
-        if (chairId == "chair-2") {
-            chairOrder2 = {
-                dishes: chairDishes2,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-3") {
-            chairOrder3 = {
-                dishes: chairDishes3,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-4") {
-            chairOrder4 = {
-                dishes: chairDishes4,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-5") {
-            chairOrder5 = {
-                dishes: chairDishes5,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-6") {
-            chairOrder6 = {
-                chairSixOrder: chairDishes6,
-                chairSixNotes: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-7") {
-            chairOrder7 = {
-                dishes: chairDishes7,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-8") {
-            chairOrder8 = {
-                dishes: chairDishes8,
-                specialNote: $(`#textarea${chairId.charAt(chairId.length-1) }`).val()
-            }
-        }
-        if (chairId == "chair-100") {
-            chairOrder100 = {
-                dishes: chairDishes100,
-                specialNote: $('#textarea100').val()
-            }
-        }
-        $(`#${chairId}`).children('i').addClass("text-success")
-    };
 
-    function getPriceOfTheProduct(productName) {
-        let productItem = menuData.filter(function(product) {
-            return product.name == productName;
-        })
-        return productItem[0].price;
-    }
-
-    function addToList(firstElId, secondElId, chairNo) {
-        if (firstElId != "beverages" && $(`#${firstElId} option:selected`).val() != firstElId) {
-            let tmpDish = {
-                name: $(`#${firstElId+chairNo} option:selected`).val(),
-                quantity: $(`#${secondElId+chairNo} option:selected`).val(),
-                type: "food",
-                price: getPriceOfTheProduct($(`#${firstElId+chairNo} option:selected`).val()),
-                chairNo: chairNo,
-                allergy: $(`#allergy${chairNo} option:selected`).val(),
+            function cancelOrder() {
+                $(`#${chairId}`).children("i").removeClass("text-success");
             }
-            if (chairNo == 1) chairDishes1.push(tmpDish);
-            if (chairNo == 2) chairDishes2.push(tmpDish);
-            if (chairNo == 3) chairDishes3.push(tmpDish);
-            if (chairNo == 4) chairDishes4.push(tmpDish);
-            if (chairNo == 5) chairDishes5.push(tmpDish);
-            if (chairNo == 6) chairDishes6.push(tmpDish);
-            if (chairNo == 7) chairDishes7.push(tmpDish);
-            if (chairNo == 8) chairDishes8.push(tmpDish);
-            if (chairNo == 100) chairDishes100.push(tmpDish);
-        }
-        if (firstElId == "beverages" && $(`#${firstElId+chairNo} option:selected`).val() != firstElId) {
-            let tmpDrink = {
-                name: $(`#${firstElId+chairNo} option:selected`).val(),
-                quantity: $(`#${secondElId+chairNo} option:selected`).val(),
-                type: "drink"
+
+            function openDialog(e) {
+                chairId = e;
             }
-            if (chairNo == 1) chairDishes1.push(tmpDrink);
-            if (chairNo == 2) chairDishes2.push(tmpDrink);
-            if (chairNo == 3) chairDishes3.push(tmpDrink);
-            if (chairNo == 4) chairDishes4.push(tmpDrink);
-            if (chairNo == 5) chairDishes5.push(tmpDrink);
-            if (chairNo == 6) chairDishes6.push(tmpDrink);
-            if (chairNo == 7) chairDishes7.push(tmpDrink);
-            if (chairNo == 8) chairDishes8.push(tmpDrink);
-            if (chairNo == 100) chairDishes100.push(tmpDish);
 
-        }
-        if (chairNo == 1) {
-            setOrderItemToTextArea(chairDishes1, chairNo);
-        }
-        if (chairNo == 2) {
-            setOrderItemToTextArea(chairDishes2, chairNo);
-        }
-        if (chairNo == 3) {
-            setOrderItemToTextArea(chairDishes3, chairNo);
-        }
-        if (chairNo == 4) {
-            setOrderItemToTextArea(chairDishes4, chairNo);
-        }
-        if (chairNo == 5) {
-            setOrderItemToTextArea(chairDishes5, chairNo);
-        }
-        if (chairNo == 6) {
-            setOrderItemToTextArea(chairDishes6, chairNo);
-        }
-        if (chairNo == 7) {
-            setOrderItemToTextArea(chairDishes7, chairNo);
-        }
-        if (chairNo == 8) {
-            setOrderItemToTextArea(chairDishes8, chairNo);
-        }
-        if (chairNo == 100) {
-            setOrderItemToTextArea(chairDishes100, chairNo);
-        }
+            function saveOrder() {
+                if (chairId == "chair-1") {
+                    chairOrder1 = {
+                        dishes: chairDishes1,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-2") {
+                    chairOrder2 = {
+                        dishes: chairDishes2,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-3") {
+                    chairOrder3 = {
+                        dishes: chairDishes3,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-4") {
+                    chairOrder4 = {
+                        dishes: chairDishes4,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-5") {
+                    chairOrder5 = {
+                        dishes: chairDishes5,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-6") {
+                    chairOrder6 = {
+                        chairSixOrder: chairDishes6,
+                        chairSixNotes: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-7") {
+                    chairOrder7 = {
+                        dishes: chairDishes7,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-8") {
+                    chairOrder8 = {
+                        dishes: chairDishes8,
+                        specialNote: $(
+                            `#textarea${chairId.charAt(chairId.length - 1)}`
+                        ).val(),
+                    };
+                }
+                if (chairId == "chair-100") {
+                    chairOrder100 = {
+                        dishes: chairDishes100,
+                        specialNote: $("#textarea100").val(),
+                    };
+                }
+                $(`#${chairId}`).children("i").addClass("text-success");
+            }
 
-    }
+            function getPriceOfTheProduct(productName) {
+                let productItem = menuData.filter(function (product) {
+                    return product.name == productName;
+                });
+                return productItem[0].price;
+            }
 
-    function increaseQuantityOfOrder(chairNo, index, currentNumber) {
-        let arrayList = [];
-        if (chairNo == 1) arrayList = chairDishes1;
-        if (chairNo == 2) arrayList = chairDishes2;
-        if (chairNo == 3) arrayList = chairDishes3;
-        if (chairNo == 4) arrayList = chairDishes4;
-        if (chairNo == 5) arrayList = chairDishes5;
-        if (chairNo == 6) arrayList = chairDishes6;
-        if (chairNo == 7) arrayList = chairDishes7;
-        if (chairNo == 8) arrayList = chairDishes8;
-        if (chairNo == 100) arrayList = chairDishes100;
+            function addToList(firstElId, secondElId, chairNo) {
+                if (
+                    firstElId != "beverages" &&
+                    $(`#${firstElId} option:selected`).val() != firstElId
+                ) {
+                    let tmpDish = {
+                        name: $(
+                            `#${firstElId + chairNo} option:selected`
+                        ).val(),
+                        quantity: $(
+                            `#${secondElId + chairNo} option:selected`
+                        ).val(),
+                        type: "food",
+                        price: getPriceOfTheProduct(
+                            $(`#${firstElId + chairNo} option:selected`).val()
+                        ),
+                        chairNo: chairNo,
+                        allergy: $(`#allergy${chairNo} option:selected`).val(),
+                    };
+                    if (chairNo == 1) chairDishes1.push(tmpDish);
+                    if (chairNo == 2) chairDishes2.push(tmpDish);
+                    if (chairNo == 3) chairDishes3.push(tmpDish);
+                    if (chairNo == 4) chairDishes4.push(tmpDish);
+                    if (chairNo == 5) chairDishes5.push(tmpDish);
+                    if (chairNo == 6) chairDishes6.push(tmpDish);
+                    if (chairNo == 7) chairDishes7.push(tmpDish);
+                    if (chairNo == 8) chairDishes8.push(tmpDish);
+                    if (chairNo == 100) chairDishes100.push(tmpDish);
+                }
+                if (
+                    firstElId == "beverages" &&
+                    $(`#${firstElId + chairNo} option:selected`).val() !=
+                        firstElId
+                ) {
+                    let tmpDrink = {
+                        name: $(
+                            `#${firstElId + chairNo} option:selected`
+                        ).val(),
+                        quantity: $(
+                            `#${secondElId + chairNo} option:selected`
+                        ).val(),
+                        type: "drink",
+                        price: getPriceOfTheProduct(
+                            $(`#${firstElId + chairNo} option:selected`).val()
+                        ),
+                        chairNo: chairNo,
+                        allergy: $(`#allergy${chairNo} option:selected`).val(),
+                    };
+                    if (chairNo == 1) chairDishes1.push(tmpDrink);
+                    if (chairNo == 2) chairDishes2.push(tmpDrink);
+                    if (chairNo == 3) chairDishes3.push(tmpDrink);
+                    if (chairNo == 4) chairDishes4.push(tmpDrink);
+                    if (chairNo == 5) chairDishes5.push(tmpDrink);
+                    if (chairNo == 6) chairDishes6.push(tmpDrink);
+                    if (chairNo == 7) chairDishes7.push(tmpDrink);
+                    if (chairNo == 8) chairDishes8.push(tmpDrink);
+                    if (chairNo == 100) chairDishes100.push(tmpDish);
+                }
+                if (chairNo == 1) {
+                    setOrderItemToTextArea(chairDishes1, chairNo);
+                }
+                if (chairNo == 2) {
+                    setOrderItemToTextArea(chairDishes2, chairNo);
+                }
+                if (chairNo == 3) {
+                    setOrderItemToTextArea(chairDishes3, chairNo);
+                }
+                if (chairNo == 4) {
+                    setOrderItemToTextArea(chairDishes4, chairNo);
+                }
+                if (chairNo == 5) {
+                    setOrderItemToTextArea(chairDishes5, chairNo);
+                }
+                if (chairNo == 6) {
+                    setOrderItemToTextArea(chairDishes6, chairNo);
+                }
+                if (chairNo == 7) {
+                    setOrderItemToTextArea(chairDishes7, chairNo);
+                }
+                if (chairNo == 8) {
+                    setOrderItemToTextArea(chairDishes8, chairNo);
+                }
+                if (chairNo == 100) {
+                    setOrderItemToTextArea(chairDishes100, chairNo);
+                }
+            }
 
-        arrayList[index].quantity = ++arrayList[index].quantity;
-        setOrderItemToTextArea(arrayList, chairNo)
-    }
+            function increaseQuantityOfOrder(chairNo, index, currentNumber) {
+                let arrayList = [];
+                if (chairNo == 1) arrayList = chairDishes1;
+                if (chairNo == 2) arrayList = chairDishes2;
+                if (chairNo == 3) arrayList = chairDishes3;
+                if (chairNo == 4) arrayList = chairDishes4;
+                if (chairNo == 5) arrayList = chairDishes5;
+                if (chairNo == 6) arrayList = chairDishes6;
+                if (chairNo == 7) arrayList = chairDishes7;
+                if (chairNo == 8) arrayList = chairDishes8;
+                if (chairNo == 100) arrayList = chairDishes100;
 
-    function decreaseQuantityOfOrder(chairNo, index, currentNumber) {
-        let arrayList = [];
-        if (chairNo == 1) arrayList = chairDishes1;
-        if (chairNo == 2) arrayList = chairDishes2;
-        if (chairNo == 3) arrayList = chairDishes3;
-        if (chairNo == 4) arrayList = chairDishes4;
-        if (chairNo == 5) arrayList = chairDishes5;
-        if (chairNo == 6) arrayList = chairDishes6;
-        if (chairNo == 7) arrayList = chairDishes7;
-        if (chairNo == 8) arrayList = chairDishes8;
-        if (chairNo == 100) arrayList = chairDishes100;
-        if (currentNumber > 1) {
-            arrayList[index].quantity = arrayList[index].quantity - 1;
-            console.log(arrayList[index].quantity)
-            setOrderItemToTextArea(arrayList, chairNo)
-        } else {
-            arrayList.splice(index, 1);
-            setOrderItemToTextArea(arrayList, chairNo)
-            console.log(arrayList)
+                arrayList[index].quantity = ++arrayList[index].quantity;
+                setOrderItemToTextArea(arrayList, chairNo);
+            }
 
-        }
-    }
+            function decreaseQuantityOfOrder(chairNo, index, currentNumber) {
+                let arrayList = [];
+                if (chairNo == 1) arrayList = chairDishes1;
+                if (chairNo == 2) arrayList = chairDishes2;
+                if (chairNo == 3) arrayList = chairDishes3;
+                if (chairNo == 4) arrayList = chairDishes4;
+                if (chairNo == 5) arrayList = chairDishes5;
+                if (chairNo == 6) arrayList = chairDishes6;
+                if (chairNo == 7) arrayList = chairDishes7;
+                if (chairNo == 8) arrayList = chairDishes8;
+                if (chairNo == 100) arrayList = chairDishes100;
+                if (currentNumber > 1) {
+                    arrayList[index].quantity = arrayList[index].quantity - 1;
+                    console.log(arrayList[index].quantity);
+                    setOrderItemToTextArea(arrayList, chairNo);
+                } else {
+                    arrayList.splice(index, 1);
+                    setOrderItemToTextArea(arrayList, chairNo);
+                    console.log(arrayList);
+                }
+            }
 
-    function setOrderItemToTextArea(arr, chairNo) {
-        collapseItem = "";
-        let subTotal = 0;
-        if (arr.length > 0) {
-            arr.forEach((element, index) => {
-                console.log(element)
-                subTotal += element.price * element.quantity;
-                collapseItem += `<div class="input-group">
+            function setOrderItemToTextArea(arr, chairNo) {
+                collapseItem = "";
+                let subTotal = 0;
+                if (arr.length > 0) {
+                    arr.forEach((element, index) => {
+                        console.log(element);
+                        subTotal += element.price * element.quantity;
+                        collapseItem += `<div class="input-group">
                                         <input type="text" class="form-control" aria-describedby="basic-addon2" value="${element.name}">
                                         <div class="input-group-append">
                                             <span class="input-group-text">x</span>
@@ -474,86 +551,93 @@
                                             <button onclick="decreaseQuantityOfOrder(${chairNo},${index},${element.quantity})" class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
                                             <button onclick="increaseQuantityOfOrder(${chairNo},${index},${element.quantity})" class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
                                         </div>
-                                    </div>`
+                                    </div>`;
 
-                $(`#my-controlgroup${chairNo}`).html(collapseItem);
-                $(`#confirmBtn${chairNo}`).html(`Total Price: ${subTotal} Euro`)
-            });
-        } else {
-            $(`#my-controlgroup${chairNo}`).html(collapseItem);
-            $(`#confirmBtn${chairNo}`).html(`Total Price: 0 Euro`)
-
-        }
-    }
-
-    function isEmpty(obj) {
-        return Object.keys(obj).length === 0;
-    }
-
-    function makeGeneralOrderList() {
-        let specialNoteList = [];
-
-        if (!isEmpty(chairOrder1)) {
-            dishList.push(...chairOrder1.dishes);
-            specialNoteList.push(chairOrder1.specialNote);
-        };
-        if (!isEmpty(chairOrder2)) {
-            dishList.push(...chairOrder2.dishes);
-            specialNoteList.push(chairOrder2.specialNote);
-        };
-        if (!isEmpty(chairOrder3)) {
-            dishList.push(...chairOrder3.dishes);
-            specialNoteList.push(chairOrder3.specialNote);
-        };
-        if (!isEmpty(chairOrder4)) {
-            dishList.push(...chairOrder4.dishes);
-            specialNoteList.push(chairOrder4.specialNote);
-        };
-        if (!isEmpty(chairOrder5)) {
-            dishList.push(...chairOrder5.dishes);
-            specialNoteList.push(chairOrder5.specialNote);
-        };
-        if (!isEmpty(chairOrder6)) {
-            dishList.push(...chairOrder6.dishes);
-            specialNoteList.push(chairOrder6.specialNote);
-        };
-        if (!isEmpty(chairOrder7)) {
-            dishList.push(...chairOrder7.dishes);
-            specialNoteList.push(chairOrder7.specialNote);
-        };
-        if (!isEmpty(chairOrder8)) {
-            dishList.push(...chairOrder8.dishes);
-            specialNoteList.push(chairOrder8.specialNote);
-        };
-        if (!isEmpty(chairOrder100)) {
-            dishList.push(...chairOrder100.dishes);
-            specialNoteList.push(chairOrder100.specialNote);
-        };
-
-        let orderJsObj = {
-            table: {
-                id: $("#inputTableNo ").val()
-            },
-            dishes: dishList,
-            specialNotes: specialNoteList
-        }
-        orderJSON = JSON.stringify(orderJsObj);
-        getModal("Hey,there!", "Check Order", "YEP, I'M SURE:)", "btn-primary");
-    }
-
-    function setPopUpPage(amountOfChairs) {
-        let popUpHtml = "";
-        for (let i = 0; i <= amountOfChairs; i++) {
-            if (i == amountOfChairs) {
-                i = 99;
+                        $(`#my-controlgroup${chairNo}`).html(collapseItem);
+                        $(`#confirmBtn${chairNo}`).html(
+                            `Total Price: ${subTotal} Euro`
+                        );
+                    });
+                } else {
+                    $(`#my-controlgroup${chairNo}`).html(collapseItem);
+                    $(`#confirmBtn${chairNo}`).html(`Total Price: 0 Euro`);
+                }
             }
-            popUpHtml += `<div data-role="page" id="chair${i+1}">
+
+            function isEmpty(obj) {
+                return Object.keys(obj).length === 0;
+            }
+
+            function makeGeneralOrderList() {
+                let specialNoteList = [];
+
+                if (!isEmpty(chairOrder1)) {
+                    dishList.push(...chairOrder1.dishes);
+                    specialNoteList.push(chairOrder1.specialNote);
+                }
+                if (!isEmpty(chairOrder2)) {
+                    dishList.push(...chairOrder2.dishes);
+                    specialNoteList.push(chairOrder2.specialNote);
+                }
+                if (!isEmpty(chairOrder3)) {
+                    dishList.push(...chairOrder3.dishes);
+                    specialNoteList.push(chairOrder3.specialNote);
+                }
+                if (!isEmpty(chairOrder4)) {
+                    dishList.push(...chairOrder4.dishes);
+                    specialNoteList.push(chairOrder4.specialNote);
+                }
+                if (!isEmpty(chairOrder5)) {
+                    dishList.push(...chairOrder5.dishes);
+                    specialNoteList.push(chairOrder5.specialNote);
+                }
+                if (!isEmpty(chairOrder6)) {
+                    dishList.push(...chairOrder6.dishes);
+                    specialNoteList.push(chairOrder6.specialNote);
+                }
+                if (!isEmpty(chairOrder7)) {
+                    dishList.push(...chairOrder7.dishes);
+                    specialNoteList.push(chairOrder7.specialNote);
+                }
+                if (!isEmpty(chairOrder8)) {
+                    dishList.push(...chairOrder8.dishes);
+                    specialNoteList.push(chairOrder8.specialNote);
+                }
+                if (!isEmpty(chairOrder100)) {
+                    dishList.push(...chairOrder100.dishes);
+                    specialNoteList.push(chairOrder100.specialNote);
+                }
+                let orderJsObj = {
+                    table: {
+                        id: $("#inputTableNo ").val(),
+                    },
+                    dishes: dishList,
+                    specialNotes: specialNoteList,
+                };
+                orderJSON = JSON.stringify(orderJsObj);
+                getModal(
+                    "Hey,there!",
+                    "Check Order",
+                    "YEP, I'M SURE:)",
+                    "btn-primary"
+                );
+            }
+
+            function setPopUpPage(amountOfChairs) {
+                let popUpHtml = "";
+                for (let i = 0; i <= amountOfChairs; i++) {
+                    if (i == amountOfChairs) {
+                        i = 99;
+                    }
+                    popUpHtml += `<div data-role="page" id="chair${i + 1}">
                             <div data-role="header">
                                 <h1>Order</h1>
                     </div> 
                     <div role="main" class="ui-content">
                         <form id="orderForm">
-                                <select name="select-native-1" id="allergy${i+1}">
+                                <select name="select-native-1" id="allergy${
+                                i + 1
+                            }">
                                     <option value="allergy" disabled selected>Allergy</option>
                                     <option value="Peanut">Peanut allergy</option>
                                     <option value="Milk">Milk allergy</option>
@@ -561,73 +645,101 @@
                                 </select>
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
-                                    <select name="select-choice-1" id="breakfast${i+1}">
+                                    <select name="select-choice-1" id="breakfast${
+                                        i + 1
+                                    }">
                                         ${optionsForBreakfast}
                                     </select>
                                 </div>
                                 <div class="ui-block-b">
-                                    <select name="select-h-4a" id="breakfastQty${i+1}">
+                                    <select name="select-h-4a" id="breakfastQty${
+                                        i + 1
+                                    }">
                                         ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
-                                    <input type="button" onclick='addToList("breakfast","breakfastQty",${i+1})' value="Add">
+                                    <input type="button" onclick='addToList("breakfast","breakfastQty",${
+                                        i + 1
+                                    })' value="Add">
                                 </div>
                             </fieldset>
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
-                                    <select name="select-choice-2" id="salad${i+1}">
+                                    <select name="select-choice-2" id="salad${
+                                        i + 1
+                                    }">
                                         ${optionsForSalad}
                                     </select>
                                 </div>
                                 <div class="ui-block-b">
-                                    <select name="select-h-4a" id="saladQty${i+1}">
+                                    <select name="select-h-4a" id="saladQty${
+                                        i + 1
+                                    }">
                                         ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
-                                    <input type="button" onclick='addToList("salad","saladQty",${i+1})' value="Add">
+                                    <input type="button" onclick='addToList("salad","saladQty",${
+                                        i + 1
+                                    })' value="Add">
                                 </div>
                             </fieldset>
                             
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
-                                    <select name="select-choice-4" id="entrees${i+1}">
+                                    <select name="select-choice-4" id="entrees${
+                                        i + 1
+                                    }">
                                         ${optionsForEntrees}
                                     </select>
                                 </div>
                                 <div class="ui-block-b">
-                                    <select name="select-h-4a" id="entreesQty${i+1}">
+                                    <select name="select-h-4a" id="entreesQty${
+                                        i + 1
+                                    }">
                                         ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
-                                    <input type="button" onclick='addToList("entrees","entreesQty",${i+1})' value="Add">
+                                    <input type="button" onclick='addToList("entrees","entreesQty",${
+                                        i + 1
+                                    })' value="Add">
                                 </div>
                             </fieldset>
                             <fieldset class="ui-grid-b">
                                 <div class="ui-block-a">
-                                    <select name="select-choice-5" id="beverages${i+1}">
+                                    <select name="select-choice-5" id="beverages${
+                                        i + 1
+                                    }">
                                         ${optionsForBeverages}
                                     </select>
                                 </div>
 
                                 <div class="ui-block-b">
-                                    <select name="select-h-4a" id="beveragesQty${i+1}">
+                                    <select name="select-h-4a" id="beveragesQty${
+                                        i + 1
+                                    }">
                                         ${optionsQuantityElements}
                                     </select>
                                 </div>
                                 <div class="ui-block-c">
-                                    <input type="button" onclick='addToList("beverages","beveragesQty",${i+1})' value="Add">
+                                    <input type="button" onclick='addToList("beverages","beveragesQty",${
+                                        i + 1
+                                    })' value="Add">
                                 </div>
                             </fieldset>
                          
-                                <div id="my-controlgroup${i+1}">
+                                <div id="my-controlgroup${i + 1}">
                                     <!-- items will be injected here -->
                                 </div>
                             
-                            <label for="textarea${i+1}">Special Notes:</label>
-                            <textarea onkeyup="getSpecialNotes('textarea${i+1}')" name="textarea${i+1}" id="textarea${i+1}"></textarea>
+                            <label for="textarea${i + 1}">Special Notes:</label>
+                            <textarea onkeyup="getSpecialNotes('textarea${
+                                i + 1
+                            }')" name="textarea${i + 1}" id="textarea${
+                        i + 1
+                    }"></textarea>
                             <fieldset class="ui-grid-a">
                                 <div class="ui-block-a">
                                     <a href="#foo" data-role="button" onclick="cancelOrder();" data-rel="dialog" data-transition="flip">Cancel Order</a>
@@ -636,47 +748,59 @@
                                     <a href="#foo" data-role="button" onclick="saveOrder();" data-rel="dialog" data-transition="flip">Confirm Order</a>
                                 </div>
                             </fieldset>
-                            <button type="submit" id="confirmBtn${i+1}" class="ui-btn ui-shadow "> Total Price: </button>
+                            <button type="submit" id="confirmBtn${
+                                i + 1
+                            }" class="ui-btn ui-shadow "> Total Price: </button>
                         </form>
                     </div>
                 </div>`;
-        }
-        $("body").append(popUpHtml);
-    }
-
-    function getSpecialNotes(elId) {
-        specialNotes = $(`#${elId}`).val();
-    }
-
-    function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
-        $("#confirmButton").show();
-        $("#confirmButton").addClass(buttonColor);
-        $("#exampleModalLabel").html(header)
-        $("#confirmButton").html(confirmationWord)
-        $(".modal-body").html(text);
-        $('#exampleModal').modal('show')
-        if (deleteButton == true) {
-            $("#confirmButton").hide();
-            $("#cancelButton").html("Close")
-        }
-    }
-
-    $("#confirmButton").click(function(e) {
-        e.preventDefault();
-        console.log(orderJSON)
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/api/order",
-            data: orderJSON,
-            contentType: "application/json",
-            success: function(response) {
-                console.log(response)
-                getModal("Information", "The order is sent!", "hello", "btn-primary", true)
+                }
+                $("body").append(popUpHtml);
             }
-        });
-    });
-</script>
 
-</body>
+            function getSpecialNotes(elId) {
+                specialNotes = $(`#${elId}`).val();
+            }
 
+            function getModal(
+                header,
+                text,
+                confirmationWord,
+                buttonColor,
+                deleteButton
+            ) {
+                $("#confirmButton").show();
+                $("#confirmButton").addClass(buttonColor);
+                $("#exampleModalLabel").html(header);
+                $("#confirmButton").html(confirmationWord);
+                $(".modal-body").html(text);
+                $("#exampleModal").modal("show");
+                if (deleteButton == true) {
+                    $("#confirmButton").hide();
+                    $("#cancelButton").html("Close");
+                }
+            }
+
+            $("#confirmButton").click(function (e) {
+                e.preventDefault();
+                console.log(orderJSON);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/api/order",
+                    data: orderJSON,
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response);
+                        getModal(
+                            "Information",
+                            "The order is sent!",
+                            "hello",
+                            "btn-primary",
+                            true
+                        );
+                    },
+                });
+            });
+        </script>
+    </body>
 </html>

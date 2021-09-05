@@ -43,8 +43,6 @@ public class OrderController {
 
     @PostMapping(value = "/order")
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        System.out.println("order = " + order);
-        order.getDishes().forEach(System.out::println);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         order.setEmployee(userDetails.getUser());
