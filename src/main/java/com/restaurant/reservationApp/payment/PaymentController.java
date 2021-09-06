@@ -14,6 +14,8 @@ import java.util.Optional;
 public class PaymentController {
     PaymentService paymentService;
 
+    private Payment paymentWhichIsProcessing;
+
     public PaymentController() {
     }
 
@@ -40,5 +42,15 @@ public class PaymentController {
     public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
         Payment payment1 = paymentService.createPayment(payment);
         return new ResponseEntity<>(payment1, HttpStatus.OK);
+    }
+
+    @PostMapping("/payment")
+    public void setPaymentInfo(@RequestBody Payment payment) {
+        paymentWhichIsProcessing = payment;
+    }
+
+    @GetMapping("/payment/in/processing")
+    public ResponseEntity<Payment> getPaymentInProcessing(){
+        return new ResponseEntity<>(paymentWhichIsProcessing,HttpStatus.OK);
     }
 }
