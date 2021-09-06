@@ -46,7 +46,6 @@ public class MenuController {
 
     @PutMapping(value = "/willupdatemenu")
     public void willUpdateMenu(@RequestBody Menu menu) {
-        System.out.println("menu.getId() = " + menu.getId());
         willUpdateMenu = menu;
     }
 

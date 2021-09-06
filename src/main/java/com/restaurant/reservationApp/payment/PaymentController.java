@@ -40,20 +40,17 @@ public class PaymentController {
 
     @PutMapping(value = "/payment", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
-        System.out.println("payment = " + payment);
         Payment payment1 = paymentService.createPayment(payment);
         return new ResponseEntity<>(payment1, HttpStatus.OK);
     }
 
     @PostMapping("/payment")
     public void setPaymentInfo(@RequestBody Payment payment) {
-        System.out.println("payment = " + payment);
         paymentWhichIsProcessing = payment;
     }
 
     @GetMapping("/payment/in/processing")
     public ResponseEntity<Payment> getPaymentInProcessing(){
-        System.out.println("paymentService = " + paymentWhichIsProcessing);
         return new ResponseEntity<>(paymentWhichIsProcessing,HttpStatus.OK);
     }
 }
