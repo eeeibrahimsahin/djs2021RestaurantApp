@@ -47,8 +47,6 @@ public class SupplementServiceImpl implements SupplementService {
         List list = new ArrayList();
         foodList.stream().filter(food -> food.getQuantity() < amount).forEach(list::add);
         drinkList.stream().filter(drink -> drink.getQuantity() < amount).forEach(list::add);
-        System.out.println("drinkList = " + drinkList);
-        System.out.println("list = " + list);
         return list;
 
     }

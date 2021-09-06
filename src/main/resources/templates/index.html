@@ -1,47 +1,77 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Restaurant App</title>
+        <link
+            href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://kit.fontawesome.com/144f4e017a.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurant App</title>
-    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
-</head>
+    <body>
+        <div th:insert="fragments/navbar.html"></div>
+        <div th:insert="fragments/modal.html"></div>
 
-<body>
-    <div th:insert="fragments/navbar.html"></div>
-    <div th:insert="fragments/modal.html"></div>
-
-    <div class="container">
-
-        <div class="jumbotron">
-
-            <div class="row text-center">
-                <div class="container">
-                    <h3 sec:authorize="isAuthenticated()"> Welcome <span th:text="${#authentication.getPrincipal().getUser().getFirstName()}"></span></h3>
-                    <p>
-                        What do you want to do with me?
-                    </p>
-                    <img sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN','CASHIER','KITCHEN','WAITER')" src="/images/header-bg.jpg" style="width:75%" class="mx-auto" />
-                    <div sec:authorize="hasAnyRole('CHEF')" th:insert="fragments/cards.html"></div>
+        <div class="container">
+            <div class="jumbotron">
+                <div class="row text-center">
+                    <div class="container">
+                        <h3 sec:authorize="isAuthenticated()">
+                            Welcome
+                            <span
+                                th:text="${#authentication.getPrincipal().getUser().getFirstName()}"
+                            ></span>
+                        </h3>
+                        <p>What do you want to do with me?</p>
+                        <img
+                            sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN','CASHIER','KITCHEN','WAITER')"
+                            src="/images/header-bg.jpg"
+                            style="width: 75%"
+                            class="mx-auto"
+                        />
+                        <div
+                            sec:authorize="hasAnyRole('CHEF')"
+                            th:insert="fragments/cards.html"
+                        ></div>
+                    </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
 
-    <script>
-        let amountOfGuest;
-        let amountOfGuestWhoVisitContinue;
-        let amountOfGuestWhoVisitPlanned
-        let carOneText;
-        let tableHead = `
+        <script>
+            let amountOfGuest;
+            let amountOfGuestWhoVisitContinue;
+            let amountOfGuestWhoVisitPlanned;
+            let carOneText;
+            let tableHead = `
                 <thead class="thead-light">
                     <tr>
                         <th scope="col"></th>
@@ -54,142 +84,149 @@
                 </thead>
                 <tbody id="tableBody">
 
-                </tbody>`
-        let warningElement = '';
+                </tbody>`;
+            let warningElement = "";
 
-        function putDataToDataTable(data) {
-            $('#table').DataTable().clear();
-            $('#table').DataTable().rows.add(data);
-            $('#table').DataTable().columns.adjust().draw();
-        }
-
-        $(document).ready(function() {
-
-
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:8080/api/amountofcustomer",
-                success: function(response) {
-                    amountOfGuest = response.amountOfGuestSoFar;
-                    amountOfGuestWhoVisitContinue = response.amountOfGuestWhoVisitContinue;
-                    amountOfGuestWhoVisitPlanned = response.amountOfGuestWhoVisitPlanned;
-                    carOneText = `<p>A total of <span class="font-weight-bold">${amountOfGuest}</span> guests have visited the restaurant so far.</p>
-                                    <p>The visits of <span class="font-weight-bold">${amountOfGuestWhoVisitContinue}</span> of our guests are continuing.</p>
-                                    <p><span class="font-weight-bold">${amountOfGuestWhoVisitPlanned}</span> of our guests also planned their visit.<\p>`
-
-                    $("#card-1-text").html(carOneText);
-                    $("#card-1-link").attr("href", "/guest")
-                }
-            });
-
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:8080/api/supplement_amount/" + 10,
-                success: function(response) {
-                    console.log(response)
-                    response.forEach(element => {
-                        warningElement += `<div class="alert alert-danger" role="alert">
-                                                ${element.quantity} ${element.typeOfQuantity} of ${element.name} left!
-                                         </div>`
-                    });
-
-                    $("#warning-container").html(warningElement);
-                }
-            });
-
-        });
-
-        $(".form-inline").submit(function(e) {
-            e.preventDefault();
-            let amount = $("#amount").val();
-            let typeOfAmount = $(`#typeSelector option:selected`).val()
-            $("#table").empty();
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                data: {},
-                url: "http://localhost:8080/api/supplement_amount/" + amount,
-                success: function(response) {
-                    console.log(response)
-                    $("#table").append(tableHead);
-                    //$("#table").DataTable().clear().draw()
-                    // $("#table").DataTable().rows.add()
-                    createTable("#table", sortDataByTypeOfAmount(response, typeOfAmount));
-                    //$("#table").DataTable().ajax.reload();
-                }
-            });
-        });
-
-        function sortDataByTypeOfAmount(arr, filterType) {
-            console.log(arr)
-            let result = arr.filter(food => food.typeOfQuantity == filterType);
-            console.log(result);
-            return result;
-        }
-
-        function createTable(tableId, dataNew) {
-            $(tableId).DataTable({
-                paging: false,
-                data: dataNew,
-                columns: [{
-                    data: "id",
-                    "visible": false,
-                    "searchable": false
-                }, {
-                    data: "name"
-                }, {
-                    data: "type"
-                }, {
-                    data: "price"
-                }, {
-                    data: "quantity"
-                }, {
-                    data: "typeOfQuantity"
-                }]
-            });
-        }
-
-        let modalBody = `<div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="Enter new warning limit" id="newAmaountOfWarning" aria-describedby="basic-addon2">
-                        </div>`
-        $("#warningAmountBtn").click(function(e) {
-            e.preventDefault();
-            getModal("Hey,there!", modalBody, "YEP, I'M SURE:)", "btn-primary");
-
-        });
-        $("#confirmButton").click(function(e) {
-            e.preventDefault();
-            let newLimit = $("#newAmaountOfWarning").val();
-            console.log(newLimit)
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:8080/api/supplement_amount/" + newLimit,
-                success: function(response) {
-                    warningElement = '';
-                    response.forEach(element => {
-                        warningElement += `<div class="alert alert-danger" role="alert">
-                                                ${element.quantity} ${element.typeOfQuantity} of ${element.name} left!
-                                         </div>`
-                    });
-                    $("#warning-container").html(warningElement);
-                }
-            });
-        });
-
-        function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
-            $("#confirmButton").show();
-            $("#confirmButton").addClass(buttonColor);
-            $("#exampleModalLabel").html(header)
-            $("#confirmButton").html(confirmationWord)
-            $(".modal-body").html(text);
-            $('#exampleModal').modal('show')
-            if (deleteButton == true) {
-                $("#confirmButton").hide();
-                $("#cancelButton").html("Close")
+            function putDataToDataTable(data) {
+                $("#table").DataTable().clear();
+                $("#table").DataTable().rows.add(data);
+                $("#table").DataTable().columns.adjust().draw();
             }
-        }
-    </script>
 
-</body>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/amountofcustomer",
+                    success: function (response) {
+                        amountOfGuest = response.amountOfGuestSoFar;
+                        amountOfGuestWhoVisitContinue =
+                            response.amountOfGuestWhoVisitContinue;
+                        amountOfGuestWhoVisitPlanned =
+                            response.amountOfGuestWhoVisitPlanned;
+                        carOneText = `<p>A total of <span class="font-weight-bold">${amountOfGuest}</span> guests have visited the restaurant so far.</p>
+                                    <p>The visits of <span class="font-weight-bold">${amountOfGuestWhoVisitContinue}</span> of our guests are continuing.</p>
+                                    <p><span class="font-weight-bold">${amountOfGuestWhoVisitPlanned}</span> of our guests also planned their visit.<\p>`;
 
+                        $("#card-1-text").html(carOneText);
+                        $("#card-1-link").attr("href", "/guest");
+                    },
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/supplement_amount/" + 10,
+                    success: function (response) {
+                        console.log(response);
+                        response.forEach((element) => {
+                            warningElement += `<div class="alert alert-danger" role="alert">
+                                                ${element.quantity} ${element.typeOfQuantity} of ${element.name} left!
+                                         </div>`;
+                        });
+
+                        $("#warning-container").html(warningElement);
+                    },
+                });
+            });
+
+            $(".form-inline").submit(function (e) {
+                e.preventDefault();
+                let amount = $("#amount").val();
+                let typeOfAmount = $(`#typeSelector option:selected`).val();
+                $("#table").empty();
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    data: {},
+                    url:
+                        "http://localhost:8080/api/supplement_amount/" + amount,
+                    success: function (response) {
+                        console.log(response);
+                        $("#table").append(tableHead);
+                        //$("#table").DataTable().clear().draw()
+                        // $("#table").DataTable().rows.add()
+                        createTable(
+                            "tableBody",
+                            sortDataByTypeOfAmount(response, typeOfAmount)
+                        );
+                        //$("#table").DataTable().ajax.reload();
+                    },
+                });
+            });
+
+            function sortDataByTypeOfAmount(arr, filterType) {
+                let result = arr.filter(
+                    (food) => food.typeOfQuantity == filterType
+                );
+                return result;
+            }
+
+            function createTable(tableId, dataArr) {
+                let tableBody = "";
+                $(`#${tableId}`).empty();
+                dataArr.forEach((element) => {
+                    tableBody += `<tr>
+                                    <th scope="row">${element.id}</th>
+                                    <td>${element.name}</td>
+                                    <td>${element.type}</td>
+                                    <td>${element.price}</td>
+                                    <td>${element.quantity}</td>
+                                    <td>${element.typeOfQuantity}</td>
+                                  </tr>`;
+                });
+                $(`#${tableId}`).append(tableBody);
+            }
+
+            let modalBody = `<div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="Enter new warning limit" id="newAmaountOfWarning" aria-describedby="basic-addon2">
+                        </div>`;
+            $("#warningAmountBtn").click(function (e) {
+                e.preventDefault();
+                getModal(
+                    "Hey,there!",
+                    modalBody,
+                    "YEP, I'M SURE:)",
+                    "btn-primary"
+                );
+            });
+            $("#confirmButton").click(function (e) {
+                e.preventDefault();
+                let newLimit = $("#newAmaountOfWarning").val();
+                console.log(newLimit);
+                $.ajax({
+                    type: "GET",
+                    url:
+                        "http://localhost:8080/api/supplement_amount/" +
+                        newLimit,
+                    success: function (response) {
+                        warningElement = "";
+                        response.forEach((element) => {
+                            warningElement += `<div class="alert alert-danger" role="alert">
+                                                ${element.quantity} ${element.typeOfQuantity} of ${element.name} left!
+                                         </div>`;
+                        });
+                        $("#warning-container").html(warningElement);
+                    },
+                });
+            });
+
+            function getModal(
+                header,
+                text,
+                confirmationWord,
+                buttonColor,
+                deleteButton
+            ) {
+                $("#confirmButton").show();
+                $("#confirmButton").addClass(buttonColor);
+                $("#exampleModalLabel").html(header);
+                $("#confirmButton").html(confirmationWord);
+                $(".modal-body").html(text);
+                $("#exampleModal").modal("show");
+                if (deleteButton == true) {
+                    $("#confirmButton").hide();
+                    $("#cancelButton").html("Close");
+                }
+            }
+        </script>
+    </body>
 </html>

@@ -5,6 +5,8 @@ import com.restaurant.reservationApp.dish.Dish;
 import com.restaurant.reservationApp.dish.DishService;
 import com.restaurant.reservationApp.drink.Drink;
 import com.restaurant.reservationApp.table.TableService;
+import javassist.NotFoundException;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class OrderController {
+    private Order orderWhichWillBePaid;
     @Autowired
     private OrderService orderService;
     @Autowired
@@ -29,7 +32,6 @@ public class OrderController {
     @GetMapping("/orders")
     public ResponseEntity<List<Order>> getAllOrder() {
         List<Order> allOrders = orderService.getAllOrders();
-        orderService.getAllOrders().forEach(System.out::println);
         return new ResponseEntity<>(allOrders, HttpStatus.OK);
     }
 
@@ -39,6 +41,20 @@ public class OrderController {
         if (order.isPresent())
             return new ResponseEntity<>(order.get(), HttpStatus.OK);
         return null; // TODO:
+    }
+
+    @GetMapping("/order/orderwhichwillbepaid/{id}")
+    public void setOrderIToPay(@PathVariable long id) throws NotFoundException {
+        Optional<Order> orderById = orderService.getOrderById(id);
+        if (orderById.isEmpty())
+            throw new NotFoundException("There is no order with id: " + id);
+        orderWhichWillBePaid = orderById.get();
+        System.out.println("orderWhichWillBePaid = " + orderWhichWillBePaid);
+    }
+
+    @GetMapping("/order/orderwhichwillbepaid")
+    public ResponseEntity<Order> getOrderWhichWillBePaid() {
+        return new ResponseEntity<>(orderWhichWillBePaid, HttpStatus.OK);
     }
 
     @PostMapping(value = "/order")

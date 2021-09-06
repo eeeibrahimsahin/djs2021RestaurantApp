@@ -1,5 +1,7 @@
 package com.restaurant.reservationApp.payment;
 
+import com.restaurant.reservationApp.order.Order;
+import com.restaurant.reservationApp.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ import java.util.Optional;
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
     PaymentRepository paymentRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
 
     @Override
     public List<Payment> getAllPayment() {
@@ -27,12 +32,21 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment createPayment(Payment payment) {
+        Optional<Order> orderOptional = orderRepository.findById(payment.getOrder().getId());
+        orderOptional.get().setPaid(true);
+        orderRepository.save(orderOptional.get());
         return paymentRepository.save(payment);
     }
 
     @Override
     public void saveAllPayment(List<Payment> paymentList) {
         paymentList.forEach(payment -> createPayment(payment));
+    }
+
+    @Override
+    public Payment calculateTotalPrice(Order order) {
+
+        return null;
     }
 }
 

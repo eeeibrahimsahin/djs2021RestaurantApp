@@ -36,5 +36,6 @@ public class Order {
     private List<Drink> drinkList;
     //private List<Dessert> dessertList;
     private boolean isDiet;
+    private boolean isPaid;
 
 }
