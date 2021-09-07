@@ -1,114 +1,174 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://kit.fontawesome.com/144f4e017a.js"
+            crossorigin="anonymous"
+        ></script>
+        <title>Create Menu!</title>
+    </head>
 
-<head>
+    <body>
+        <div th:insert="fragments/navbar.html"></div>
+        <div th:insert="fragments/modal.html"></div>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/144f4e017a.js" crossorigin="anonymous"></script>
-    <title>Create Menu!</title>
-</head>
-
-<body>
-    <div th:insert="fragments/navbar.html"></div>
-    <div th:insert="fragments/modal.html"></div>
-
-    <div class="container">
-        <div class="jumbotron">
-            <div class="text-center">
-                <i class="fas fa-concierge-bell fa-10x"></i>
-                <br/>
-                <h3>Add new dish</h3>
-            </div>
-            <div class="mt-5">
-                <form id="menuForm">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputName">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="name">
+        <div class="container">
+            <div class="jumbotron">
+                <div class="text-center">
+                    <i class="fas fa-concierge-bell fa-10x"></i>
+                    <br />
+                    <h3>Add new dish</h3>
+                </div>
+                <div class="mt-5">
+                    <form id="menuForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Name</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    placeholder="name"
+                                />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="price">Price (Euro)</label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="price"
+                                    name="price"
+                                    placeholder="Price"
+                                />
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" id="price" name="price" placeholder="Price">
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="type">Description</label>
-                            <input type="text" class="form-control" id="description" name="description" placeholder="description">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="type">Description</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="description"
+                                    name="description"
+                                    placeholder="description"
+                                />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="typeSelect">Type</label>
+                                <select
+                                    class="custom-select"
+                                    id="typeSelect"
+                                    name="typeSelect"
+                                >
+                                    <option selected>Choose...</option>
+                                    <option value="BREAKFAST">BREAKFAST</option>
+                                    <option value="SALAD">SALAD</option>
+                                    <option value="PASTA">PASTA</option>
+                                    <option value="ENTREES">ENTREES</option>
+                                    <option value="BEVERAGES">BEVERAGES</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="typeSelect">Type</label>
-                            <select class="custom-select" id="typeSelect" name="typeSelect">
-                                <option selected>Choose...</option>
-                                <option value="BREAKFAST">BREAKFAST</option>
-                                <option value="SALAD">SALAD</option>
-                                <option value="PASTA">PASTA</option>
-                                <option value="ENTREES">ENTREES</option>
-                                <option value="BEVERAGES">BEVERAGES</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <input type="submit" class="btn btn-primary" value="Save">
-                </form>
+                        <input
+                            type="submit"
+                            class="btn btn-primary"
+                            value="Save"
+                        />
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        let menuJSON;
-        let createText = "<p>Are you sure want to add the dish to menu?.</p>"
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            let menuJSON;
+            let createText =
+                "<p>Are you sure want to add the dish to menu?.</p>";
 
-
-        $("#menuForm").submit(function(e) {
-            e.preventDefault();
-            let name = $("#name").val();
-            let price = $("#price").val();
-            let description = $("#description").val();
-            let type = $('select[name=typeSelect] option').filter(':selected').val()
-            let menuJsObj = {
-                name,
-                price,
-                description,
-                type
-            }
-            console.log(menuJsObj)
-            menuJSON = JSON.stringify(menuJsObj);
-            getModal("Hey,there!", createText, "YEP, I'M SURE:)", "btn-primary");
-
-        });
-        $("#confirmButton").click(function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "/api/menu",
-                data: menuJSON,
-                contentType: "application/json",
-                success: function(response) {
-                    console.log(response)
-                    getModal("Information", "The dish is added to the menu!", "hello", "btn-primary", true)
-                }
+            $("#menuForm").submit(function (e) {
+                e.preventDefault();
+                let name = $("#name").val();
+                let price = $("#price").val();
+                let description = $("#description").val();
+                let type = $("select[name=typeSelect] option")
+                    .filter(":selected")
+                    .val();
+                let menuJsObj = {
+                    name,
+                    price,
+                    description,
+                    type,
+                };
+                console.log(menuJsObj);
+                menuJSON = JSON.stringify(menuJsObj);
+                getModal(
+                    "Hey,there!",
+                    createText,
+                    "YEP, I'M SURE:)",
+                    "btn-primary"
+                );
             });
-        });
+            $("#confirmButton").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/api/menu",
+                    data: menuJSON,
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response);
+                        getModal(
+                            "Information",
+                            "The dish is added to the menu!",
+                            "hello",
+                            "btn-primary",
+                            true
+                        );
+                    },
+                });
+            });
 
-        function getModal(header, text, confirmationWord, buttonColor, deleteButton) {
-            $("#confirmButton").show();
-            $("#confirmButton").addClass(buttonColor);
-            $("#exampleModalLabel").html(header)
-            $("#confirmButton").html(confirmationWord)
-            $(".modal-body").html(text);
-            $('#exampleModal').modal('show')
-            if (deleteButton == true) {
-                $("#confirmButton").hide();
-                $("#cancelButton").html("Close")
+            function getModal(
+                header,
+                text,
+                confirmationWord,
+                buttonColor,
+                deleteButton
+            ) {
+                $("#confirmButton").show();
+                $("#confirmButton").addClass(buttonColor);
+                $("#exampleModalLabel").html(header);
+                $("#confirmButton").html(confirmationWord);
+                $(".modal-body").html(text);
+                $("#exampleModal").modal("show");
+                if (deleteButton == true) {
+                    $("#confirmButton").hide();
+                    $("#cancelButton").html("Close");
+                }
             }
-        }
-    </script>
-</body>
-
+        </script>
+    </body>
 </html>
