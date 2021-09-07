@@ -3,8 +3,13 @@
         <div id="card-1" class="card">
             <div class="card-body">
                 <h5 class="card-title">Guest Report</h5>
-                <p id="card-1-text" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a id="card-1-link" class="btn btn-primary">Go Guest</a>
+                <p id="card-1-text" class="card-text">
+                    With supporting text below as a natural lead-in to
+                    additional content.
+                </p>
+                <a id="card-1-link" class="btn btn-primary" href="guests"
+                    >Go Guest</a
+                >
             </div>
         </div>
     </div>
@@ -13,37 +18,52 @@
             <div class="card-body">
                 <h5 class="card-title">Stock warning</h5>
 
-                <button id="warningAmountBtn" type="button" class="btn btn-outline-warning btn-block mb-2">Change warning amount</button>
-                <div id="warning-container">
-                </div>
+                <button
+                    id="warningAmountBtn"
+                    type="button"
+                    class="btn btn-outline-warning btn-block mb-2"
+                >
+                    Change warning amount
+                </button>
+                <div id="warning-container"></div>
             </div>
         </div>
     </div>
 </div>
-<br/>
+<br />
 <div class="card text-center">
     <div class="card-header">
         <h5 class="card-title">Stock Status</h5>
-        <p class="card-text">You can make a search in stock by your own criteria. Ex: I want to see all items which quantity is less than 10.</p>
+        <p class="card-text">
+            You can make a search in stock by your own criteria. Ex: I want to
+            see all items which quantity is less than 10.
+        </p>
     </div>
     <div class="card-body">
         <form class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
                 <label for="amount" class="sr-only">Amount</label>
-                <input type="number" class="form-control" id="amount" placeholder="amount">
+                <input
+                    type="number"
+                    class="form-control"
+                    id="amount"
+                    placeholder="amount"
+                />
             </div>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="typeSelector" class="sr-only">Type</label>
                 <select id="typeSelector" class="form-control">
-                    <option value="kg" >KG</option>
+                    <option value="kg">KG</option>
                     <option value="gr">GR</option>
                     <option value="lt">LT</option>
                     <option value="ml">ML</option>
                     <option value="bottle">BOTTLE</option>
                     <option value="box">BOX</option>
-                  </select>
+                </select>
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Get Items</button>
+            <button type="submit" class="btn btn-primary mb-2">
+                Get Items
+            </button>
         </form>
         <table id="table" class="table table-striped"></table>
     </div>
