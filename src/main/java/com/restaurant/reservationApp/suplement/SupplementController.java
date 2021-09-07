@@ -16,7 +16,7 @@ public class SupplementController {
     private SupplementService supplementService;
 
     @GetMapping("/supplement")
-    public ResponseEntity<List<Supplement>> getAllSupplements() {
+    public ResponseEntity<List> getAllSupplements() {
         return new ResponseEntity<>(supplementService.getAllSupplements(), HttpStatus.OK);
 
     }

@@ -166,7 +166,8 @@ Data URL for your signature will go here!</textarea
 
                                 <div class="form-group col-sm-12">
                                     <button
-                                        type="submit"
+                                    id="complete-payment"
+                                        type="button"
                                         class="btn btn-primary btn-block"
                                     >
                                         Complete Payment
@@ -257,7 +258,7 @@ Data URL for your signature will go here!</textarea
             $(`#${htmlElId}`).append(htmlElement);
         }
 
-        $("#paymentForm").submit(function (e) {
+        $("#complete-payment").click(function (e) { 
             e.preventDefault();
             let order = orderInfo;
             let paymentMethod =
@@ -273,6 +274,7 @@ Data URL for your signature will go here!</textarea
                 "YEP, I'M SURE:)",
                 "btn-primary"
             );
+            
         });
 
         function getPriceOfProduct(productName, priceArr) {

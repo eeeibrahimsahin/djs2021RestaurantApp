@@ -21,10 +21,14 @@ public class SupplementServiceImpl implements SupplementService {
     private DrinkService drinkService;
 
     @Override
-    public List<Supplement> getAllSupplements() {
-        List<Supplement> supplements = new ArrayList<>();
-        Iterable<Supplement> supplementIterable = supplementRepository.findAll();
-        supplementIterable.forEach(supplements::add);
+    public List getAllSupplements() {
+        List supplements = new ArrayList<>();
+
+        List<Food> foodList = foodService.getAllFood();
+        List<Drink> drinkList = (List<Drink>) drinkService.getAllDrinks();
+        foodList.forEach(supplements::add);
+        drinkList.forEach(supplements::add);
+
         return supplements;
     }
 
