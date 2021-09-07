@@ -13,7 +13,7 @@ public interface ReservationService {
 
     Reservation createReservation(Reservation reservation);
 
-    void deleteReservation(Reservation reservation);
+    void deleteReservation(long id);
 
     List<Table> getAvailableTables(String dateAndTime);
 

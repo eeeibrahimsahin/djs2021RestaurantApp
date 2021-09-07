@@ -62,10 +62,11 @@ public class ReservationController {
         return new ResponseEntity<>(reservation.get(), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
-    public void Reservation(@RequestBody Reservation reservation) {
-        reservationService.deleteReservation(reservation);
-    }
+//    @PutMapping(value = "/reservation", produces = "application/json", consumes = "application/json")
+//    public void Reservation(@RequestBody Reservation reservation) {
+//        reservationService.deleteReservation(reservation);
+//    }
+
     @PutMapping(value = "/reservation")
     public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) {
         System.out.println(reservation.getReservationDate());
@@ -76,6 +77,7 @@ public class ReservationController {
     public void setWillUpdateReservation(@RequestBody Reservation reservation) {
         willUpdateReservation =reservation;
     }
+
     @GetMapping("/reservation/update")
     public ResponseEntity<Reservation> getWillUpdateReservation() {
         return new ResponseEntity<>(willUpdateReservation, HttpStatus.OK);
@@ -84,6 +86,11 @@ public class ReservationController {
     @GetMapping("/getavailabletables/{dateAndTime}")
     public ResponseEntity<List<Table>> getAvailableTables(@PathVariable(name = "dateAndTime") String dateAndTime) {
         return new ResponseEntity<>(reservationService.getAvailableTables(dateAndTime), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/reservation/{id}")
+    public void deleteReservation(@PathVariable long id){
+        this.reservationService.deleteReservation(id);
     }
 
     @GetMapping("/amountofcustomer")

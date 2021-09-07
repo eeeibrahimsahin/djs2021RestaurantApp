@@ -29,7 +29,7 @@ public class Reservation {
     private Employee employee;
     @OneToOne
     private Table table;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Guest guest;
     private Date bookingDate;
     @JsonFormat()

@@ -1,5 +1,6 @@
 package com.restaurant.reservationApp.reservation;
 
+import com.restaurant.reservationApp.employee.Employee;
 import com.restaurant.reservationApp.table.Table;
 import com.restaurant.reservationApp.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,30 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation updateReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
+    public void deleteReservation(long id) {
+        reservationRepository.deleteById(id);
     }
 
-    public void deleteReservation(Reservation reservation) {
-        reservationRepository.delete(reservation);
+//    @Override
+//    public Reservation updateReservation(Reservation reservation) {
+//        return reservationRepository.save(reservation);
+//    }
+
+
+    @Override
+    public Reservation updateReservation(Reservation reservation) {
+        if (reservationRepository.existsById(reservation.getId())) {
+            Optional<Reservation> reservation1 = reservationRepository.findById(reservation.getId());
+            reservation1.get().setGuest(reservation.getGuest());
+            reservation1.get().setReservationDate(reservation.getReservationDate());
+            reservation1.get().setTable(reservation.getTable());
+            reservation1.get().setId(reservation.getId());
+//            reservation1.get().setEmployee(reservation.getEmployee());
+            reservationRepository.save(reservation1.get());
+            return reservation1.get();
+        }
+        return null; // //TO DO: We should handle to return null situation
+
     }
 
     @Override
