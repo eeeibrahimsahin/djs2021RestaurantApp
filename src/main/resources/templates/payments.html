@@ -109,7 +109,9 @@
                     result += element.totalPrice;
                 });
                 generalTotalPrice = result;
-                $("#totalPriceShow").append("Total income: € " + result);
+                $("#totalPriceShow").append(
+                    "Total income: € " + formatMoney(result)
+                );
             }
             function putDataToDataTable(data) {
                 $("#table").DataTable().clear();
