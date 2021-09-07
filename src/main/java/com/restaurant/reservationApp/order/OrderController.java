@@ -67,5 +67,9 @@ public class OrderController {
         Order newOrder = orderService.createOrder(order);
         return new ResponseEntity<>(newOrder, HttpStatus.OK);
     }
+    @DeleteMapping("/order/{id}")
+    public void deleteOrder(@PathVariable long id){
+        orderService.deleteOrder(id);
+    }
 }
 

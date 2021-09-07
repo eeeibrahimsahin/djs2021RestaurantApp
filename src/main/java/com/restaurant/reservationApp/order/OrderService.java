@@ -12,5 +12,7 @@ public interface OrderService {
 
     void saveAllOrder(List<Order> orderList);
 
+    void deleteOrder(long id);
+
     //Order addDishToOrder(int id, List<Dish> dish);
 }

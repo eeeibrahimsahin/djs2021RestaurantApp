@@ -22,7 +22,7 @@
 
     <body>
         <div th:insert="fragments/navbar.html"></div>
-
+        <div th:insert="fragments/modal.html"></div>
         <div class="container">
             <div class="jumbotron">
                 <h3>Orders</h3>
@@ -57,6 +57,7 @@
             crossorigin="anonymous"
         ></script>
         <script>
+            let id;
             $(document).ready(function () {
                 $.ajax({
                     url: "http://localhost:8080/api/orders",
@@ -129,7 +130,9 @@
                                         <td sec:authorize="hasAnyRole('CASHIER','ADMIN')"><button  onclick=goPaymentPage(${
                                             element.id
                                         }) type="button" class="btn btn-outline-success"><i class="fas fa-cash-register"></i></button></td>
-                                        <td sec:authorize="hasAnyRole('CASHIER','ADMIN')" ><button type="button" class="btn btn-outline-danger"><i class="far fa-window-close"></i></button></td>
+                                        <td sec:authorize="hasAnyRole('CASHIER','ADMIN')"><button onclick=deleteOrder(${
+                                            element.id
+                                        }) type="button" class="btn btn-outline-danger"><i class="far fa-window-close"></i></button></td>
                                     </tr>`;
                         });
 
@@ -140,6 +143,16 @@
                     },
                 });
             });
+
+            function deleteOrder(orderId) {
+                id = orderId;
+                console.log(id);
+                let text =
+                    "<p>----Once  you delete an order,  there's no getting it back.----" +
+                    "Make sure you want to do this.</p>";
+                getModal("Hey,there!", text, "YEP, I'M SURE:)", "btn-primary");
+            }
+
             function goPaymentPage(orderId) {
                 $.ajax({
                     type: "GET",
@@ -149,6 +162,47 @@
                     },
                 });
             }
+
+            $("#confirmButton").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "DELETE",
+                    url: "/api/order/" + id,
+                    success: function (response) {
+                        console.log(response);
+                        getModal(
+                            "Information",
+                            "The order is deleted!",
+                            "hello",
+                            "btn-primary",
+                            true
+                        );
+                    },
+                });
+            });
+            $("#cancelButton").click(function (e) {
+                e.preventDefault();
+                pageRedirect("orders");
+            });
+            function getModal(
+                header,
+                text,
+                confirmationWord,
+                buttonColor,
+                deleteButton
+            ) {
+                $("#confirmButton").show();
+                $("#confirmButton").addClass(buttonColor);
+                $("#exampleModalLabel").html(header);
+                $("#confirmButton").html(confirmationWord);
+                $(".modal-body").html(text);
+                $("#exampleModal").modal("show");
+                if (deleteButton == true) {
+                    $("#confirmButton").hide();
+                    $("#cancelButton").html("Close");
+                }
+            }
+
             function pageRedirect(pageName) {
                 window.location.href = `./${pageName}`;
             }
