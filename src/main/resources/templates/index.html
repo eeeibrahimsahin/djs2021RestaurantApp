@@ -41,13 +41,13 @@
                         </h3>
                         <p>What do you want to do with me?</p>
                         <img
-                            sec:authorize="hasAnyRole('RECEPTIONIST','ADMIN','CASHIER','KITCHEN','WAITER')"
+                            sec:authorize="hasAnyRole('RECEPTIONIST','CASHIER','KITCHEN','WAITER')"
                             src="/images/header-bg.jpg"
                             style="width: 75%"
                             class="mx-auto"
                         />
                         <div
-                            sec:authorize="hasAnyRole('CHEF')"
+                            sec:authorize="hasAnyRole('CHEF,ADMIN')"
                             th:insert="fragments/cards.html"
                         ></div>
                     </div>
@@ -108,7 +108,7 @@
                                     <p><span class="font-weight-bold">${amountOfGuestWhoVisitPlanned}</span> of our guests also planned their visit.<\p>`;
 
                         $("#card-1-text").html(carOneText);
-                        $("#card-1-link").attr("href", "/guest");
+                        $("#card-1-link").attr("href", "/guests");
                     },
                 });
 
