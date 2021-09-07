@@ -8,7 +8,7 @@ public interface SupplementService {
         return null;
     }
 
-    List<Supplement> getAllSupplements();
+    List getAllSupplements();
 
     Supplement createSupplement(Supplement supplement);
 

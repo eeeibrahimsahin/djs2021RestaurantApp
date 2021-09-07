@@ -151,25 +151,6 @@
                 <a
                     class="nav-link dropdown-toggle"
                     href="#"
-                    id="navbarAppMenuLink5"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Food
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
-                    <a class="dropdown-item" href="/foods">View</a>
-                    <a class="dropdown-item">Create</a>
-                </div>
-            </li>
-            <li
-                sec:authorize="hasAnyRole('ADMIN','CHEF')"
-                class="nav-item dropdown"
-            >
-                <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
                     id="navbarAppMenuLink4"
                     data-toggle="dropdown"
                     aria-haspopup="true"
@@ -178,8 +159,10 @@
                     Stock
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarAppMenuLink">
-                    <a class="dropdown-item" href="/stock">View</a>
-                    <a class="dropdown-item" href="/add_stock">Add</a>
+                    <a class="dropdown-item" href="/add_stock">Add </a>
+                    <a class="dropdown-item" href="/foods">View </a>
+                    <a class="dropdown-item" href="/index">Report</a>
+
                 </div>
             </li>
 

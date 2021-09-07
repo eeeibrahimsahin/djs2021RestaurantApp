@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Food</title>
+    <title>Stocks</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h3>Food</h3>
+        <h3>Stocks</h3>
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
@@ -40,39 +40,39 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script>
-<!--        $(document).ready(function () {-->
-<!--            $.ajax({-->
-<!--                url: 'http://localhost:8080/api/drinks',-->
-<!--                headers: { "Accept": "application/json" },-->
-<!--                type: "GET", /* or type:"GET" or type:"PUT" */-->
-<!--                dataType: "json",-->
-<!--                data: {-->
-<!--                },-->
-<!--                success: function (data) {-->
-<!--                    console.log(data);-->
+// <!--        $(document).ready(function () {-->
+// <!--            $.ajax({-->
+// <!--                url: 'http://localhost:8080/api/drinks',-->
+// <!--                headers: { "Accept": "application/json" },-->
+// <!--                type: "GET", /* or type:"GET" or type:"PUT" */-->
+// <!--                dataType: "json",-->
+// <!--                data: {-->
+// <!--                },-->
+// <!--                success: function (data) {-->
+// <!--                    console.log(data);-->
 
-<!--                    let html;-->
-<!--                    data.forEach(element => {-->
-<!--                        html += `<tr>-->
-<!--                                        <td>${element.id}</td>-->
-<!--                                        <td>${element.name}</td>-->
-<!--                                        <td>${element.type}</td>-->
-<!--                                        <td>${element.quantity}</td>-->
-<!--                                        <td>${element.price}</td>-->
-<!--                                    </tr>`-->
-<!--                    });-->
+// <!--                    let html;-->
+// <!--                    data.forEach(element => {-->
+// <!--                        html += `<tr>-->
+// <!--                                        <td>${element.id}</td>-->
+// <!--                                        <td>${element.name}</td>-->
+// <!--                                        <td>${element.type}</td>-->
+// <!--                                        <td>${element.quantity}</td>-->
+// <!--                                        <td>${element.price}</td>-->
+// <!--                                    </tr>`-->
+// <!--                    });-->
 
-<!--                    $('#tableBody').append(html);-->
+// <!--                    $('#tableBody').append(html);-->
 
-<!--                },-->
-<!--                error: function () {-->
-<!--                    console.log("error");-->
-<!--                }-->
-<!--            });-->
-<!--        })-->
+// <!--                },-->
+// <!--                error: function () {-->
+// <!--                    console.log("error");-->
+// <!--                }-->
+// <!--            });-->
+// <!--        })-->
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:8080/api/foods',
+                url: 'http://localhost:8080/api/supplement',
                 headers: { "Accept": "application/json" },
                 type: "GET", /* or type:"GET" or type:"PUT" */
                 dataType: "json",
@@ -88,7 +88,7 @@
                                         <td>${element.name}</td>
                                         <td>${element.type}</td>
                                         <td>${element.quantity}</td>
-                                        <td>${element.price}</td>
+                                        <td> € ${element.price}</td>
                                     </tr>`
                     });
 
