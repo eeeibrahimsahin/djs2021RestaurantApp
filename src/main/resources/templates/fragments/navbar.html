@@ -39,7 +39,7 @@
                 </div>
             </li>
             <li
-                sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN','KITCHEN')"
+                sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN','KITCHEN', 'CASHIER')"
                 class="nav-item dropdown"
             >
                 <a
@@ -54,7 +54,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
                     <a class="dropdown-item" href="/orders">View</a>
-                    <a class="dropdown-item" href="/order_create">Create</a>
+                    <a sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN')" class="dropdown-item" href="/order_create">Create</a>
                 </div>
             </li>
             <li
