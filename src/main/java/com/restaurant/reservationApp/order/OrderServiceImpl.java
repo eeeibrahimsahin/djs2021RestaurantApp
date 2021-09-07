@@ -37,6 +37,11 @@ public class OrderServiceImpl implements OrderService {
         orderList.forEach(order -> createOrder(order));
     }
 
+    @Override
+    public void deleteOrder(long id) {
+        orderRepository.deleteById(id);
+    }
+
 //    @Override
 //    public Order addDishToOrder(int id, List<Dish> dish) {
 //        return orderRepository.addDishToOrder(id, dish);
