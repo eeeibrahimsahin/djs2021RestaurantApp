@@ -54,7 +54,12 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
                     <a class="dropdown-item" href="/orders">View</a>
-                    <a sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN')" class="dropdown-item" href="/order_create">Create</a>
+                    <a
+                        sec:authorize="hasAnyRole('WAITER', 'CHEF','ADMIN')"
+                        class="dropdown-item"
+                        href="/order_create"
+                        >Create</a
+                    >
                 </div>
             </li>
             <li
@@ -96,6 +101,7 @@
                     Payment
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarTcktMenuLink">
+                    <a class="dropdown-item" href="/get_payment">Get payment</a>
                     <a class="dropdown-item" href="/payments">View</a>
                 </div>
             </li>
@@ -162,7 +168,6 @@
                     <a class="dropdown-item" href="/add_stock">Add </a>
                     <a class="dropdown-item" href="/foods">View </a>
                     <a class="dropdown-item" href="/index">Report</a>
-
                 </div>
             </li>
 

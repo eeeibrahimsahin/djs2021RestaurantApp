@@ -36,6 +36,8 @@
                             <th scope="col">Notes</th>
                             <th scope="col">Allergy</th>
                             <th scope="col">Employee</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody id="tableBody"></tbody>
@@ -125,6 +127,12 @@
                                                 : allergyList
                                         }</td>
                                         <td>${element.employee.firstName}</td>
+                                        <td sec:authorize="hasAnyRole('CASHIER','ADMIN')"><button  onclick=goPaymentPage(${
+                                            element.id
+                                        }) type="button" class="btn btn-outline-success"><i class="fas fa-cash-register"></i></button></td>
+                                        <td sec:authorize="hasAnyRole('CASHIER','ADMIN')"><button onclick=deleteOrder(${
+                                            element.id
+                                        }) type="button" class="btn btn-outline-danger"><i class="far fa-window-close"></i></button></td>
                                     </tr>`;
                         });
 
